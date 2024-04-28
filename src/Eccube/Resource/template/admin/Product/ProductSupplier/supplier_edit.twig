@@ -1,0 +1,736 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['product', 'supplier'] %}
+
+{% block title %}{{ 'admin.product.supplier_management'|trans }}{% endblock %}
+{% block sub_title %}{{ 'admin.setting.system'|trans }}{% endblock %}
+
+{% form_theme form '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block javascript %}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+    <script>
+        $(document).ready(function() {
+            // you may need to change this code if you are not using Bootstrap Datepicker
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
+        });
+    </script>
+{% endblock %}
+{% block main %}
+    <form name="member_form" role="form" id="member_form" method="post" action="" novalidate>
+        {{ form_widget(form._token) }}
+        <div class="c-contentsArea__cols">
+            <div class="c-contentsArea__primaryCol">
+                <div class="c-primaryCol">
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-8"><span class="card-title">{{ 'admin.setting.system.rank_registration'|trans }}</span></div>
+                                <div class="col-4 text-right">
+                                    <a data-toggle="collapse" href="#memberInfo" aria-expanded="false" aria-controls="memberInfo">
+                                        <i class="fa fa-angle-up fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse show ec-cardCollapse" id="memberInfo">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.supplier.name'|trans }}</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.name) }}
+                                            </div>
+                                            {{ form_errors(form.name) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.supplier.supplier_name'|trans }}</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.supplier_name) }}
+                                            </div>
+                                            {{ form_errors(form.supplier_name) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.supplier.phone_number'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.phone_number) }}
+                                            </div>
+                                            {{ form_errors(form.phone_number) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.supplier.fax'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.fax) }}
+                                            </div>
+                                            {{ form_errors(form.fax) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.supplier.email'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.email) }}
+                                            </div>
+                                            {{ form_errors(form.email) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.supplier.postal_code'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.postal_code) }}
+                                            </div>
+                                            {{ form_errors(form.postal_code) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.supplier.address'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.address) }}
+                                            </div>
+                                            {{ form_errors(form.address) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.supplier.supplier_category_1'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.supplier_category_1) }}
+                                            </div>
+                                            {{ form_errors(form.supplier_category_1) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.supplier.supplier_category_2'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.supplier_category_2) }}
+                                            </div>
+                                            {{ form_errors(form.supplier_category_2) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>締め日</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.closing_date) }}
+                                            </div>
+                                            {{ form_errors(form.closing_date) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>支払日</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.payment_date) }}
+                                            </div>
+                                            {{ form_errors(form.payment_date) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>支払いサイクル</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.payment_cycle) }}
+                                            </div>
+                                            {{ form_errors(form.payment_cycle) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>支払い条件</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.payment_term) }}
+                                            </div>
+                                            {{ form_errors(form.payment_term) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>締処理対象区分</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.closing_process_target_category) }}
+                                            </div>
+                                            {{ form_errors(form.closing_process_target_category) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <div class="row mb-2">
+                                <div class="col-3">
+                                        <span>担当者</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.member) }}
+                                            </div>
+                                            {{ form_errors(form.member) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>支払い管理区分</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.payment_management_class) }}
+                                            </div>
+                                            {{ form_errors(form.payment_management_class) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>期首費用残高</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.balance_costs_beginning_year) }}
+                                            </div>
+                                            {{ form_errors(form.balance_costs_beginning_year) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>前回支払設定切替額</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.previous_payment_amount) }}
+                                            </div>
+                                            {{ form_errors(form.previous_payment_amount) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>支払い率</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.payment_rate) }}
+                                            </div>
+                                            {{ form_errors(form.payment_rate) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>基準単位額</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.basic_cost) }}
+                                            </div>
+                                            {{ form_errors(form.basic_cost) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                              <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>支払額設定方法</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.payment_amount_method) }}
+                                            </div>
+                                            {{ form_errors(form.payment_amount_method) }}
+                                        </div>
+                                    </div>
+                              </div>
+
+                               <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>基準単位額</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.basic_cost_amount) }}
+                                            </div>
+                                            {{ form_errors(form.basic_cost_amount) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>振込情報の設定</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.is_enable_transfer_infomation) }}
+                                            </div>
+                                            {{ form_errors(form.is_enable_transfer_infomation) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>振込先</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.payee) }}
+                                            </div>
+                                            {{ form_errors(form.payee) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>A口座区分</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.account_classification) }}
+                                            </div>
+                                            {{ form_errors(form.account_classification) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>引落口座コード</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.debit_account_code) }}
+                                            </div>
+                                            {{ form_errors(form.debit_account_code) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>単単価掛け率計算</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.cost_multiplier_calculation) }}
+                                            </div>
+                                            {{ form_errors(form.cost_multiplier_calculation) }}
+                                        </div>
+                                    </div>
+                                 </div>
+                                
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>単価掛率</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.unit_cost_rate) }}
+                                            </div>
+                                            {{ form_errors(form.unit_cost_rate) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>単価設定</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.is_enable_unit_cost) }}
+                                            </div>
+                                            {{ form_errors(form.is_enable_unit_cost) }}
+                                        </div>
+                                    </div>
+                                 </div>
+                              
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>消費税通知</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.consumption_tax_notice) }}
+                                            </div>
+                                            {{ form_errors(form.consumption_tax_notice) }}
+                                        </div>
+                                    </div>
+                                 </div>
+                            
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>支払消費税算出</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.calculation_of_consumption_tax_payable) }}
+                                            </div>
+                                            {{ form_errors(form.calculation_of_consumption_tax_payable) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>単価区分</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.unit_cost_class) }}
+                                            </div>
+                                            {{ form_errors(form.unit_cost_class) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                 <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>単価単位</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.unit_cost) }}
+                                            </div>
+                                            {{ form_errors(form.unit_cost) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>定額区分 </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.subscription_class) }}
+                                            </div>
+                                            {{ form_errors(form.subscription_class) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span> 消費税計算区分</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.vat_class) }}
+                                            </div>
+                                            {{ form_errors(form.vat_class) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span> 消費税計算単位</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.vat_calculation_class) }}
+                                            </div>
+                                            {{ form_errors(form.vat_calculation_class) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span> 消費税文化区分</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.consumption_vat_culture_class) }}
+                                            </div>
+                                            {{ form_errors(form.consumption_vat_culture_class) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>指定支払い費用使用区分 </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.designated_payment_cost_use_class) }}
+                                            </div>
+                                            {{ form_errors(form.designated_payment_cost_use_class) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>指定支払書番号 </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.designated_payment_form_no) }}
+                                            </div>
+                                            {{ form_errors(form.designated_payment_form_no) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>支払明細書出力タイプ </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.payment_statement_output_type) }}
+                                            </div>
+                                            {{ form_errors(form.payment_statement_output_type) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span> 支払明細書出力形式</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.payment_statement_output_format) }}
+                                            </div>
+                                            {{ form_errors(form.payment_statement_output_format) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>日付印字区分 </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.date_classification) }}
+                                            </div>
+                                            {{ form_errors(form.date_classification) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>注文書出力書区分 </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.order_output_document_class) }}
+                                            </div>
+                                            {{ form_errors(form.order_output_document_class) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                   <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>取引 </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.transaction) }}
+                                            </div>
+                                            {{ form_errors(form.transaction) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>I個別設定入力行数 </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.individual_setting_of_entry_levels) }}
+                                            </div>
+                                            {{ form_errors(form.individual_setting_of_entry_levels) }}
+                                        </div>
+                                    </div>
+                                 </div>
+                                 
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span> 分類</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.classification) }}
+                                            </div>
+                                            {{ form_errors(form.classification) }}
+                                        </div>
+                                    </div>
+                                 </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-conversionArea">
+            <div class="c-conversionArea__container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-6">
+                        <div class="c-conversionArea__leftBlockItem">
+                            <a class="c-baseLink"
+                               href="{{ url('admin_product_supplier') }}">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                <span>{{ 'admin.product.supplier_management'|trans }}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="ex-conversion-action" class="row align-items-center justify-content-end">
+                            <div class="col-auto">
+                                <button class="btn btn-ec-conversion px-5"
+                                        type="submit">{{ 'admin.common.registration'|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+
+

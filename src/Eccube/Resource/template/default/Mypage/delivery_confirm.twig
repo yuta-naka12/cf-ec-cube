@@ -1,0 +1,110 @@
+
+{% extends 'default_frame.twig' %}
+
+{% form_theme form 'Form/form_div_layout.twig' %}
+
+
+
+{% block main %}
+
+
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="img\icons\page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.title_en'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_mypage'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_delivery'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="otodokesaki otodokesaki-confirm">
+        <div class="wrapper">
+          <div class="otodokesaki-title">
+            <h3>{{'front.mypage.delivery.title'|trans}}</h3>
+            {% if app.user.name01 != ” %}
+                <p>{{ app.user.name01 }} {{ app.user.name02 }}{{'common.name.suffix'|trans}}</p>
+            {% endif %}
+            <span>{{'front.mypage.delivery.complete.note01'|trans}}<br>{{'front.mypage.delivery.complete.note02'|trans}}</span>
+          </div>
+          <div class="entry-form otodokesaki-form">
+            <div class="entry-form__block">
+              <div class="entry-form__item otodokesaki-form__item">
+                <div class="entry-form__label otodokesaki__label">{{'front.mypage.delivery.complete.label_plc'|trans}}</div>
+                <div class="entry-form__inputs entry-form__inputs--column">
+                  <div class="entry-form__input otodokesaki__input"> <span>会社</span></div>
+                </div>
+              </div>
+              <div class="entry-form__item otodokesaki-form__item">
+                <div class="entry-form__label otodokesaki__label">{{'front.mypage.delivery.complete.label_name'|trans}}</div>
+                <div class="entry-form__inputs">
+                  <div class="entry-form__inputs entry-form__inputs--column w100">
+                    <div class="entry-form__inputs entry-form__inputs--wrap wcc">
+                      <div class="entry-form__inputs otodokesaki-form__inputs"><span class="otodokesaki-input__label">{{'common.last_name'|trans}}:</span>
+                        <div class="entry-form__input"> <span>佐藤</span></div>
+                      </div>
+                      <div class="entry-form__inputs otodokesaki-form__inputs"><span class="otodokesaki-input__label">{{'common.first_name'|trans}}:</span>
+                        <div class="entry-form__input"> <span>太郎</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="entry-form__item otodokesaki-form__item">
+                <div class="entry-form__label otodokesaki__label">{{'front.mypage.delivery.complete.label_kana'|trans}}</div>
+                <div class="entry-form__inputs">
+                  <div class="entry-form__inputs entry-form__inputs--column">
+                    <div class="entry-form__inputs entry-form__inputs--wrap wcc">
+                      <div class="entry-form__inputs otodokesaki-form__inputs"><span class="otodokesaki-input__label">{{'common.last_name_kana'|trans}}:</span>
+                        <div class="entry-form__input"> <span>サトウ</span></div>
+                      </div>
+                      <div class="entry-form__inputs otodokesaki-form__inputs"><span class="otodokesaki-input__label">{{'common.first_name_kana'|trans}}:</span>
+                        <div class="entry-form__input"> <span>タロウ</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="entry-form__item otodokesaki-form__item">
+                <div class="entry-form__label otodokesaki__label">{{'front.mypage.delivery.complete.label_phone'|trans}}</div>
+                <div class="entry-form__inputs entry-form__inputs--column">
+                  <div class="entry-form__input wcc"> <span>03-0000-0000</span></div>
+                </div>
+              </div>
+              <div class="entry-form__item otodokesaki-form__item"><span class="entry-form__label otodokesaki__label">{{'front.mypage.delivery.complete.label_zip'|trans}}</span>
+                <div class="entry-form__inputs">
+                  <div class="entry-form__inputs entry-form__inputs--column w100">
+                    <div class="entry-form__inputs w100">
+                      <div class="entry-form__input"><span>000-0000</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="entry-form__item otodokesaki-form__item"><span class="entry-form__label otodokesaki__label">{{'front.mypage.delivery.complete.label_addr'|trans}}</span>
+                <div class="entry-form__inputs entry-form__inputs--column">
+                  <div class="entry-form__inputs">
+                    <div class="entry-form__input"> <span>東京都</span></div>
+                  </div>
+                  <div class="entry-form__inputs">
+                    <div class="entry-form__input"> <span>〇〇区</span></div>
+                  </div>
+                  <div class="entry-form__input entry-form__input--long"><span>1丁目2-3-4</span></div>
+                </div>
+              </div>
+              <div class="entry-form__item otodokesaki-form__item"><span class="entry-form__label otodokesaki__label otodokesaki__label--any">{{'front.mypage.delivery.complete.label_build'|trans}}</span>
+                <div class="entry-form__inputs entry-form__inputs--column">
+                  <div class="entry-form__input entry-form__input--long"> <span>○○マンション 201号室</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="entry__button-wrap otodokesaki__btn-wrap"><a class="entry__button otodokesaki__btn-return" href=""><span>{{'common.back'|trans}}</span></a><a class="entry__button" href=""><span>{{'common.registration'|trans}}</span></a></div>
+          </div>
+        </div>
+      </div>
+
+      {% endblock %}

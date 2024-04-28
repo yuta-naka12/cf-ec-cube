@@ -1,0 +1,117 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends 'default_frame.twig' %}
+
+{% form_theme form 'Form/form_div_layout.twig' %}
+
+{% block main %}
+      <div class="wrapper application__container">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/common/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{ 'front.shopping.form_title__sub'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{ 'front.shopping.form_title'|trans }}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/common/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{ 'front.shopping.form_title'|trans }}</span>
+          </div>
+        </div>
+      </div>
+      <section class="netform"> 
+        <p class="netform__text">{{'いつもキャプテンフーヅをご利用頂き誠にありがとうございます。このたび、新システムを導入し、自社便会員様もインターネットでご注文いただけるようになりました。'|trans}}</p><a class="netform__button" href=""><span>{{'front.form.to_guest'|trans}}</span></a>
+        <h3 class="entry__subtitle">{{'front.step.outline'|trans}}</h3>
+        <div class="netform__steps"> 
+          <div class="netform__step"> <img src="/html/template/default/assets/img/common/netform-step01.svg" alt="">
+            <p>{{'front.form.step.message_1'|trans}}</p>
+          </div>
+          <div class="netform__step"> <img src="/html/template/default/assets/img/common/netform-step02.svg" alt="">
+            <p>{{'front.form.step.message_2'|trans}}</p>
+          </div>
+          <div class="netform__step"> <img src="/html/template/default/assets/img/common/netform-step03.svg" alt="">
+            <p>{{'front.form.step.message_3'|trans}}</p>
+          </div>
+        </div>
+        <h3 class="entry__subtitle">{{'front.form.qa_outline'|trans}} </h3>
+        <div class="netform__faqs"> 
+          <div class="netform__faq">
+            <p class="netform__faq-question">{{'front.form.qa_q1'|trans}} </p>
+            <p class="netform__faq-answer">{{'front.form.qa_a1'|trans}} </p>
+          </div>
+          <div class="netform__faq">
+            <p class="netform__faq-question">{{'front.form.qa_q2'|trans}} </p>
+            <p class="netform__faq-answer">{{'front.form.qa_a2'|trans}} <br><a class="netform__faq-link" href="">{{'front.form.transit_1'|trans}} </a></p>
+          </div>
+          <div class="netform__faq">
+            <p class="netform__faq-question">{{'front.form.qa_q3'|trans}} </p>
+            <p class="netform__faq-answer">{{'front.form.qa_a3'|trans}} <a class="netform__faq-link" href="">{{'front.form.transit_2'|trans}} </a></p>
+          </div>
+          <div class="netform__faq">
+            <p class="netform__faq-question">{{'front.form.qa_q4'|trans}} </p>
+            <p class="netform__faq-answer">{{'front.form.qa_a4'|trans}} </p>
+          </div>
+        </div>
+        <h3 class="entry__subtitle">{{'front.form.subtitle'|trans}}</h3>
+      </section>
+      <section class="entry-form"> 
+        <div class="entry-form__item"><span class="entry-form__label">{{'admin.common.name'|trans}}</span>
+          <div class="entry-form__inputs"> 
+            <div class="entry-form__input-name"> <span>{{'admin.common.last_name'|trans}}</span>
+              <input type="text" placeholder={{'front.form.ph_lastname'|trans}}>
+            </div>
+            <div class="entry-form__input-name"> <span>{{'admin.common.first_name'|trans}}</span>
+              <input type="text" placeholder={{'front.form.ph_firstname'|trans}}>
+            </div>
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label">{{'admin.common.kana_label'|trans}}</span>
+          <div class="entry-form__inputs"> 
+            <div class="entry-form__input-name"> <span>{{'admin.common.last_name_kana'|trans}}</span>
+              <input type="text" placeholder={{'front.form.ph_lastname_kana'|trans}}>
+            </div>
+            <div class="entry-form__input-name"> <span>{{'admin.common.first_name_kana'|trans}}</span>
+              <input type="text" placeholder={{'front.form.ph_firstname_kana'|trans}}>
+            </div>
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional">{{'admin.common.user_id'|trans}}</span>
+          <div class="entry-form__inputs">
+            <input class="entry-form__input" type="text">
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label">{{'admin.common.phone_number'|trans}}</span>
+          <div class="entry-form__inputs">
+            <input class="entry-form__input entry-form__input--med" type="text" placeholder={{'front.form.ph_phonenumber'|trans}}>
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label">{{'admin.common.mail_address'|trans}}</span>
+          <div class="entry-form__inputs entry-form__inputs--column">
+            <input class="entry-form__input entry-form__input--med" type="email" placeholder={{'front.form.ph_email'|trans}}><span>{{'front.form.mail_note'|trans}}</span>
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional">{{'admin.common.password'|trans}}</span>
+          <div class="entry-form__inputs"><span>{{'front.form.password_note'|trans}}</span></div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional">{{'admin.common.demand_1'|trans}}<br>{{'admin.common.demand_2'|trans}}</span>
+          <div class="entry-form__inputs"> 
+            <textarea class="entry-form__textarea" placeholder={{'front.form.consult_placeolder_1'|trans}}&#10;&#10;{{'front.form.consult_placeolder_2'|trans}}&#10;{{'front.form.consult_placeolder_3'|trans}}></textarea>
+          </div>
+        </div><a class="entry__button entry__button--long entry__button--center" href=""><span>{{'front.form.transit_3'|trans}}</span></a>
+        <div class="netform__contact">
+          <p class="netform__contact-text netform__contact-text--medium">{{'front.form.consult_message'|trans}}</p>
+          <p class="netform__contact-text">{{'front.form.consult_day'|trans}}<span class="red">{{'front.form.consult_time'|trans}}</span>{{'front.form.consult_unit'|trans}}</p>
+          <div class="netform__contact-number"> <img src="/html/template/default/assets/img/common/icon-phone.svg" alt=""><a href="tel:0120-978-669">{{'front.form.consult_phone'|trans}}</a></div>
+        </div>
+      </section>
+
+
+{% endblock %}

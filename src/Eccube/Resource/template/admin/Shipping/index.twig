@@ -1,0 +1,192 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['shipping', 'shippping_list'] %}
+
+{% block title %}{{ 'admin.shipping.shipping_list'|trans }}{% endblock %}
+{% block sub_title %}{% endblock %}
+
+{% form_theme searchForm '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/tempusdominus-bootstrap-4.min.css', 'admin') }}">
+    <style type="text/css">
+        .datepicker-days th.dow:first-child,
+        .datepicker-days td:first-child {
+            color: #f00;
+        }
+
+        .datepicker-days th.dow:last-child,
+        .datepicker-days td:last-child {
+            color: #00f;
+        }
+    </style>
+{% endblock stylesheet %}
+
+{% block javascript %}
+<script src="{{ asset('assets/js/vendor/moment.min.js', 'admin') }}"></script>
+    <script src="{{ asset('assets/js/vendor/moment-with-locales.min.js', 'admin') }}"></script>
+    <script src="{{ asset('assets/js/vendor/tempusdominus-bootstrap-4.min.js', 'admin') }}"></script>
+
+    <script>
+        $(function() {
+
+            {#// datetimepicker と競合するため HTML5 のカレンダ入力を無効に#}
+            {#$('input[type="date"]').attr('type','text');#}
+
+            {#// datetimepicker で value が消えてしまうので data-value に保持しておく#}
+            {#$('input.datetimepicker-input').each(function() {#}
+            {#    $(this).data('value', $(this).val());#}
+            {#});#}
+
+            {#$('input.datetimepicker-input').not('#admin_search_customer_birth_start').not('#admin_search_customer_birth_end').datetimepicker({#}
+            {#    locale: '{{ eccube_config.locale }}',#}
+            {#    format: 'YYYY-MM-DD HH:mm:ss',#}
+            {#    useCurrent: false,#}
+            {#    buttons: {#}
+            {#        showToday: true,#}
+            {#        showClose: true#}
+            {#    },#}
+            {#});           #}
+            //
+            // // datetimepicker で value が消えてしまうので更新
+            // $('input.datetimepicker-input').each(function() {
+            //     $(this).val($(this).data('value'));
+            // });
+        });
+    </script>
+{% endblock javascript %}
+
+{% block main %}
+    <form name="search_form" id="search_form" method="post" action="">
+        {{ form_widget(searchForm._token) }}
+        <div class="c-outsideBlock">
+            <div class="c-outsideBlock__contents">
+                <div class="row justify-content-start">
+                    <div class="col-6">
+                        <div class="mb-2">
+                            <label class="col-form-label">入出荷予定日</label>
+                            {{ form_widget(searchForm.created_at) }}
+                            {{ form_errors(searchForm.created_at) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-outsideBlock__contents mb-5">
+            <button type="submit" class="btn btn-ec-conversion px-5">{{ 'admin.common.search'|trans }}</button>
+            {% if pagination %}
+                <span class="font-weight-bold ml-2">{{ 'admin.common.search_result'|trans({'%count%':pagination.totalItemCount}) }}</span>
+            {% endif %}
+        </div>
+        <div class="c-outsideBlock__contents mb-5">
+            {{ include('@admin/search_items.twig', { 'form': searchForm }, ignore_missing = true) }}
+        </div>
+        <div class="c-contentsArea__cols">
+            <div class="c-contentsArea__primaryCol">
+                <div class="c-primaryCol">
+                    {% if pagination and pagination.totalItemCount %}
+                        <div class="row justify-content-between mb-2">
+                            <div class="col-6"></div>
+
+                            <div class="col-5 text-right">
+                                Dropdown page count
+                                <div class="d-inline-block mr-2">
+                                    <select class="custom-select" onchange="location = this.value;">
+                                        {% for pageMax in pageMaxis %}
+                                            <option {% if pageMax.name == page_count %} selected {% endif %}
+                                                value="{{ path('admin_customer_page', {'page_no': 1, 'page_count': pageMax.name }) }}">
+                                                {{ 'admin.common.count'|trans({ '%count%': pageMax.name }) }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card rounded border-0 mb-4 d-block">
+                            <div class="card-body p-0">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th class="border-top-0 pt-2 pb-3">ID</th>
+                                        <th class="border-top-0 pt-2 pb-3">ステータス</th>
+                                        <th class="border-top-0 pt-2 pb-3 pr-3">出荷予定日</th>
+                                        <th class="border-top-0 pt-2 pb-3 pr-3"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ShippingGroup in pagination %}
+                                        <tr id="ex-customer-{{ ShippingGroup.id }}">
+                                            <td class="align-middle pl-3">{{ ShippingGroup.id }}</td>
+                                            <td class="align-middle">{{ ShippingGroup.status ? '未処理' : '処理済み' }}</td>
+                                            <td class="align-middle">{{ ShippingGroup.created_at|date_format('','Y/m/d') }}</td>
+                                            <td class="align-middle">
+                                                <a class="btn btn-primary" onclick="openPickingList({{ ShippingGroup.id }});" href="#" target="_blank">ピッキングリスト抽出</a>
+                                            </td>
+                                            <td class="align-middle">
+                                                <a class="btn btn-primary" onclick="openPackedList({{ ShippingGroup.id }})" href="#" target="_blank">詰込管理票出力</a>
+                                            </td>
+                                            <td class="align-middle">
+                                                <a class="btn btn-primary" onclick="openContainerList({{ ShippingGroup.id }})" href="#" target="_blank">コンテナ表抽出</a>
+                                            </td>
+
+                                            <td class="align-middle">
+                                                <a class="btn btn-primary" onclick="openDeliveryInvoice({{ ShippingGroup.id }})" href="#" target="_blank">配送伝票出力</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="row justify-content-md-center mb-4">
+                                    {% if pagination.totalItemCount > 0 %}
+                                        {% include "@admin/pager.twig" with { 'pages' : pagination.paginationData, 'routes' : 'admin_customer_page' } %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% elseif has_errors %}
+                        <div class="card rounded border-0">
+                            <div class="card-body p-4">
+                                <div class="text-center text-muted mb-4 h5">{{ 'admin.common.search_invalid_condition'|trans }}</div>
+                                <div class="text-center text-muted">{{ 'admin.common.search_try_change_condition'|trans }}</div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="card rounded border-0">
+                            <div class="card-body p-4">
+                                <div class="text-center text-muted mb-4 h5">{{ 'admin.common.search_no_result'|trans }}</div>
+                                <div class="text-center text-muted">{{ 'admin.common.search_try_change_condition'|trans }}</div>
+                                <div class="text-center text-muted">{{ 'admin.common.search_try_advanced_search'|trans }}</div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        // ピッキングリストを表示
+        function openPickingList(id) {
+            window.open(`/admin/shipping/${id}/picking-list`,"window1","width=794,height=1123,scrollbars=1");
+        }
+        function openPackedList(id) {
+            window.open(`/admin/shipping/${id}/packed-list`,"window1","width=1123,height=794,scrollbars=1");
+        }
+        function openContainerList(id) {
+            window.open(`/admin/shipping/${id}/container-list`,"window1","width=794,height=1123,scrollbars=1");
+        }
+        function openDeliveryInvoice(id) {
+            window.open(`/admin/shipping/${id}/delivery-invoice`,"window1","width=794,height=1123,scrollbars=1");
+        }
+
+    </script>
+{% endblock %}
+

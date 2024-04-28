@@ -1,0 +1,64 @@
+{% extends 'default_frame.twig' %}
+
+	{% block main %}
+<div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/stg/cf2022/img\icons\page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">Voice</div>
+              <div class="breadcrumbs__page-title-text-jp">お客様の声</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">TOP</a>
+            <div class="breadcrumbs__main-carret"><img src="/stg/cf2022/img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">お客様の声</span>
+          </div>
+        </div>
+        <div class="voice-details js-post-voice">
+          <div class="voice-details__head" style="display:none;">
+            <h4 class="voice-details__name">山田  太郎様</h4><span class="voice-details__date"> <span id="news-post-date">2022.02.07</span> ／<span id="news-post-category">カテゴリー名 1</span></span>
+          </div>
+          <h2 class="voice-details__title" id="news-post-title">{{VoiceList.title}} {{VoiceList.customer_initials}}</h2>
+          <div class="voice-details__content">
+            <div class="voice-details__column">
+              <div class="voice-details__image"><img src="{{VoiceList.image_path}}" alt="" id="news-post-mainvisual"></div>
+              <!--.voice-details__image-text
+              h2.voice-details__product-title 商品名が入ります
+              .voice-details__product-button
+                h2.voice-details__product-text 商品詳細へ
+              -->
+            </div>
+            <div class="voice-details__info">
+              <div class="voice-details__description">
+                <p id="news-post-content">{{VoiceList.content}}</p>
+              </div>
+              <!--.voice-details__staff-info
+              h2.voice-details__staff-title キャプテンフーヅスタッフより
+              h4.voice-details__staff-name 山田 太郎様 
+              .voice-details__description
+                p スタッフからのお返事が入ります。スタッフからのお返事が入ります。スタッフからのお返事が入ります。スタッフからのお返事が入ります。スタッフからのお返事が入ります。スタッフからのお返事が入ります。スタッフからのお返事が入ります。スタッフからのお返事が入ります。スタッフからのお返事が入ります。スタッフからのお返事が入ります。
+              
+              -->
+            </div>
+          </div>
+          <div class="voice-details__other">
+            <!--h2.voice-details__other-header その他のお客様の声-->
+            <!--.voice-details__other-list
+            a.voice-details__other-item(href="")
+              .voice-details__other-image
+                img(src="img/voice/voice-detail.jpg" alt="")
+              h2.voice-details__other-title Test
+              h4.voice-details__other-name 山田 太郎様
+              span.voice-details__other-date 2022年06月22日 ／ 「天然海老M」
+            a.voice-details__other-item(href="")
+              .voice-details__other-image
+                img(src="img/voice/voice-detail.jpg" alt="")
+              h2.voice-details__other-title Test
+              h4.voice-details__other-name 山田 太郎様
+              span.voice-details__other-date 2022年06月22日 ／ 「天然海老M」
+            --><a class="voice-details__return-button" href="/stg/cf2022/voice-list.html">お客様の声一覧に戻る</a>
+          </div>
+        </div>
+      </div>
+   
+{% endblock %}

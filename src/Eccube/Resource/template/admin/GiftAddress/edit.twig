@@ -1,0 +1,522 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['gift_address', 'gift_address_registration'] %}
+
+{% block title %}
+	{{ 'admin.gift_address.registration'|trans }}
+{% endblock %}
+{% block sub_title %}
+	{{ 'admin.gift_address'|trans }}
+{% endblock %}
+
+{% form_theme form '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block javascript %}
+    <script src="{{ asset('assets/js/vendor/moment.min.js', 'admin') }}"></script>
+    <script src="{{ asset('assets/js/vendor/moment-with-locales.min.js', 'admin') }}"></script>
+    <script src="{{ asset('assets/js/vendor/tempusdominus-bootstrap-4.min.js', 'admin') }}"></script>
+
+    <script>
+        $(function() {
+
+            // datetimepicker と競合するため HTML5 のカレンダ入力を無効に
+            $('input[type="date"]').attr('type','text');
+
+            // datetimepicker で value が消えてしまうので data-value に保持しておく
+            $('input.datetimepicker-input').each(function() {
+                $(this).data('value', $(this).val());
+            });
+
+            $('input.datetimepicker-input').not('#admin_search_customer_birth_start').not('#admin_search_customer_birth_end').datetimepicker({
+                locale: '{{ eccube_config.locale }}',
+                format: 'YYYY-MM-DD HH:mm:ss',
+                useCurrent: false,
+                buttons: {
+                    showToday: true,
+                    showClose: true
+                },
+            });
+
+            $('#admin_search_customer_birth_start').datetimepicker({
+                locale: '{{ eccube_config.locale }}',
+                format: 'YYYY-MM-DD',
+                useCurrent: false,
+                buttons: {
+                    showToday: true,
+                    showClose: true
+                }
+            });
+
+            $('#admin_search_customer_birth_end').datetimepicker({
+                locale: '{{ eccube_config.locale }}',
+                format: 'YYYY-MM-DD',
+                useCurrent: false,
+                buttons: {
+                    showToday: true,
+                    showClose: true
+                }
+            });
+
+            // datetimepicker で value が消えてしまうので更新
+            $('input.datetimepicker-input').each(function() {
+                $(this).val($(this).data('value'));
+            });
+
+            $('#search-pattern-register-btn').on('click', function() {
+                // 各値を入れるオブジェクト
+                var admin_search_customer= {};
+                $("#search_form input:text").each(function(){
+                    admin_search_customer[this.name] = this.value
+                });
+                $("#search_form input:hidden").each(function(){
+                    admin_search_customer[String(this.name)] = this.value
+                });
+                $("#search_form input:checked").each(function(){
+                    admin_search_customer[String(this.name)] = this.value
+                });
+                $("#search_form select").each(function(){
+                    admin_search_customer[String(this.name)] = this.value
+                });
+
+                $.ajax({
+                    url: '{{ url('admin_customer_search_template') }}',
+                        type: 'POST',
+                        data: {
+                        admin_search_customer,
+                        "search-pattern-name": $("#search-pattern-name").val(),
+                        "search-pattern-type": $("#search-pattern-type").val(),
+                        }
+                    }).done(function(data) {
+                        location.reload();
+                    });
+
+            });
+        });
+    </script>
+{% endblock javascript %}
+
+{% block main %}
+	<form name="customer_form" role="form" id="customer_form" method="post" class="h-adr" action="" novalidate>
+<div class="c-outsideBlock">
+            <div class="c-outsideBlock__contents">
+                <div class="row justify-content-start">
+                    <div class="col-6">
+                        <div class="mb-2">
+                            <label class="col-form-label" data-tooltip="true" data-placement="top" title="{{ 'tooltip.customer.multi_search_label'|trans }}">{{ 'admin.customer.multi_search_label'|trans }}<i class="fa fa-question-circle fa-lg ml-1"></i></label>
+                            {{ form_widget(searchForm.multi) }}
+                            {{ form_errors(searchForm.multi) }}
+                        </div>
+                        <div class="d-inline-block mb-3 collapsed" data-toggle="collapse" href="#searchDetail" aria-expanded="false" aria-controls="searchDetail"><a><i class="fa font-weight-bold mr-1 fa-plus-square-o"></i><span class="font-weight-bold">{{ 'admin.common.search_detail'|trans }}</span></a></div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="form-group col-3">
+                <label class="col-form-label">テンプレート一覧</label>
+                <div id="admin_search_order_status">
+                    <select class="form-control" name="search-template">
+                        <option value="">選択してください</option>
+                        {% for template in orderSearchTemplates %}
+                            <option value="{{ template.id }}">{{ template.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="c-subContents ec-collapse collapse{{ has_errors ? ' show' }}" id="searchDetail">
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-row">
+                            <div class="col-12">
+                                <p class="col-form-label">{{ 'admin.customer.customer_status'|trans }}</p>
+                                {{ form_widget(searchForm.customer_status, { 'label_attr': { 'class': 'checkbox-inline'}}) }}
+                                {{ form_errors(searchForm.customer_status) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>{{ 'admin.order.purchase_product'|trans }}</label>
+                            {{ form_widget(searchForm.buy_product_name) }}
+                            {{ form_errors(searchForm.buy_product_name) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-row">
+                            <div class="col-12">
+                                <p class="col-form-label">{{ 'admin.common.gender'|trans }}</p>
+                                {{ form_widget(searchForm.sex, { 'label_attr': { 'class': 'checkbox-inline'}}) }}
+                                {{ form_errors(searchForm.sex) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>{{ 'admin.order.purchase_price'|trans }}</label>
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                    {{ form_widget(searchForm.buy_total_start) }}
+                                    {{ form_errors(searchForm.buy_total_start) }}
+                                </div>
+                                <div class="col-auto text-center"><span>{{ 'admin.common.separator__range'|trans }}</span></div>
+                                <div class="col">
+                                    {{ form_widget(searchForm.buy_total_end) }}
+                                    {{ form_errors(searchForm.buy_total_end) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div>
+                            <label>{{ 'admin.customer.birth_month'|trans }}</label>
+                            <div class="row">
+                                <div class="col-5">
+                                    {{ form_widget(searchForm.birth_month) }}
+                                    {{ form_errors(searchForm.birth_month) }}
+                                </div>
+                                <div class="col-7"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>{{ 'admin.order.purchase_count'|trans }}</label>
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                    {{ form_widget(searchForm.buy_times_start) }}
+                                    {{ form_errors(searchForm.buy_times_start) }}
+                                </div>
+                                <div class="col-auto text-center"><span>{{ 'admin.common.separator__range'|trans }}</span></div>
+                                <div class="col">
+                                    {{ form_widget(searchForm.buy_times_end) }}
+                                    {{ form_errors(searchForm.buy_times_end) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div>
+                            <label>{{ 'admin.common.birth_day'|trans }}</label>
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                    {{ form_widget(searchForm.birth_start) }}
+                                    {{ form_errors(searchForm.birth_start) }}
+                                </div>
+
+                                <div class="col-auto text-center"><span>{{ 'admin.common.separator__range'|trans }}</span></div>
+                                <div class="col">
+                                    {{ form_widget(searchForm.birth_end) }}
+                                    {{ form_errors(searchForm.birth_end) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>{{ 'admin.common.create_date'|trans }}</label>
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                    {{ form_widget(searchForm.create_datetime_start) }}
+                                    {{ form_errors(searchForm.create_datetime_start) }}
+                                </div>
+                                <div class="col-auto text-center"><span>{{ 'admin.common.separator__range'|trans }}</span></div>
+                                <div class="col">
+                                    {{ form_widget(searchForm.create_datetime_end) }}
+                                    {{ form_errors(searchForm.create_datetime_end) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div>
+                            <label>{{ 'admin.common.pref'|trans }}</label>
+                            <div class="row">
+                                <div class="col-5">
+                                    {{ form_widget(searchForm.pref) }}
+                                    {{ form_errors(searchForm.pref) }}
+                                </div>
+                                <div class="col-7"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>{{ 'admin.common.update_date'|trans }}</label>
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                    {{ form_widget(searchForm.update_datetime_start) }}
+                                    {{ form_errors(searchForm.update_datetime_start) }}
+                                </div>
+                                <div class="col-auto text-center"><span>{{ 'admin.common.separator__range'|trans }}</span></div>
+                                <div class="col">
+                                    {{ form_widget(searchForm.update_datetime_end) }}
+                                    {{ form_errors(searchForm.update_datetime_end) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div>
+                            <label>コースマスタ</label>
+                            <div class="row">
+                                <div class="col-5">
+                                    {{ form_widget(searchForm.CourseMaster) }}
+                                    {{ form_errors(searchForm.CourseMaster) }}
+                                </div>
+                                <div class="col-7"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>曜日</label>
+                            <div class="row">
+                                <div class="col-5">
+                                    {{ form_widget(searchForm.delivery_date) }}
+                                    {{ form_errors(searchForm.delivery_date) }}
+                                </div>
+                                <div class="col-7"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div>
+                            <label>DCコード</label>
+                            <div class="row">
+                                <div class="col-5">
+                                    {{ form_widget(searchForm.delivery_code_name) }}
+                                    {{ form_errors(searchForm.delivery_code_name) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>配送週</label>
+                            <div class="row">
+                                <div class="col-5">
+                                    {{ form_widget(searchForm.delivery_week) }}
+                                    {{ form_errors(searchForm.delivery_week) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label>{{ 'admin.common.phone_number'|trans }}</label>
+                            {{ form_widget(searchForm.phone_number) }}
+                            {{ form_errors(searchForm.phone_number) }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div>
+                            <label>{{ 'admin.order.last_buy_date'|trans }}</label>
+                            <div class="form-row align-items-center">
+                                <div class="col">
+                                    {{ form_widget(searchForm.last_buy_start) }}
+                                    {{ form_errors(searchForm.last_buy_start) }}
+                                </div>
+                                <div class="col-auto text-center"><span>{{ 'admin.common.separator__range'|trans }}</span></div>
+                                <div class="col">
+                                    {{ form_widget(searchForm.last_buy_end) }}
+                                    {{ form_errors(searchForm.last_buy_end) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-3 text-right">
+                        <a class="btn btn-info btn-sm" data-toggle="modal" data-target="#search-pattern">検索パターンを登録</a>
+                        <div class="modal fade" id="search-pattern" tabindex="-1" role="dialog" aria-labelledby="search-pattern" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">検索パターン登録</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <p class="text-left mb-1">検索パターン名</p>
+                                            <input name="search-pattern-name" id="search-pattern-name" class="form-control" placeholder="パターン名">
+                                        </div>
+                                        <div class="form-group">
+                                            <p class="text-left mb-1">種別</p>
+                                            <select class="form-control" name="search-pattern-type" id="search-pattern-type">
+                                                <option value="common">共通</option>
+                                                <option value="personal">個人</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" id="search-pattern-register-btn" class="btn btn-primary">保存する</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% for f in searchForm|filter(f => f.vars.eccube_form_options.auto_render) %}
+                    <div class="row mb-2">
+                        {% if f.vars.eccube_form_options.form_theme %}
+                            {% form_theme f f.vars.eccube_form_options.form_theme %}
+                            {{ form_row(f) }}
+                        {% else %}
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label>{{ f.vars.label|trans }}</label>
+                                    {{ form_widget(f) }}
+                                    {{ form_errors(f) }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            {{ form_widget(searchForm.sortkey, {'attr': {'class': 'js-listSort-key'}}) }}
+            {{ form_widget(searchForm.sorttype, {'attr': {'class': 'js-listSort-type'}}) }}
+        </div>
+        <div class="c-outsideBlock__contents mb-5">
+            <button type="submit" class="btn btn-ec-conversion px-5" name='search'>{{ 'admin.common.search'|trans }}</button>
+            {% if pagination %}
+                <span class="font-weight-bold ml-2">{{ 'admin.common.search_result'|trans({'%count%':pagination.totalItemCount}) }}</span>
+            {% endif %}
+        </div>
+        <div class="c-outsideBlock__contents mb-5">
+            {{ include('@admin/search_items.twig', { 'form': searchForm }, ignore_missing = true) }}
+        </div>
+		<span class="p-country-name" style="display:none;">Japan</span>
+		{{ form_widget(form._token) }}
+		<div class="c-contentsArea__cols">
+			<div class="c-contentsArea__primaryCol">
+				<div class="c-primaryCol">
+					<div class="card rounded border-0 mb-4">
+						<div class="card-header">
+							<div class="row">
+								<div class="col-8">
+									<span class="card-title">{{ 'admin.gift_address.info'|trans }}</span>
+								</div>
+								<div class="col-4 text-right">
+									<a data-toggle="collapse" href="#ordererInfo" aria-expanded="false" aria-controls="ordererInfo">
+										<i class="fa fa-angle-up fa-lg"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="collapse show ec-cardCollapse" id="ordererInfo">
+							<div class="card-body">
+                                <div class='row'>
+                                    <div class='col-3'>
+                                        <span>{{ 'admin.customer.customer'|trans }}</span>
+                                        <span class="badge badge-primary ml-1">
+                                            {{ 'admin.common.required'|trans }}
+                                        </span>
+                                    </div>
+                                    <div class='col'>
+                                        <div class="mb-3">
+													{{ form_widget(form.customer) }}
+													{{ form_errors(form.customer) }}
+										</div>
+                                    </div>
+                                </div>
+								<div class="row mb-2">
+									<div class="col-3">
+										<span>{{ 'admin.common.address'|trans }}</span>
+										<span class="badge badge-primary ml-1">
+											{{ 'admin.common.required'|trans }}
+										</span>
+									</div>
+									<div class="col">
+										<div class="mb-3">
+											<div class="row justify-content-start">
+												<div class="col-auto pr-0 align-self-center">
+													<span>{{ 'admin.common.postal_symbol'|trans }}</span>
+												</div>
+												<div class="col-3">
+													{{ form_widget(form.postal_code) }}
+
+												</div>
+											</div>
+											<div class="row">
+												<div class="col">
+													{{ form_errors(form.postal_code) }}
+												</div>
+											</div>
+										</div>
+										<div class="mb-3">
+											<div class="row justify-content-start">
+												<div class="col-auto">
+													{{ form_widget(form.address.pref) }}
+													{{ form_errors(form.address.pref) }}
+												</div>
+											</div>
+										</div>
+										<div class="mb-3">
+											{{ form_widget(form.address.addr01, { attr : { placeholder : 'admin.common.address_sample_01' }}
+											) }}
+											{{ form_errors(form.address.addr01) }}
+										</div>
+										<div class="mb-3">
+											{{ form_widget(form.address.addr02, { attr : { placeholder : 'admin.common.address_sample_02' }}) }}
+											{{ form_errors(form.address.addr02) }}
+										</div>
+										<div class="mb-3">
+											{{ form_widget(form.addr03, { attr : { placeholder : 'admin.common.address_sample_03' }}) }}
+											{{ form_errors(form.addr03) }}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="c-conversionArea">
+			<div class="c-conversionArea__container">
+				<div class="row justify-content-between align-items-center">
+					<div class="col-6">
+						<div class="c-conversionArea__leftBlockItem">
+							<a class="c-baseLink" href="{{ url('admin_gift_address_list') }}">
+								<i class="fa fa-backward" aria-hidden="true"></i>
+								<span>{{ 'admin.gift_address'|trans }}</span>
+							</a>
+						</div>
+					</div>
+					<div class="col-6">
+						<div id="ex-conversion-action" class="row align-items-center justify-content-end">
+							<div class="col-auto">
+								<button class="btn btn-ec-conversion px-5" type="submit">{{ 'admin.common.registration'|trans }}</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+{% endblock %}

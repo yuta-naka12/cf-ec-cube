@@ -1,0 +1,193 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+    <title>自社便宅配エリア検索　食材宅配のキャプテンフーヅ</title>
+    <meta name="description" content="魚介販売ならキャプテンフーヅにお任せください。魚介を中心に選び抜いた冷凍食品を販売・宅配をしています魚介の食材宅配【キャプテンフーヅ】">
+    <meta name="keywords" content=",魚介,販売,宅配,冷凍食品,神奈川">
+    <!-- saved from url=(0083)http://www.openspc2.org/JavaScript/Ajax/Ajax_study/chapter03/007/sample1/index.html -->
+    <SCRIPT type=text/javascript
+            src="/html/user_data/assets/js/areasearch/xmlhttp.js"></SCRIPT>
+
+    <script type=text/javascript>
+        findText = "";
+        function loadDataFile(fName)
+        {
+            httpObj = createXMLHttpRequest(displayData);
+            if (httpObj)
+            {
+                httpObj.open("GET",fName,true);
+                httpObj.send(null);
+                findText = document.ajaxForm.requestText.value;	// 検索する文字
+            }
+        }
+        function displayData()
+        {
+            if ((httpObj.readyState == 4) && (httpObj.status == 200))
+            {
+                $("result").innerHTML = parseTabText(httpObj.responseText);
+            }else{
+                $("result").innerHTML = "<b>Loading...</b>";
+            }
+        }
+        // タブ区切りテキストを解析して一致したデータを表示
+        function parseTabText(tabText)
+        {
+            var resultText = "<table style='width:100%; background:none; border:none;'><tr><td style='border:none;'><div id='addscrolltable'><table cellpadding='1' cellspacing='0' width='530px' height='300'>";
+            var LF = String.fromCharCode(10);	// 改行コード (LF)
+            var TAB = String.fromCharCode(9);	// タブコード
+            lineData = tabText.split(LF);
+            for (var i=0; i<lineData.length; i++)
+            {
+                itemData = lineData[i].split(TAB);
+                str = itemData[0].match(findText);
+                if (str)
+                {
+                    resultText += "<tr><td align='left'>"+itemData[0]+"</td><td align='center'>"+itemData[1]+"</td></tr>";
+                }
+            }
+            resultText += "</table></div></td><td align='center' style='border:none;'><a href='/shop/ssl2/jisha_use.aspx'><img src='/html/user_data/assets/img/entrysearch/riyouannai.png' alt='利用案内'/></a></td></tr></table>";
+            return resultText;
+        }
+        </script>
+
+    <link rel="stylesheet" href="/html/template/default/assets/css/style.css">
+    <link rel="stylesheet" href="/html/template/default/assets/css/customize.css">
+    <script src="/html/user_data/assets/js/areasearch/prototype.js" type="text/javascript"></script>
+    <script src="/html/user_data/assets/js/areasearch/scriptaculous.js?load=effects,builder" type="text/javascript"></script>
+    <script src="/html/user_data/assets/js/areasearch/lightbox.js" type="text/javascript"></script>
+    <style type="text/css"><!--
+        #outerImageContainer {
+            -moz-border-radius-topleft:10px;
+            -moz-border-radius-topright:10px;
+        }
+        #imageDataContainer {
+            -moz-border-radius-bottomleft:10px;
+            -moz-border-radius-bottomright:10px;
+        }
+        --></style>
+
+    <style>
+        #rapaddsearch {
+            margin:0 auto;
+            width:100%;
+            height:auto;
+            background:url(/html/user_data/assets/img/entrysearch/bg.gif) left top;
+            color:#FFFFFF;
+        }
+
+        #addsearch {
+            margin:0 auto;
+            width:850px;
+            height:796px;
+            text-align:left;
+            font-size:14px;
+            background:url(/html/user_data/assets/img/entrysearch/areabg.gif) left top no-repeat;
+            padding:160px 0 0 0;
+        }
+        #addsearch-min {
+            width:660px;
+            margin:0 auto;
+        }
+        #addsearch table {
+            background:url(/html/user_data/assets/img/entrysearch/tablebg.png);
+            color:#003366;
+            margin:0;
+            padding:0;
+        }
+        #addscrolltable {
+            overflow:scroll;
+            height:280px;
+            border:none;
+        }
+        #addsearch table td {
+            border:none;
+            border-bottom:1px #68839e solid;
+            background:none;
+        }
+        #addsearch div.message {
+            margin-top:10px;
+        }
+        #addsearch .q {
+            padding-left:15px;
+            color:#FFFFFF;
+            background:none;
+            font-weight:bold;
+        }
+        #addsearch .a {
+            padding-left:15px;
+            background:none;
+            border:none;
+        }
+
+        div#calendar {
+            margin:20px;
+        }
+
+        div#calendar h3 {
+            font-size:14px;
+        }
+
+    </style>
+</head>
+<body onLoad="document.ajaxForm.requestText.focus()">
+<div id="rapaddsearch">
+    <div id="addsearch">
+        <div id="addsearch-min">
+            <div style='width:500px; margin:0 auto;'>
+                <P>郵便番号(ハイフン無し)または区町村を入れて検索してください<br>
+
+                    <span style="font-size:12px;">例：2340054　世田谷区</span></P>
+                <form onsubmit="loadDataFile('/html/user_data/assets/img/entrysearch/sample.txt');return false" name=ajaxForm>
+                    <input value="" name=requestText> <input onclick="loadDataFile('/html/user_data/assets/img/entrysearch/sample.txt')" value=検索 type=button><BR></form><!--？日付で↑その日以降のデータ読み込み-->
+                <div class="message">
+                    表の見方：【例】1週3週（火）の場合→１週と３週の火曜日お届けです。<br>週は西暦のカレンダーと異なります。
+                    <a href="/shop/pages/add_search_btn2.aspx" style="color:#ff9966;">詳しくはこちらをクリックしてください。</a></div>
+            </div>
+            <DIV id=result></DIV>
+            <div style='width:500px; margin:0 auto;'>
+                <div class="message">
+                    <div class="q"><font color="red"><b>Q.</b></font>検索をしても<font color="#ff99cc">何も出てこない</font>場合は？</div>
+                    <div class="a"><font color="#66ff66"><b>A.</b></font>宅配エリア外の可能性があります。<a href="/shop/customer/agree.aspx" style="color:#ff9966;">他社便宅配</a>をご利用ください。</div>
+                    <div class="a"><font color="#66ff66"><b>A.</b></font>
+                        一度もお届けしたことのない区町村の場合がございます。お電話でお問い合わせください。0120-978-669
+                    </div>
+                    <div class="a"><font color="#66ff66"><b>A.</b></font>郵便番号はハイフンなしで入力してください。例:2340054</div>
+                </div>
+                <!--<div id="calendar">
+                <h3>年間の配達スケジュールをご確認いただけます。</h3>
+                <table><tr><td>
+                <a href="/img/calendar/calendar2011_1-3tue.gif" rel="lightbox[calendar2011]" title="1/3火">1/3火</a>
+                </td><td>
+                <a href="/img/calendar/calendar2011_1-3wed.gif" rel="lightbox[calendar2011]" title="1/3水">1/3水</a>
+                </td><td>
+                <a href="/img/calendar/calendar2011_1-3thu.gif" rel="lightbox[calendar2011]" title="1/3木">1/3木</a>
+                </td><td>
+                <a href="/img/calendar/calendar2011_1-3fri.gif" rel="lightbox[calendar2011]" title="1/3金">1/3金</a>
+                </td><td>
+                <a href="/img/calendar/calendar2011_1-3sat.gif" rel="lightbox[calendar2011]" title="1/3土">1/3土</a>
+                </td></tr>
+                <tr>
+                <td>
+                <a href="/img/calendar/calendar2011_2-4tue.gif" rel="lightbox[calendar2011]" title="2/4火">2/4火</a>
+                </td><td>
+                <a href="/img/calendar/calendar2011_2-4wed.gif" rel="lightbox[calendar2011]" title="2/4水">2/4水</a>
+                </td><td>
+                <a href="/img/calendar/calendar2011_2-4thu.gif" rel="lightbox[calendar2011]" title="2/4木">2/4木</a>　
+                </td><td>
+                <a href="/img/calendar/calendar2011_2-4fri.gif" rel="lightbox[calendar2011]" title="2/4金">2/4金</a>
+                </td><td>
+                <a href="/img/calendar/calendar2011_2-4sat.gif" rel="lightbox[calendar2011]" title="2/4土">2/4土</a>
+                </td></tr>
+                </table>
+                </div>-->
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

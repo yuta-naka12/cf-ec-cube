@@ -1,0 +1,690 @@
+{% extends 'default_frame.twig' %}
+
+	{% block main %}
+        <div class="wrapper">
+            <div class="breadcrumbs">
+                <div class="breadcrumbs__page-title">
+                    <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+                    <div class="breadcrumbs__page-title-text">
+                        <div class="breadcrumbs__page-title-text-en">{{ 'front.faq.subtitle'|trans }}</div>
+                        <div class="breadcrumbs__page-title-text-jp">{{ 'front.faq.title'|trans }}</div>
+                    </div>
+                </div>
+                <div class="breadcrumbs__main">
+                    <a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="/">{{ 'front.product.position_top'|trans }}</a>
+                    <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div>
+                    <span class="breadcrumbs__main-pagename">{{ 'front.faq.title'|trans }}</span>
+                </div>
+            </div>
+            <div class="faq">
+                <section class="faq__list">
+                    <h3 class="faq__list-title">自社便宅配のよくある質問</h3>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">情報変更・再発行</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">パスワードを忘れた。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="/forgot">パスワード設定</a>からパスワードの再設定をお願いいたします。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">会員IDを忘れた。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="/contact">各種お問い合わせ</a>から会員IDの再発行をお願いします。<br>※発行は翌営業日になる場合がございます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">登録情報（住所・名前等）の変更をしたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="/mypage/change">登録情報変更フォーム</a>よりご変更ください。<br>※変更内容によって数日お時間をいただく場合がございます。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">入会について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">入会金・月額費用は？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">一切いただきません。商品代金以外と送料のみいただきます。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">お支払いについて</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">支払い方法は？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">代金引換・ゆうちょ銀行引落しの2種類からお選びいただけます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">手数料はかかる？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">無料となっております。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">ゆうちょ銀行の自動引落しにしたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">申し込み用紙をお送りしますので<a href="/contact">お問い合わせフォーム</a>より、お知らせください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">お届けについて</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">時間指定は可能？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">時間指定はお受けしておりません。<br>※２回目以降のお届け時間は初回お届けの前後1時間が目安になります。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">お届けサイクルは？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">２週間に一度のお届けとなります。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">自社宅配便を利用可能か知りたい</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="/areasearch">自社便宅配エリア検索</a>から調べられます。<br>検索をしても何も出てこない場合は、宅配エリア外の可能性があります。他社便宅配をご利用ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">お届け曜日は？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">お住まいのエリアによって変わります。<br><a href="/areasearch">自社便宅配エリア検索</a>から調べられます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">どのような状態で届くの？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">ご在宅時は手渡しでお渡しします。<br>留守時は預け箱または保冷バックにドライアイスを入れ、玄関先またはご指定の場所に置かせていただきます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">今回の配達日はちょうど旅行で家に帰らない。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">配達日を一日後にできます。火⇒水　土⇒火<br><a href="/contact">お問い合わせフォーム</a>より、お知らせください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">留守時の場合</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">留守時は？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">留守時は保冷バックまたは預け箱にドライアイスを入れて玄関先または、ご指定の場所に置かせていただき、集金は翌日<br>（土曜届けは火曜集金）お伺いいたします。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">帰りが遅い場合は？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="/contact">お問い合わせフォーム</a>にて、帰宅時間をお知らせください。保冷力を保てるように、ドライアイスをお入れします。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">置き場所を指定したい</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="/contact">お問い合わせフォーム</a>にて、ご指定の場所をお知らせください。（物置の中、車庫の中等）</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">お取替え・弁償について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">留守時のお届けで商品の盗難・いたずらをされた。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">当社負担にて、1～2営業日後に替わりの商品をお届けさせていただきます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">頼んでいた商品と違う物が入っていた、または入っていなかった。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">当日または、翌日にお引取り・お届けさせていただきます。<br>お手数ですがお電話(045-833-7221)または、<a href="/contact">お問い合わせフォーム</a>からご連絡ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">不良品が入っていた。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">翌日(日・月除く)または次回配達時に替わりの商品をお届けいたします。<br>お手数ですがお電話(045-833-7221)または、<a href="/contact">お問い合わせフォーム</a>からご連絡ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">受け取り時に解凍していた。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">翌日(日・月除く)または次回配達時にお取り替えいたします。<br>お手数ですがお電話(045-832-9596)または、<a href="/contact">お問い合わせフォーム</a>からご連絡ください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">退会について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">退会したい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">12回連続(６ヵ月)でお休みしますと自動退会となります。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">登録について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">インターネットで買い物がしたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">既に宅配をご利用されている方は<a href="https://captainfoods.co.jp/shop/ssl2/webentry.aspx">web利用申し込み</a>へ初めての方は<a href="https://captainfoods.co.jp/shop/ssl2/jisha_use.aspx#entry">自社便登録フォーム</a>をご利用ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">登録をしたが、メールが来ない</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">迷惑メールBOXに入ってしまっている、またはメールアドレスに誤りがある可能性があります。<br>今一度ご確認ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">久しぶりにログインを試みたができなかった。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">12回連続(６ヵ月)でお休みしますと自動退会となり、ログインできなくなります。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">注文について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">注文内容の変更をしたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">マイページ⇒購入履歴一覧⇒オーダーIDを選択し注文内容の変更手続きをお願いします。お電話でも受け付けております。<br><a href="https://captainfoods.co.jp/shop/pages/orderchange.aspx">注文済み商品を変更する（ご利用ガイド）</a><br>※発送済みの品物については変更できませんのでご了承ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">注文変更で在庫切れメッセージが出た。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><div class="faq__double"><div class="faq__double-column">システムの仕様上このような事象が発生いたします。<br>お手数ですが、変更のお手続きはお電話または<a href="/contact">お問い合わせフォーム</a>にてお受けいたします。<br>0120-978-669　平日9:00～17:00　ネット係まで </div><div class="faq__double-column"><img src="/html/user_data/assets/img/cf2022/img\faq\img-faq-setsumei.gif"></div></div></div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">注文のキャンセルをしたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">マイページ⇒購入履歴一覧⇒オーダーIDを選択し注文のキャンセル手続きをお願いします。<br>お電話でも受け付けております。<br>※発送済みの品物についてはキャンセルできませんのでご了承ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">買い物かご～注文完了まで</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="https://captainfoods.co.jp/shop/pages/jishatetuduki.aspx">ご利用ガイド</a>をご覧ください。</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="faq__list">
+                    <h3 class="faq__list-title">他社便宅配のよくある質問</h3>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">情報変更・再発行</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">パスワードを忘れた。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="https://captainfoods.co.jp/shop/customer/askpass.aspx">パスワード設定</a>からパスワードの再設定をお願いいたします。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">会員IDを忘れた。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="/contact">各種お問い合わせ</a>から会員IDの再発行をお願いします。<br>※発行は翌営業日になる場合がございます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">登録情報（住所・名前等）の変更をしたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="https://captainfoods.co.jp/shop/customer/customer.aspx">登録情報変更フォーム</a>よりご変更ください。<br>※変更内容によって数日お時間をいただく場合がございます。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">入会について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">入会金・月額費用は？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">一切いただきません。商品代金以外と送料のみいただきます。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">お支払いについて</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">支払い方法は？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">銀行振込・代金引換（手数料300円（＋税））をご利用いただけます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">支払い手数料はかかる？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">代金引換（手数料300円（＋税））・銀行振込時の手数料を頂戴しております。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">お届けについて</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">時間指定は可能？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">可能です。<br>午前中・14-16・16-18・18-20・19-21</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">お届けサイクルは？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">お好きな時にご注文ください。ご注文から最短で２日後にお届けいたします。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">お届けエリアは？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">クロネコヤマト宅急便を利用して全国にお届けいたします。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">どのような状態で届くの？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">冷凍車の冷気を通すため無地の段ボール箱でお届けしています。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">冷凍品と常温品を同時に購入したが、どのように届くの？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">冷凍品と常温品を別口でお送りします。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">海外に持って行きたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">ホテルへ前泊される場合はホテルへ、またはご自宅までお届けいたします。<br>発砲スチロールにドライアイス（別途費用）を入れてお送り致します。<br>ドライアイスの量は渡航先・荷物量で変わってきますのでメールまたはお電話でお問い合わせください。<br>発送例：インドへ商品20kg分を持ち出し⇒ドライアイス8kg使用<br><br><span class="red">空港までの直接配送は2014.2.26現在不可能となっております。</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">お取替え・弁償について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">頼んでいた商品と違う物が入っていた、または入っていなかった。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">次回ご注文時に不足商品をお届け、または不足商品分をご返金させていただきます。<br>お手数ですがお電話(045-833-7221)または、<a href="/contact">お問い合わせフォーム</a>からご連絡ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">不良品が入っていた。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">翌日(日・月除く)または次回配達時に替わりの商品をお届けいたします。<br>お手数ですがお電話(045-833-7221)または、<a href="/contact">お問い合わせフォーム</a>からご連絡ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">受け取り時に解凍していた。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">翌日(日・月除く)または次回配達時にお取り替えいたします。<br>お手数ですがお電話(045-832-9596)または、<a href="/contact">お問い合わせフォーム</a>からご連絡ください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">退会について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">退会したい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">お手数ですがお電話<a href="045-832-9596">(045-832-9596)</a>または、<a href="/contact">お問い合わせフォーム</a>からご連絡ください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">登録について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">インターネットで買い物がしたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content"><a href="https://captainfoods.co.jp/shop/customer/agree.aspx#kiyaku_point">他社便登録フォーム</a> からご登録ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">登録をしたが、メールが来ない</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">迷惑メールBOXに入ってしまっている、またはメールアドレスに誤りがある可能性があります。今一度ご確認ください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">注文について</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">注文内容の変更をしたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">お電話または<a href="/contact">お問い合わせフォーム</a>から承ります。<br>※発送済みの品物については変更できませんのでご了承ください。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">注文のキャンセルをしたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">お電話または<a href="/contact">お問い合わせフォーム</a>から承ります。<br>※発送済みの品物についてはキャンセルできませんのでご了承ください。</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">ギフトについて</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">のしは可能？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">可能です。お買い物手続き途中の「宅配便（他社便）ご利用時のご要望入力欄」にご記入ください。(無料)<br><a href="/noshi" target="_blank">のしのご入力場所</a></div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">ギフト包装は可能？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">可能です。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">複数の場所に贈りたい。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">可能です。複数の贈答先に一括でお送りする事ができます。<br><a href="/hukusuu">複数贈答先に送る</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="faq__group">
+                        <h4 class="faq__group-title">ポイントについて</h4>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">ポイントの有効期限はありますか？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">有効期限なくご利用いただけます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">買い物したのにポイントが加算されていない。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">ポイントは出荷完了時に付与されます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">キャンペーンポイントが加算されていない。</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">通常ポイントとは別の処理で加算されるため、遅れる場合がございます。</div>
+                            </div>
+                        </div>
+                        <div class="faq__item">
+                            <div class="faq__item-question js-faq__item-question">
+                                <div class="faq__item-question-logo">Q</div>
+                                <div class="faq__item-question-content">注文時ポイントを使用した商品をキャンセルした場合の使用ポイントは？</div>
+                                <div class="faq__item-question-carret"><img src="/html/user_data/assets/img/cf2022/img\icons\icon-arrow.svg" alt=""></div>
+                            </div>
+                            <div class="faq__item-answer">
+                                <div class="faq__item-answer-logo">A</div>
+                                <div class="faq__item-answer-content">ご注文締め切り日以降のキャンセルにつきましては、ポイントの返還はできません。<br>締め切り日に関しましてはお届け先により異なりますのでお問い合わせください。</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    {% endblock %}

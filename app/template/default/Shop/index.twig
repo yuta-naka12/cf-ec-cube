@@ -1,0 +1,227 @@
+{% extends 'default_frame.twig' %}
+
+	{% block main %}
+        <section class="t-banner">
+            <div class="t-banner__background js-banner">
+                <div class="t-banner__item"><img class="t-banner__image pc" src="/html/user_data/assets/img/cf2022/img/top/banner-image1.jpeg" alt="Captain Foods"><img class="t-banner__image sp" src="/html/user_data/assets/img/cf2022/img/top/banner-image1-sp.jpeg" alt="Captain Foods"></div>
+                <div class="t-banner__item"><img class="t-banner__image pc" src="/html/user_data/assets/img/cf2022/img/top/banner-image2.jpeg" alt="Captain Foods"><img class="t-banner__image sp" src="/html/user_data/assets/img/cf2022/img/top/banner-image2-sp.jpeg" alt="Captain Foods"></div>
+                <div class="t-banner__item"><img class="t-banner__image pc" src="/html/user_data/assets/img/cf2022/img/top/banner-image3.jpeg" alt="Captain Foods"><img class="t-banner__image sp" src="/html/user_data/assets/img/cf2022/img/top/banner-image3-sp.jpeg" alt="Captain Foods"></div>
+                <div class="t-banner__item"><img class="t-banner__image pc" src="/html/user_data/assets/img/cf2022/img/top/banner-image4.jpeg" alt="Captain Foods"><img class="t-banner__image sp" src="/html/user_data/assets/img/cf2022/img/top/banner-image4-sp.jpeg" alt="Captain Foods"></div>
+                <div class="t-banner__item"><img class="t-banner__image pc" src="/html/user_data/assets/img/cf2022/img/top/banner-image5.jpeg" alt="Captain Foods"><img class="t-banner__image sp" src="/html/user_data/assets/img/cf2022/img/top/banner-image5-sp.jpeg" alt="Captain Foods"></div>
+                <div class="t-banner__item"><img class="t-banner__image pc" src="/html/user_data/assets/img/cf2022/img/top/banner-image6.jpeg" alt="Captain Foods"><img class="t-banner__image sp" src="/html/user_data/assets/img/cf2022/img/top/banner-image6-sp.jpeg" alt="Captain Foods"></div>
+            </div>
+            <div class="t-banner__scroll-container">
+                <div class="t-banner__scroll-text">Scroll Down</div>
+            </div>
+            <!--<div class="t-banner__news">
+              <div class="t-banner__news-container">
+                <div class="js-banner-news">
+                  <ul>
+                    <li class="t-banner__news-item"> <a class="t-banner__news-date" href="">2022.02.07</a><a class="t-banner__news-content" href="">最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります…</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>-->
+        </section>
+
+        <section class="t-search">
+            <form action="/shop/goods/search.aspx" method="post" name="frmSearch" class="t-search__wrapper">
+                <div class="t-search__component">
+                    <input type="hidden" name="search" value="x">
+                    <input class="keyword_ t-search__input"  name="keyword" type="text" id="keyword" tabindex="1" value="" size="8" placeholder="商品番号で検索">
+                    <button type="submit" class="t-search__button">
+                        <img src="/html/user_data/assets/img/cf2022/img/top/magnifying-glass-icon.svg" alt="" loading="lazy">
+                        <span>商品検索</span>
+                    </button>
+                </div>
+                <div class="t-search__text">
+                    <div class="t-search__text-description"><span>※商品名でも検索できます</span><span>商品コード4桁の先頭に36を付けて検索ください。<br>例：363001</span></div>
+                    <a href="https://captainfoods.co.jp/shop/goods/search.aspx" class="t-search__text-button"><span>詳細検索する</span><img src="/html/user_data/assets/img/html/user_data/assets/img/cf2022/img/top\right-carret-1.svg" alt="" loading="lazy"></a>
+                </div>
+            </form>
+        </section>
+
+        <section class="t-collage">
+            <div class="t-collage__wrapper">
+                <div class="t-collage__item">
+                    <h3 class="t-collage__title t-collage__title--fish">お刺身バイキング<img src="/html/user_data/assets/img/cf2022/img/top/gold-fish.svg" alt="" loading="lazy"></h3><a class="t-collage__thumbnail" href="https://captainfoods.co.jp/shop/c/c010301/">
+                        <div class="t-collage__thumbnail-ratio"></div><img class="pc" src="/html/user_data/assets/img/cf2022/img/top/fish-collage-1.png" alt="" loading="lazy"><img class="sp" src="/html/user_data/assets/img/cf2022/img/top/fish-collage-1-sp.png" alt="" loading="lazy"></a>
+                </div>
+                <div class="t-collage__item">
+                    <h3 class="t-collage__title t-collage__title--shrimp">自慢のえび<img src="/html/user_data/assets/img/cf2022/img/top/gold-shrimp.svg" alt="" loading="lazy"></h3>
+                    <a href="https://captainfoods.co.jp/shop/c/c0101/" class="t-collage__thumbnail">
+                        <div class="t-collage__thumbnail-ratio"></div><img class="pc" src="/html/user_data/assets/img/cf2022/img/top/fish-collage-2.png" alt="" loading="lazy"><img class="sp" src="/html/user_data/assets/img/cf2022/img/top/fish-collage-2-sp.png" alt="" loading="lazy">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="t-about">
+            <div class="t-about__wrapper">
+                <div class="t-about__vertical">
+                    <div class="t-about__outlined pc">
+                        <img class="image" src="/html/user_data/assets/img/cf2022/img/top/top-about-text-2.svg" alt="">
+                    </div>
+                    <div class="t-about__text sp">
+                        <span>というお客様も多数いらっしゃいます。</span>
+                        <span>お魚はキャプテンフーヅで。</span>
+                        <span>実際に日用品は大手宅配会社、</span>
+                        <span>&nbsp;</span>
+                        <span>トップクラスだと自負しております。</span>
+                        <span>食材宅配業界において</span>
+                        <span>そのため、魚介類の品質は</span>
+                        <span>皆様よりご愛顧いただいております。 </span>
+                        <span>魚介類を中心とした品ぞろえで</span>
+                        <span>
+            <span>1980</span>
+            <span>年創業当初から</span>
+          </span>
+                        <span>一般小売することから始まり、</span>
+                        <span>料亭向けの海老を</span>
+                        <span>キャプテンフーヅは</span>
+                    </div>
+                    <h3 class="t-about__title sp">キャプテンフーヅについて</h3>
+                    <div class="t-about__strip sp">About</div>
+                </div>
+                <div class="t-about__buttons">
+                    <a class="t-about__button-1" href="/lp/" target="__blank"><span>キャプテンフーヅについて</span><img src="/html/user_data/assets/img/cf2022/img/top/external-link-icon.svg" alt="" loading="lazy"></a>
+                    <a class="t-about__button-2" href="/cf2022/beginner.html"><span>初めての方へ</span><img src="/html/user_data/assets/img/cf2022/img/top/carret-icon.svg" alt="" loading="lazy"></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="t-seafood" style="padding-bottom: 40px;">
+            <div class="t-seafood__wrapper">
+                <div class="t-seafood__title">
+                    <h3>魚介類ジャンル一覧</h3>
+                    <h4>Seafood</h4>
+                </div>
+                <div class="t-seafood__list">
+                    <div class="t-seafood__list-wrapper">
+                        <a href="/shop/c/c0101/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-1.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">えび</div>
+                        </a>
+                        <a href="/shop/c/c0102/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img style="left: 55%;" src="/html/user_data/assets/img/cf2022/img/top/seafood-2.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">かに</div>
+                        </a>
+                        <a href="/shop/c/c0103/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-3.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">刺身</div>
+                        </a>
+                        <a href="/shop/c/c0104/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-4.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">まぐろ</div>
+                        </a>
+                        <a href="/shop/c/c0105/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-5.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">水産加工品</div>
+                        </a>
+                        <a href="/shop/c/c0106/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-6.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">魚卵</div>
+                        </a>
+                        <a href="/shop/c/c0107/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-7.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">貝類</div>
+                        </a>
+                        <a href="/shop/c/c0108/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-8.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">一尾物</div>
+                        </a>
+                        <a href="/shop/c/c0109/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-9.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">切身</div>
+                        </a>
+                        <a href="/shop/c/c0110/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-10.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">漬魚</div>
+                        </a>
+                        <a href="/shop/c/c0111/" class="t-seafood__item">
+                            <div class="t-seafood__item-thumbnail">
+                                <div class="t-seafood__item-thumbnail-ratio"></div><img src="/html/user_data/assets/img/cf2022/img/top/seafood-11.png" alt="" loading="lazy">
+                            </div>
+                            <div class="t-seafood__item-name">干物</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--<section class="t-news">
+          <div class="t-news__wrapper">
+            <div class="t-news__label">
+              <h3>お知らせ</h3><span>News</span>
+            </div>
+            <div class="t-news__right">
+              <div class="t-news__items">
+                <div class="t-news__item">
+                  <div class="t-news__item-date">2022.02.07</div>
+                  <div class="t-news__item-content"> <span>カテゴリー</span>
+                    <p>最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります</p>
+                  </div>
+                </div>
+                <div class="t-news__item">
+                  <div class="t-news__item-date">2022.02.07</div>
+                  <div class="t-news__item-content"> <span>カテゴリー</span>
+                    <p>最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります</p>
+                  </div>
+                </div>
+                <div class="t-news__item">
+                  <div class="t-news__item-date">2022.02.07</div>
+                  <div class="t-news__item-content"> <span>カテゴリー</span>
+                    <p>最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります</p>
+                  </div>
+                </div>
+                <div class="t-news__item">
+                  <div class="t-news__item-date">2022.02.07</div>
+                  <div class="t-news__item-content"> <span>カテゴリー</span>
+                    <p>最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります</p>
+                  </div>
+                </div>
+                <div class="t-news__item">
+                  <div class="t-news__item-date">2022.02.07</div>
+                  <div class="t-news__item-content"> <span>カテゴリー</span>
+                    <p>最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります最新ニュースが入ります</p>
+                  </div>
+                </div>
+              </div><a class="t-news__button" href="#"><span>すべて見る</span><img src="/cf2022/img/t-news/news-button-carret.svg" alt="" loading="lazy"></a>
+            </div>
+          </div>
+        </section>-->
+        <script src="../cf2022/ofi.min.8e98ee7a.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+        <script src="../cf2022/js/index.js"></script>
+        <script src="../cf2022/clamp.min.8a68984c.js"></script>
+        <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+        <script src="https://unpkg.com/flickity-fade@1/flickity-fade.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+        <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+        <script src="../cf2022/jquery.simpleTicker.91d4c5c4.js"></script>
+        <script>$(document).ready(function () {
+                $.simpleTicker($(".js-banner-news"), {
+                    'effectType': 'roll'
+                });
+            });</script>
+    {% endblock %}

@@ -1,0 +1,318 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['product', 'event'] %}
+
+{% block title %}{{ 'admin.product.event_management'|trans }}{% endblock %}
+{% block sub_title %}{{ 'admin.product'|trans }}{% endblock %}
+
+{% form_theme form '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block main %}
+    <form name="member_form" role="form" id="member_form" method="post" action="" novalidate>
+        {{ form_widget(form._token) }}
+        <div class="c-contentsArea__cols">
+            <div class="c-contentsArea__primaryCol">
+                <div class="c-primaryCol">
+                    <div class="card rounded border-0 mb-4">
+                        <div class="collapse show ec-cardCollapse" id="memberInfo">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.event_id'|trans }}</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.event_id) }}
+                                            </div>
+                                            {{ form_errors(form.event_id) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.name'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.name) }}
+                                            </div>
+                                            {{ form_errors(form.name) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.category_id'|trans }}</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.category_id) }}
+                                            </div>
+                                            {{ form_errors(form.category_id) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.started_at'|trans }}</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.started_at) }}
+                                            </div>
+                                            {{ form_errors(form.started_at) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.ended_at'|trans }}</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.ended_at) }}
+                                            </div>
+                                            {{ form_errors(form.ended_at) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.link'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.link) }}
+                                            </div>
+                                            {{ form_errors(form.link) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+{#                                <div class="row mb-2">#}
+{#                                    <div class="col-3">#}
+{#                                        <span>{{ 'admin.product.event.is_lpo_display'|trans }}</span>#}
+{#                                    </div>#}
+{#                                    <div class="col">#}
+{#                                        <div class="row">#}
+{#                                            <div class="col">#}
+{#                                                {{ form_widget(form.is_lpo_display) }}#}
+{#                                            </div>#}
+{#                                            {{ form_errors(form.is_lpo_display) }}#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.keyword'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.keyword) }}
+                                            </div>
+                                            {{ form_errors(form.keyword) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.display_position'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.display_position) }}
+                                            </div>
+                                            {{ form_errors(form.display_position) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.display_maximum_number'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.display_maximum_number) }}
+                                            </div>
+                                            {{ form_errors(form.display_maximum_number) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.status'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.status) }}
+                                            </div>
+                                            {{ form_errors(form.status) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.comment'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.comment) }}
+                                            </div>
+                                            {{ form_errors(form.comment) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.free_comment_1'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.free_comment_1) }}
+                                            </div>
+                                            {{ form_errors(form.free_comment_1) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.free_comment_2'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.free_comment_2) }}
+                                            </div>
+                                            {{ form_errors(form.free_comment_2) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.free_comment_3'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.free_comment_3) }}
+                                            </div>
+                                            {{ form_errors(form.free_comment_3) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.free_comment_4'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.free_comment_4) }}
+                                            </div>
+                                            {{ form_errors(form.free_comment_4) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.free_comment_5'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.free_comment_5) }}
+                                            </div>
+                                            {{ form_errors(form.free_comment_5) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.event.sort_no'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.sort_no) }}
+                                            </div>
+                                            {{ form_errors(form.sort_no) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-conversionArea">
+            <div class="c-conversionArea__container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-6">
+                        <div class="c-conversionArea__leftBlockItem">
+                            <a class="c-baseLink"
+                               href="{{ url('admin_product_event') }}">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                <span>{{ 'admin.product.event_management'|trans }}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="ex-conversion-action" class="row align-items-center justify-content-end">
+                            <div class="col-auto">
+                                <button class="btn btn-ec-conversion px-5"
+                                        type="submit">{{ 'admin.common.registration'|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+
+

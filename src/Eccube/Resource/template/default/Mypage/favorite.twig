@@ -1,0 +1,86 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.title_en'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_mypage'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_mypage_favorite'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <section class="okiniiri"> 
+        <div class="wrapper">
+          <h2 class="delivery__heading text">{{'front.mypage.favorite.title'|trans}}<br><span>{{'front.mypage.name'|trans}}</span></h2>
+          <div class="category-subgroup">
+            <div class="category-subgroup__content category-subgroup__content--okiniiri"> 
+              <div class="category-subgroup__item">
+                <div class="category-subgroup__img"><img src="/html/template/default/assets/img/okiniiri/fav-3.jpg"></div>
+                <h4 class="regular">{{'front.product.name_item1'|trans}}</h4>
+                <p class="category-subgroup__txt okiniiri__text">{{'front.product.weight_title'|trans}}{{'front.product.weight_item1'|trans}}</p>
+                <p class="category-subgroup__txt okiniiri__text">{{'front.product.place_title'|trans}}{{'front.product.place_item1'|trans}}</p>
+                <p class="category-subgroup__txt okiniiri__text">{{'front.product.code_title'|trans}}{{'front.product.code_item1'|trans}}</p>
+                <p class="category-subgroup__txt"><span> <span class="okiniiri__black">{{'front.product.price_title'|trans}}</span>&nbsp;{{'front.product.price_item1'|trans}}</span>{{'front.product.price_yen'|trans}}&nbsp;{{'front.product.price_tax'|trans}}</p>
+                <div class="category-subgroup__buttons"><a class="category-subgroup__btn1" href="">{{'front.mypage.favorite.in_cart'|trans}}</a><a class="category-subgroup__btn2 okiniiri__text" href=""><img src="/html/template/default/assets/img/icons/star.svg" alt="">
+                    <p>{{'front.mypage.favorite.out_favorite'|trans}}</p></a></div>
+                <div class="category-subgroup__note-block"> 
+                  <form>
+                    <textarea class="okiniiri__text" placeholder="２００文字記述できます。">{{'front.mypage.favorite.dummy'|trans}}</textarea>
+                    <div class="category-subgroup__button-group"> 
+                      <button class="category-subgroup__btn2 category-subgroup__btn2--okiniiri okiniiri__text">{{'front.mypage.favorite.edit_memo'|trans}}</button>
+                      <button class="category-subgroup__btn2 category-subgroup__btn2--okiniiri okiniiri__text" type="reset">{{'front.mypage.favorite.cancel'|trans}}</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="category-subgroup__item">
+                <div class="category-subgroup__img"><img src="/html/template/default/assets/img/okiniiri/fav-2.jpg"></div>
+                <h4 class="regular">{{'front.product.name_item2'|trans}}</h4>
+                <p class="category-subgroup__txt okiniiri__text">{{'front.product.weight_title'|trans}} {{'front.product.weight_item2'|trans}}</p>
+                <p class="category-subgroup__txt okiniiri__text">{{'front.product.place_title'|trans}} {{'front.product.place_item2'|trans}}</p>
+                <p class="category-subgroup__txt okiniiri__text">{{'front.product.code_title'|trans}} {{'front.product.code_item2'|trans}}</p>
+                <p class="category-subgroup__txt"><span> <span class="okiniiri__black">{{'front.product.price_title'|trans}}</span>&nbsp;{{'front.product.price_item2'|trans}}</span>{{'front.product.price_yen'|trans}}&nbsp;{{'front.product.price_tax'|trans}}</p>
+                <div class="category-subgroup__buttons"><a class="category-subgroup__btn1" href="">{{'front.mypage.favorite.in_cart'|trans}}</a><a class="category-subgroup__btn2 okiniiri__text" href=""><img src="/html/template/default/assets/img/icons/star.svg" alt="">
+                    <p>{{'front.mypage.favorite.out_favorite'|trans}}</p></a></div>
+                <div class="category-subgroup__note-block"> 
+                  <form>
+                    <textarea class="okiniiri__text" placeholder="２００文字記述できます。"></textarea>
+                    <div class="category-subgroup__button-group"> 
+                      <button class="category-subgroup__btn2 category-subgroup__btn2--okiniiri okiniiri__text">{{'front.mypage.favorite.edit_memo'|trans}}</button>
+                      <button class="category-subgroup__btn2 category-subgroup__btn2--okiniiri okiniiri__text" type="reset">{{'front.mypage.favorite.cancel'|trans}}</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="category-subgroup__item">
+                <div class="category-subgroup__img"><img src="/html/template/default/assets/img/okiniiri/fav-1.jpg"></div>
+                <h4 class="regular">{{'front.product.name_item3'|trans}}</h4>
+                <p class="category-subgroup__txt okiniiri__text">{{'front.product.weight_title'|trans}} {{'front.product.weight_item3'|trans}}</p>
+                <p class="category-subgroup__txt okiniiri__text">{{'front.product.place_title'|trans}} {{'front.product.place_item3'|trans}}</p>
+                <p class="category-subgroup__txt okiniiri__text">{{'front.product.code_title'|trans}} {{'front.product.code_item3'|trans}}</p>
+                <p class="category-subgroup__txt"><span> <span class="okiniiri__black">{{'front.product.price_title'|trans}}</span>&nbsp;{{'front.product.price_item3'|trans}}</span>{{'front.product.price_yen'|trans}}&nbsp;{{'front.product.price_tax'|trans}}</p>
+                <div class="category-subgroup__buttons"><a class="category-subgroup__btn1" href="">{{'front.mypage.favorite.in_cart'|trans}}</a><a class="category-subgroup__btn2 okiniiri__text" href=""><img src="/html/template/default/assets/img/icons/star.svg" alt="">
+                    <p>{{'front.mypage.favorite.out_favorite'|trans}}</p></a></div>
+                <div class="category-subgroup__note-block"> 
+                  <form>
+                    <textarea class="okiniiri__text" placeholder="２００文字記述できます。"></textarea>
+                    <div class="category-subgroup__button-group"> 
+                      <button class="category-subgroup__btn2 category-subgroup__btn2--okiniiri okiniiri__text">{{'front.mypage.favorite.edit_memo'|trans}}</button>
+                      <button class="category-subgroup__btn2 category-subgroup__btn2--okiniiri okiniiri__text" type="reset">{{'front.mypage.favorite.cancel'|trans}}</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div><a class="button__secondary button__secondary--okiniiri" href="#"> 
+              <div class="button__secondary-link button__secondary-link--okiniiri">{{'front.mypage.back'|trans}}</div></a>
+          </div>
+        </div>
+      </section>
+{% endblock %}

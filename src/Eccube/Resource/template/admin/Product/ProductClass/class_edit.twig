@@ -1,0 +1,1326 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['product', 'pamphlet_master_register'] %}
+
+{% block title %}パンフレットマスタ登録{% endblock %}
+{% block sub_title %}商品管理{% endblock %}
+
+{% form_theme form '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block stylesheet %}
+    <style>
+    .c-form__fileUploadThumbnail:hover:before {
+        background: none;
+    }
+    </style>
+{% endblock stylesheet %}
+
+{% block javascript %}
+<script>
+function autofill(product_code){
+    $.ajax({
+        url: '{{ url('admin_product_class_autofill') }}',
+        type: 'POST',
+        data: {
+        'product_code': product_code,
+        },
+        dataType: 'json',
+    }).done(function(data) {
+        const thumbDivs = $(`#thumb_product_image_small, #thumb_product_image_large, #thumb_package_image`);
+        if(data.product_images){
+            $(`#thumb_product_image_small, #thumb_product_image_large, #thumb_package_image`).empty();
+            for(images in data.product_images){
+
+                data.product_images[images].forEach(function(image){
+                    let html =
+                    `<div class="c-form__fileUploadThumbnail" style="background-image:url(\'/html/upload/save_image/${image.file_name}\');cursor:not-allowed; ">` +
+                    '</div>';
+                    $(`#thumb_${image.image_type}`).append(html);
+                });
+            }
+
+            thumbDivs.each(function() {
+                if ($(this).children().length === 0) {
+                    $(this).html('<p class="message placeholder">画像が登録されていません</p>');
+                } else {
+                    $(this).find('.message').remove();
+                }
+            });
+        }
+
+        var product_specification_data = [
+            'product_name',
+            'description_detail',
+            'weight',
+            'processing_place',
+            'cooking_method',
+            'salt_amount',
+            'calorie',
+            'allergy',
+            'raw_materials',
+        ];
+        product_specification_data.forEach(function(key){
+            if(data[key]){
+                $(`#admin_product_class_${key}`).val(data[key]);
+            }else{
+                $(`#admin_product_class_${key}`).val(null);
+            }
+        });
+
+        var filter_choice_type_data = [
+            'DeliveryCalculation',
+            'ProductSupplier',
+            'DecompressionMethod',
+            'Category',
+        ]
+        filter_choice_type_data.forEach(function(key){
+            if(data[key]){
+                $(`#admin_product_class_${key}`).val(data[key]).trigger('change');
+            }else{
+                $(`#admin_product_class_${key}`).val(null).trigger('change');
+            }
+        });
+    }).fail(function(data) {
+        console.log(`fail:${data}`);
+    });
+}
+
+$(document).ready(function() {
+  $('#admin_product_class_Product').select2();
+
+  $('#admin_product_class_Product').on('select2:select', function (e) {
+    const product_code = e.params.data.id;
+    autofill(product_code);
+  });
+
+    // transition to edit page after ID search
+    $('#to-product-edit-btn').on('click', function () {
+        event.preventDefault();
+        let productId = parseInt($('#selected-product').val());
+        location.href = "{{ url('admin_product_class_edit', {'id': 1}) }}".replace('1', productId);
+    });
+
+    //通常価格から会員価格を計算
+    $('#admin_product_class_price').on('input', function () {
+        var price = $(this).val();
+        calculateMemberPrice(price);
+    });
+
+    //仕入れ期間が変更されたら、仕入れ価格を必須
+    addRequiredToCostPeriodPrice();
+    $('#admin_product_class_cost_start_period, #admin_product_class_cost_end_period').on('change', function () {
+        addRequiredToCostPeriodPrice();
+    });
+
+    {% if Product != null %}
+        {% if Product.code is defined %}
+            const productCode = {{ Product.code|json_encode|raw }};
+            $('#admin_product_class_Product').val(productCode).trigger('change');
+            autofill(productCode);
+        {% endif %}
+        {% if Class.IntroduceGood.id is defined %}
+            const introduceGoodId = {{ Class.IntroduceGood.id|json_encode|raw }};
+            $('#admin_product_class_IntroduceGoods').val(introduceGoodId).trigger('change');
+        {% endif %}
+
+        {% if Class.NewProductCategory.id is defined %}
+            const newProductCategoryId = {{ Class.NewProductCategory.id|json_encode|raw }};
+            $('#admin_product_class_NewProductCategory').val(newProductCategoryId).trigger('change');
+        {% endif %}
+
+        {% if Class.SubscriptionPurchase.id is defined %}
+            const subscriptionPurchaseId = {{ Class.SubscriptionPurchase.id|json_encode|raw }};
+            $('#admin_product_class_SubscriptionPurchase').val(subscriptionPurchaseId).trigger('change');
+        {% endif %}
+
+        {% if Class.BulkBuying.id is defined %}
+            const bulkBuyingId = {{ Class.BulkBuying.id|json_encode|raw }};
+            $('#admin_product_class_BulkBuying').val(bulkBuyingId).trigger('change');
+        {% endif %}
+
+        {% if Class.ProductIcon1.id is defined %}
+            const ProductIcon1Id = {{ Class.ProductIcon1.id|json_encode|raw }};
+            $('#admin_product_class_ProductIcon1').val(ProductIcon1Id).trigger('change');
+        {% endif %}
+
+        {% if Class.ProductIcon2.id is defined %}
+            const ProductIcon2Id = {{ Class.ProductIcon2.id|json_encode|raw }};
+            $('#admin_product_class_ProductIcon2').val(ProductIcon2Id).trigger('change');
+        {% endif %}
+
+        {% if Class.ProductIcon3.id is defined %}
+            const ProductIcon3Id = {{ Class.ProductIcon3.id|json_encode|raw }};
+            $('#admin_product_class_ProductIcon3').val(ProductIcon3Id).trigger('change');
+        {% endif %}
+
+
+    {% endif %}
+
+    //select2 autofocus
+    $(document).on('select2:open', (e) => {
+        if (!$(e.target).attr('multiple')) {
+            document.querySelector('input.select2-search__field').focus();
+        }
+    });
+
+    // 年を4桁に制限
+    $('input[type="date"]').each(
+        function(){
+            $(this).attr('max','9999-12-31');
+        }
+    );
+});
+
+function addRequiredToCostPeriodPrice() {
+    var required_html = '<span class="badge badge-primary ml-1">必須</span>';
+    var cost_start_period_value = $('#admin_product_class_cost_start_period').val();
+    var cost_end_period_value = $('#admin_product_class_cost_end_period').val();
+    var cost_period_price_title = $('.cost_period_price_title');
+    var existing_badge = cost_period_price_title.find('.badge');
+
+    if (cost_start_period_value === '' && cost_end_period_value === '' && existing_badge.length > 0) {
+        existing_badge.remove();
+    } else if ((cost_start_period_value !== '' || cost_end_period_value !== '') && existing_badge.length === 0) {
+        cost_period_price_title.append(required_html);
+    }
+}
+
+function calculateMemberPrice(price){
+    var memberPrice = Math.round(price);
+    $('#admin_product_class_member_price_0').val(memberPrice);
+    $('#admin_product_class_member_price_1').val(memberPrice);
+    $('#admin_product_class_member_price_2').val(memberPrice);
+    $('#admin_product_class_member_price_3').val(Math.round(memberPrice * 0.9));
+}
+</script>
+{% endblock %}
+
+
+{% block main %}
+    {# ID検索バー #}
+    {% if app.request.uri matches '/\\/admin\\/product\\/class\\/\\d+\\/edit/' %}
+        <form method='POST' action='{{ url('admin_product_class_edit', {'id': Class.id}) }}'>
+    {% else %}
+        <form method='POST' action='{{ url('admin_product_class_new') }}'>
+    {% endif %}
+            <div class="c-outsideBlock__contents">
+                <div class="row justify-content-start">
+                    <div class="col-6">
+                        <div class="mb-2">
+                            <label class="col-form-label" data-tooltip="true" data-placement="top">{{ 'admin.product.pamphlet_code'|trans }}</label>
+                            {{ form_widget(searchForm.pamphlet_code) }}
+                            {{ form_errors(searchForm.pamphlet_code) }}
+                            {% if results is not empty %}
+                                {% if results is iterable %}
+                                <select class='form-control' id='selected-product'>
+                                    {% for result in results %}
+                                        <option value='{{result.id}}'>{{ result.pamphlet_code }}：{{ result.Product.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% else %}
+                                    <p class="text-muted mt-2 mb-2">{{results|trans}}</p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="c-outsideBlock__contents mb-3">
+                <button id="search-id-btn" class="btn btn-ec-conversion px-5">{{ 'admin.common.search'|trans }}</button>
+                {% if results is not empty%}
+                    {% if results is iterable %}
+                    <button id="to-product-edit-btn" class="btn btn-ec-conversion px-5">編集する</button>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </form>
+
+    <form name="member_form" role="form" id="member_form" method="post" action="" novalidate>
+        {{ form_widget(form._token) }}
+        <div class="c-contentsArea__cols">
+            <div class="c-contentsArea__primaryCol">
+                <div class="c-primaryCol">
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-8">
+                                    <span class="card-title">
+                                        {{ 'admin.setting.shop.delivery.base_info'|trans }}
+                                    </span>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a data-toggle="collapse" href="#memberInfo" aria-expanded="false" aria-controls="memberInfo">
+                                        <i class="fa fa-angle-up fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse show ec-cardCollapse" id="memberInfo">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>パンフレットコード</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.pamphlet_code) }}
+                                                {{ form_errors(form.pamphlet_code) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>商品コード</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.Product) }}
+                                                {{ form_errors(form.Product) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>商品名</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.product_name) }}
+                                                {{ form_errors(form.product_name) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>サイトカテゴリ</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.Category) }}
+                                                {{ form_errors(form.Category) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# !購入グループが無い #}
+                                {# <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>購入グループ</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> #}
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>販売期間</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                {{ form_widget(form.sales_start_period) }}
+                                                {{ form_errors(form.sales_start_period) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_widget(form.sales_end_period) }}
+                                                {{ form_errors(form.sales_end_period) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>紹介品区分</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                    {{ form_widget(form.IntroduceGoods) }}
+                                                    {{ form_errors(form.IntroduceGoods) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>新商品区分</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                    {{ form_widget(form.NewProductCategory) }}
+                                                    {{ form_errors(form.NewProductCategory) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>定期購入区分</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                    {{ form_widget(form.SubscriptionPurchase) }}
+                                                    {{ form_errors(form.SubscriptionPurchase) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>通常価格</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                    {{ form_widget(form.price) }}
+                                                    {{ form_errors(form.price) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>会員区分別価格０</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                    {{ form_widget(form.member_price_0) }}
+                                                    {{ form_errors(form.member_price_0) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>会員区分別価格１</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                    {{ form_widget(form.member_price_1) }}
+                                                    {{ form_errors(form.member_price_1) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>会員区分別価格２</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                    {{ form_widget(form.member_price_2) }}
+                                                    {{ form_errors(form.member_price_2) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>会員区分別価格３</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                    {{ form_widget(form.member_price_3) }}
+                                                    {{ form_errors(form.member_price_3) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>割引期間</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                {{ form_widget(form.discount_start_period) }}
+                                                {{ form_errors(form.discount_start_period) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_widget(form.discount_end_period) }}
+                                                {{ form_errors(form.discount_end_period) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>割引期間価格</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.discount_period_price) }}
+                                                {{ form_errors(form.discount_period_price) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>まとめ買いグループ</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.BulkBuying) }}
+                                                {{ form_errors(form.BulkBuying) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>まとめ買い価格</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.bulk_buying_price) }}
+                                                {{ form_errors(form.bulk_buying_price) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>キャンペーン期間</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                {{ form_widget(form.campaign_start_period) }}
+                                                {{ form_errors(form.campaign_start_period) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_widget(form.campaign_end_period) }}
+                                                {{ form_errors(form.campaign_end_period) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>ポイント</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.point) }}
+                                                {{ form_errors(form.point) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>キャンペーンポイント</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.campaign_point) }}
+                                                {{ form_errors(form.campaign_point) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>仕入額</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.cost) }}
+                                                {{ form_errors(form.cost) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>仕入期間</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                {{ form_widget(form.cost_start_period) }}
+                                                {{ form_errors(form.cost_start_period) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_widget(form.cost_end_period) }}
+                                                {{ form_errors(form.cost_end_period) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3 cost_period_price_title">
+                                        <span>期間仕入額</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.cost_period_price) }}
+                                                {{ form_errors(form.cost_period_price) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>包材</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.packing_material) }}
+                                                {{ form_errors(form.packing_material) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>決済</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.settlement) }}
+                                                {{ form_errors(form.settlement) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>返済</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.pay_back_debt) }}
+                                                {{ form_errors(form.pay_back_debt) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>ドライ</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.dry) }}
+                                                {{ form_errors(form.dry) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>保管料</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.discount_fee) }}
+                                                {{ form_errors(form.discount_fee) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>金利</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.interest_rates) }}
+                                                {{ form_errors(form.interest_rates) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>マージン</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.margin) }}
+                                                {{ form_errors(form.margin) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-8">
+                                    <span class="card-title">
+                                        ECサイト情報
+                                    </span>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a data-toggle="collapse" href="#memberInfo" aria-expanded="false" aria-controls="memberInfo">
+                                        <i class="fa fa-angle-up fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse show ec-cardCollapse" id="memberInfo">
+                            <div class="card-body">
+                                {# 商品画像大 #}
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-inline-block" data-tooltip="true" data-placement="top">
+                                            <span>{{ 'admin.product.image_large'|trans }}</span>
+                                            <br>{{ 'admin.product.image_large_size'|trans }}
+                                        </div>
+                                    </div>
+                                    <div class="col mb-2 mt-2">
+                                        <div id="thumb_product_image_large" class="c-form__fileUploadThumbnails clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                                {# パッケージ画像 #}
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="d-inline-block" data-tooltip="true" data-placement="top">
+                                            <span>{{ 'admin.product.package_image'|trans }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col mb-2 mt-2">
+                                        <div id="thumb_package_image" class="c-form__fileUploadThumbnails clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>購入限定数</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.purchase_limit) }}
+                                                {{ form_errors(form.purchase_limit) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>購入最低数</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.purchase_minimum) }}
+                                                {{ form_errors(form.purchase_minimum) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>掲載日</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                {{ form_widget(form.insert_start_date) }}
+                                                {{ form_errors(form.insert_start_date) }}
+                                            </div>
+                                            <div class="col-6">
+                                                {{ form_widget(form.insert_end_date) }}
+                                                {{ form_errors(form.insert_end_date) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>一覧画面有無</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.is_list_page) }}
+                                                {{ form_errors(form.is_list_page) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>詳細画面有無</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.is_detail_page) }}
+                                                {{ form_errors(form.is_detail_page) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>状態</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.status) }}
+                                                {{ form_errors(form.status) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>商品説明１</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.description_detail) }}
+                                                {{ form_errors(form.description_detail) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>商品説明２（補足説明）</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.description_detail_2) }}
+                                                {{ form_errors(form.description_detail_2) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {# !編集画面のみ #}
+                                {# <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>ページURL</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.description_detail_2) }}
+                                                {{ form_errors(form.description_detail_2) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> #}
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>アイコン１</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.ProductIcon1) }}
+                                                {{ form_errors(form.ProductIcon1) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>アイコン２</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.ProductIcon2) }}
+                                                {{ form_errors(form.ProductIcon2) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>アイコン３</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.ProductIcon3) }}
+                                                {{ form_errors(form.ProductIcon3) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>かご投入時メッセージ</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.cart_insert_message) }}
+                                                {{ form_errors(form.cart_insert_message) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>キーワード</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.keyword) }}
+                                                {{ form_errors(form.keyword) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-8">
+                                    <span class="card-title">
+                                        在庫状況
+                                    </span>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a data-toggle="collapse" href="#memberInfo" aria-expanded="false" aria-controls="memberInfo">
+                                        <i class="fa fa-angle-up fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse show ec-cardCollapse" id="memberInfo">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>在庫数</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.stock) }}
+                                                {{ form_errors(form.stock) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>在庫扱いの種別</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.stock_type) }}
+                                                {{ form_errors(form.stock_type) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>在庫通常コメント</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.normal_stock_comment) }}
+                                                {{ form_errors(form.normal_stock_comment) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>在庫少量時コメント</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.low_stock_comment) }}
+                                                {{ form_errors(form.low_stock_comment) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>在庫切れコメント</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.out_of_stock_comment) }}
+                                                {{ form_errors(form.out_of_stock_comment) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>コメントしきい値</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.comment_threshold) }}
+                                                {{ form_errors(form.comment_threshold) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>実数表示フラグ</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.is_real_indicator) }}
+                                                {{ form_errors(form.is_real_indicator) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-8">
+                                    <span class="card-title">
+                                        マスタ情報
+                                    </span>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a data-toggle="collapse" href="#memberInfo" aria-expanded="false" aria-controls="memberInfo">
+                                        <i class="fa fa-angle-up fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse show ec-cardCollapse" id="memberInfo">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>温度帯（送料計算用区分）</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.DeliveryCalculation) }}
+                                                {{ form_errors(form.DeliveryCalculation) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>仕入先</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.ProductSupplier) }}
+                                                {{ form_errors(form.ProductSupplier) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>量目</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.weight) }}
+                                                {{ form_errors(form.weight) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>加工場所</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.processing_place) }}
+                                                {{ form_errors(form.processing_place) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>調理方法</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.cooking_method) }}
+                                                {{ form_errors(form.cooking_method) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>解凍区分</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.DecompressionMethod) }}
+                                                {{ form_errors(form.DecompressionMethod) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>塩分</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.salt_amount) }}
+                                                {{ form_errors(form.salt_amount) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>カロリー</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.calorie) }}
+                                                {{ form_errors(form.calorie) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>アレルギー</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.allergy) }}
+                                                {{ form_errors(form.allergy) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>原材料</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                {{ form_widget(form.raw_materials) }}
+                                                {{ form_errors(form.raw_materials) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if Class is defined %}
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="d-inline-block">
+                                    <span class="card-title">
+                                    登録情報
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <a data-toggle="collapse" href="#basicConfig" aria-expanded="false"
+                                       aria-controls="basicConfig">
+                                        <i class="fa fa-angle-up fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse show ec-cardCollapse" id="basicConfig">
+                            <div class="card-body">
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <i class="fa fa-flag mr-1"></i>
+                                        <span>登録日</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>：{{ Class.create_date|date_min }}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <i class="fa fa-refresh mr-1"></i>
+                                        <span>{{ 'admin.common.update_date'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>：{{ Class.update_date|date_min }}</span>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <i class="fa fa-user mr-1"></i>
+                                        <span>{{ 'admin.common.last_updater'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>：{{ Class.Creator ? Class.Creator.name }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="c-conversionArea">
+            <div class="c-conversionArea__container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-6">
+                        <div class="c-conversionArea__leftBlockItem">
+                            <a class="c-baseLink"
+                               href="{{ url('admin_product_class') }}">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                <span>{{ 'admin.product.pamphlet_master_list'|trans }}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="ex-conversion-action" class="row align-items-center justify-content-end">
+                            {# {% if class.id %}
+                            <div class="col-auto">
+                                <a class="btn px-5 btn-danger" type="submit" data-toggle="modal" data-target="#discontinuance-{{ class.id }}">{{ 'admin.common.delete'|trans }}</a>
+                            </div>
+                            {% endif %} #}
+                            <div class="col-auto">
+                                <button class="btn btn-ec-conversion px-5"
+                                        type="submit">{{ 'admin.common.registration'|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# {% if Class.id %}
+        <div class="modal fade" id="discontinuance-{{ Class.id }}" tabindex="-1" role="dialog" aria-labelledby="discontinuance" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title font-weight-bold">
+                            {{ 'admin.common.delete_modal__title'|trans }}</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-left">
+                        <p class="text-left">
+                            {{ 'admin.common.delete_modal__message'|trans({ '%name%' : Class.Product.name }) }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-ec-sub" type="button" data-dismiss="modal">
+                            {{ 'admin.common.cancel'|trans }}
+                        </button>
+                        <a href="{{ url('admin_product_class_delete', {'id' : Class.id}) }}" class="btn btn-ec-delete"{{ csrf_token_for_anchor() }} data-method="delete" data-confirm="false">
+                            {{ 'admin.common.delete'|trans }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %} #}
+    </form>
+{% endblock %}
+
+
+
+

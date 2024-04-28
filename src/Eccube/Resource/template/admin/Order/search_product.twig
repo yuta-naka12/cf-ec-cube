@@ -1,0 +1,215 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+<script>
+    // 商品規格情報. 規格2のプルダウンリストの設定に利用する,
+    var productsClassCategories = {
+        {% for Product in pagination %}
+        "{{ Product.id|escape('js') }}": {{ class_categories_as_json(Product, false)|raw }}{% if loop.last == false %}, {% endif %}
+        {% endfor %}
+    };
+
+    // 規格1が選択された際に, 規格2のプルダウンリストを設定する,
+    function fnSetClassCategory2(select, product_id) {
+        // 規格1の要素を取得
+        var $sele1 = $(select);
+        // 規格2の要素を取得
+        var $sele2 = $sele1.parents(".align-middle").find('select[name=classcategory_id2]');
+
+        // 規格1の選択肢
+        var classcat_id1 = $sele1.val() ? $sele1.val() : '';
+
+        // 規格2がある場合は選択肢を書き換える
+        if ($sele2 && $sele2.length) {
+            // 規格2の選択肢をクリア
+            $sele2.children().remove();
+            var classcat2 = productsClassCategories[product_id][classcat_id1];
+
+            // 規格2の要素を設定
+            for (var key in classcat2) {
+                if (classcat2.hasOwnProperty(key)) {
+                    var id = classcat2[key].classcategory_id2;
+                    var name = classcat2[key].name;
+                    var option = $('<option />').val(id ? id : '').text(name);
+                    $sele2.append(option);
+                }
+            }
+        }
+    }
+
+    // 受注明細行を追加する.
+    function fnAddOrderItem($row, product_id, type, product_name) {
+        // 規格1の要素を取得
+        var $sele1 = $row.find('select[name=classcategory_id1]');
+        // 規格2の要素を取得
+        var $sele2 = $row.find('select[name=classcategory_id2]');
+
+        var product_class_id = null;
+        var price = 0;
+        var quantity = 1;
+        var price01 = 0;
+
+        // 規格なし商品の場合
+        if (!$sele1.length && !$sele2.length) {
+            var product = productsClassCategories[product_id]['__unselected2']['#'];
+            product_class_id = product['product_class_id'];
+            price = product['price02'];
+            price01 = product['price01'];
+
+            // 規格が登録されている商品の場合
+        } else if ($sele1.length) {
+            if ($sele2.length) {
+                var class_category_id1 = $sele1.val();
+                var class_cateogry_id2 = $sele2.val();
+                if (class_category_id1 == '__unselected' || !class_cateogry_id2) {
+                    alert('{{'admin.product.unselected_class'|trans}}');
+                    return;
+                }
+                var product = productsClassCategories[product_id][class_category_id1]['#' + class_cateogry_id2];
+
+                product_class_id = product['product_class_id'];
+                price = product['price02'];
+                price01 = product['price01'];
+            } else {
+                var class_category_id1 = $sele1.val();
+                if (class_category_id1 == '__unselected') {
+                    alert('{{ 'admin.product.unselected_class'|trans }}');
+                    return;
+                }
+                var product = productsClassCategories[product_id][class_category_id1]['#'];
+
+                product_class_id = product['product_class_id'];
+                price = product['price02'];
+                price01 = product['price01'];
+
+            }
+        }
+
+
+        var puroductCodeInputs = $('input[id^="order-form-code"]').toArray();
+        var emptyInputIndex = 0;
+        for (var i = 0; i < puroductCodeInputs.length; i++) {
+            console.log(puroductCodeInputs[i].value)
+            if (!puroductCodeInputs[i].value) {
+                emptyInputIndex = i
+                break;
+            }
+        }
+
+        // Init Input value
+        $(`#order-form-code-${emptyInputIndex}`).val(product['product_code']);
+        $(`#order-form-${emptyInputIndex}-product-name`).text(product_name);
+        $(`#order-form-${emptyInputIndex}-product-name-input`).val(product_name);
+        $(`#order-form-${emptyInputIndex}-product-cost`).text(price);
+        $(`#order-form-${emptyInputIndex}-product-cost-input`).val(price);
+        $(`#order-form-${emptyInputIndex}-product-cost1`).text(price01);
+        $(`#order-form-${emptyInputIndex}-product-cost1-input`).val(price01);
+        $(`#order-form-${emptyInputIndex}-product-price`).text('');
+        $(`#order-form-${emptyInputIndex}-product-price-input`).val('');
+        $(`#order-form-${emptyInputIndex}-product-stock-input`).val(product.stock_find);
+        $(`#order-form-${emptyInputIndex}-product-stock`).text('');
+        const $selectEl = $(`#price-select-${emptyInputIndex}-select`);
+        $selectEl.find('option').eq(0).val(price01).text(price01);
+        $selectEl.find('option').eq(1).val(price).text(price);
+        console.log(product)
+    
+        $(`#order-form-${emptyInputIndex}-class-input`).val(product.product_class_id)
+
+        // モーダル閉じる.
+        $('#addProduct').modal('hide');
+
+        return false;
+    }
+
+    // 商品検索
+    $('#product_pagination a').on('click', function(event) {
+        if (!$(this).parent().is('.active')) {
+            var list = $('#searchProductModalList');
+            list.children().remove();
+
+            $.ajax({
+                url: $(this).attr('href'),
+                type: 'GET',
+                dataType: 'html'
+            }).done(function(data) {
+                $('#searchProductModalList').html(data);
+            }).fail(function(data) {
+                alert('search product failed.');
+            });
+        }
+
+        event.preventDefault();
+    });
+</script>
+
+
+<table class="table table-striped table-sm mb-3">
+    <thead class="table-active">
+    <tr>
+        <th class="pt-2 pb-2 pl-3">{{ 'admin.product.product_id'|trans }}</th>
+        <th class="pt-2 pb-2 pl-3">{{ 'admin.product.product_name_and_code'|trans }}</th>
+        <th class="pt-2 pb-2">{{ 'admin.product.product_class__short'|trans }}</th>
+        <th class="pt-2 pb-2 pr-3"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for Product in pagination %}
+        <form name="product_form{{ Product.id }}">
+            {% set form = forms[Product.id] %}
+            <tr>
+                <td class="align-middle pl-3">
+                    {% if Product.hasProductClass %}
+                        {{ Product.code_min }}～{{ Product.code_max }}
+                    {% else %}
+                        {{ Product.code_min }}
+                    {% endif %}
+                </td>
+                <td class="align-middle pl-3">
+                    <p class="m-0"> {{ Product.name }}</p>
+                </td>
+                <td class="align-middle">
+                    {% if form.classcategory_id1 is defined %}
+                        <div class="row mb-2">
+                            <div class="col-4 pr-0"><span>{{ form_label(form.classcategory_id1) }}</span></div>
+                            <div class="col-8 text-left pl-0">
+                                {{ form_widget(form.classcategory_id1, { attr : { 'onchange' : "fnSetClassCategory2(this," ~ Product.id ~ ")" } } ) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if form.classcategory_id2 is defined %}
+                        <div class="row">
+                            <div class="col-4 pr-0"><span>{{ form_label(form.classcategory_id2) }}</span></div>
+                            <div class="col-8 text-left pl-0">
+                                {{ form_widget(form.classcategory_id2, {'id': ''}) }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </td>
+                {% if Product.stock_find %}
+                    <td class="align-middle pr-3 text-right">
+                        <button type="button" class="btn btn-ec-actionIcon" onclick="fnAddOrderItem($(this).parent().parent(), {{ Product.id }}, {{ constant('Eccube\\Entity\\Master\\OrderItemType::PRODUCT') }}, '{{ Product.name|escape('js') }}')" name="mode" value="modal">
+                            <i class="fa fa-plus fa-lg font-weight-bold text-secondary"></i>
+                        </button>
+                    </td>
+                {% else %}
+                    <td class="align-middle pr-3 text-right">
+                        {{ 'front.product.out_of_stock_label'|trans }}
+                    </td>
+                {% endif %}
+            </tr>
+        </form>
+    {% endfor %}
+    </tbody>
+</table>
+{% if pagination.totalItemCount > 0 %}
+    <div id="product_pagination" class="row justify-content-md-center mb-4">
+        {% include "@admin/pager.twig" with {'pages': pagination.paginationData, 'routes': 'admin_order_search_product_page'} %}
+    </div>
+{% endif %}

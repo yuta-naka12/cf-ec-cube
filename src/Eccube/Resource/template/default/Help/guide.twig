@@ -1,0 +1,102 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+  <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">Guide</div>
+              <div class="breadcrumbs__page-title-text-jp">ご利用ガイド</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">TOP</a>
+            <div class="breadcrumbs__main-carret"><img src="/stg/cf2022/img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">ご利用ガイド</span>
+          </div>
+        </div>
+      </div>
+      <div class="delivery">
+        <div class="delivery__nav"><a class="delivery__nav-item" href="#about-order">ご注文について</a><a class="delivery__nav-item" href="#about-delivery">お届けについて</a><a class="delivery__nav-item" href="#about-payment">お支払い方法について</a></div>
+        <div class="delivery__content">
+          <h2 class="delivery__heading delivery__heading--guide">いつもキャプテンフーヅのWebサイトをご利用いただきありがとうございます。</h2>
+          <!--.delivery__text.delivery__text--payment.no-padp 簡単な挨拶が入ります簡単な挨拶が入ります簡単な挨拶が入ります簡単な挨拶が入ります簡単な挨拶が入ります簡単な挨拶が入ります
+          -->
+          <div class="delivery__anchor" id="about-order"></div>
+          <div class="delivery__section">
+            <h2 class="delivery__heading mb-double text">ご注文について</h2>
+            <div class="delivery__text-row">
+              <div class="delivery__text delivery__text--half delivery__text--flex mb-none no-pad">
+                <h3 class="delivery__subheading">簡単１ポチで！</h3>
+                <div class="order__img order__img--payment sp"><img class="cover" src="/html/user_data/assets/img/cf2022/img/guide/guide01.jpg"></div>
+                <p>キャプテンフーヅでは、お買い物に行かずとも、新鮮な食材をインターネットやお電話でご注文いただけます。またインターネットの「クイックオーダー」では、パンフレットに記載されている商品コードを入力すると、1クリックで複数商品をカートに入れることができます。お買い物時間を短縮することができるので、大変便利です。             </p>
+                <div class="order__button order__button--payment"><a class="button__secondary button__secondary--order" href="/ordering">
+                    <div class="button__secondary-link button__secondary-link--order">ご注文方法へ                            </div></a></div>
+              </div>
+              <div class="order__img order__img--payment pc"><img class="cover" src="/html/user_data/assets/img/cf2022/img/guide/guide01.jpg"></div>
+            </div>
+          </div>
+          <div class="delivery__anchor" id="about-delivery"></div>
+          <div class="delivery__section">
+            <h2 class="delivery__heading mb-double text">お届けについて</h2>
+            <div class="delivery__text-row">
+              <div class="delivery__text delivery__text--half delivery__text--flex mb-none no-pad">
+                <h3 class="delivery__subheading">鮮度を保ったままご自宅へお届けします</h3>
+                <div class="order__img order__img--payment sp"><img class="cover" src="/html/user_data/assets/img/cf2022/img/guide/guide02.jpeg"></div>
+                <p>専用保冷バックに商品とドライアイスを入れ、ご指定の場所に置かせて頂きます。お留守でもお届けが可能で、お届けの時間を気にせずにお出かけいただけます！<br>
+                  ご希望の会員様へは、保冷箱を販売いたします。ご帰宅が遅い方や、夏場の留守時に大変おすすめです。             
+                </p>
+                <div class="order__button order__button--payment"><a class="button__secondary button__secondary--order" href="/delivery">
+                    <div class="button__secondary-link button__secondary-link--order">お届けについて                            </div></a></div>
+              </div>
+              <div class="order__img order__img--payment pc"><img class="cover" src="/html/user_data/assets/img/cf2022/img/guide/guide02.jpeg"></div>
+            </div>
+          </div>
+          <div class="delivery__anchor" id="about-payment"></div>
+          <div class="delivery__section">
+            <h2 class="delivery__heading mb-double text">お支払い方法について</h2>
+            <div class="delivery__text-row">
+              <div class="delivery__text delivery__text--half delivery__text--flex mb-none no-pad">
+                <h3 class="delivery__subheading">複数のお支払い方法がございます</h3>
+                <div class="order__img order__img--payment sp"><img class="cover" src="/html/user_data/assets/img/cf2022/img/guide/guide03.jpg"></div>
+                <p>自社便、他社便によってお支払い方法が異なります。<br>
+                  下記ぺージより、手数料についてご確認ください。<br>
+                  お得なポイント制度もございます。             
+                </p>
+                <div class="order__button order__button--payment"><a class="button__secondary button__secondary--order" href="/payment">
+                    <div class="button__secondary-link button__secondary-link--order">お支払い方法について                            </div></a></div>
+              </div>
+              <div class="order__img order__img--payment pc"><img class="cover" src="/html/user_data/assets/img/cf2022/img/guide/guide03.jpg"></div>
+            </div>
+          </div>
+
+           <div class="delivery__section">
+            <div class="delivery__flow">
+              <div class="delivery__flow-item">
+                <div class="delivery__flow-icon"><img src="/html/user_data/assets/img/cf2022/img/delivery/ic-basket.svg" alt=""></div>
+                <div class="delivery__flow-links"><a class="delivery__flow-link" href="/ordering#registration">登録の流れ</a><a class="delivery__flow-link" href="/ordering#order">注文の流れ</a><a class="delivery__flow-link" href="/ordering#change">注文の変更</a><a class="delivery__flow-link" href="/ordering#mail">注文メールが届かないとき</a></div>
+              </div>
+              <div class="delivery__flow-item">
+                <div class="delivery__flow-icon"><img src="/html/user_data/assets/img/cf2022/img/delivery/ic-box.svg" alt=""></div>
+                <div class="delivery__flow-links"><a class="delivery__flow-link" href="/delivery#company">自社便</a><a class="delivery__flow-link" href="/delivery#other-company">他社便</a><a class="delivery__flow-link" href="/delivery#return-policy">商品の返品・キャンセルについて</a></div>
+              </div>
+              <div class="delivery__flow-item">
+                <div class="delivery__flow-icon"><img src="/html/user_data/assets/img/cf2022/img/delivery/ic-coins.svg" alt=""></div>
+                <div class="delivery__flow-links"><a class="delivery__flow-link" href="/payment#method">お支払いの方法</a><a class="delivery__flow-link" href="/payment#points">ポイントについて</a></div>
+              </div>
+            </div>
+            <div class="delivery__link-top"><a href="/stg/cf2022/guide.html">ご利用ガイドTOPへ</a></div>
+          </div>
+
+        </div>
+      </div>
+{% endblock %}

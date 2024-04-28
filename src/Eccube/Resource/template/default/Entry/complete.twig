@@ -1,0 +1,30 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'registration_page' %}
+
+{% block main %}
+    <div class="wrapper application__container">
+        <div class="breadcrumbs">
+            <div class="breadcrumbs__page-title">
+                <div class="breadcrumbs__page-title-image"><img src="img\icons\page-title-logo.png" alt=""></div>
+                <div class="breadcrumbs__page-title-text">
+                    <div class="breadcrumbs__page-title-text-en">Application form for online use</div>
+                    <div class="breadcrumbs__page-title-text-jp">ネット利用お申し込みフォーム</div>
+                </div>
+            </div>
+            <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">TOP</a>
+                <div class="breadcrumbs__main-carret"><img src="img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">ネット利用お申し込みフォーム</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

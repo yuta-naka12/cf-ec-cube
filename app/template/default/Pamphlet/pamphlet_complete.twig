@@ -1,0 +1,34 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+	<div class="wrapper">
+		<div class="breadcrumbs">
+			<div class="breadcrumbs__page-title">
+				<div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+				<div class="breadcrumbs__page-title-text">
+					<div class="breadcrumbs__page-title-text-en">{{ 'front.pamphlet.subtitle'|trans }}</div>
+					<div class="breadcrumbs__page-title-text-jp">{{ 'front.pamphlet.title'|trans }}</div>
+				</div>
+			</div>
+			<div class="breadcrumbs__main">
+				<a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{ 'front.product.position_top'|trans }}</a>
+				<div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div>
+				<span class="breadcrumbs__main-pagename">{{ 'front.pamphlet.title'|trans }}</span>
+			</div>
+		</div>
+	</div>
+	<section class="pamphlet">
+		<div class="pamphlet__container">
+			<div class="pamphlet__progress">
+				<div class="pamphlet__progress-item">{{ 'front.pamphlet.step_item1'|trans }}</div>
+				<div class="pamphlet__progress-item">{{ 'front.pamphlet.step_item2'|trans }}</div>
+				<div class="pamphlet__progress-item active">{{'front.pamphlet.step_item3'|trans}}</div>
+			</div>
+			<h2 class="pamphlet__big-text">{{ 'front.pamphlet.message_title'|trans }}</h2>
+			<p class="pamphlet__description">{{'front.pamphlet.message_text1'|trans}}<br>{{'front.pamphlet.message_text2'|trans}}<br>{{'front.pamphlet.message_text3'|trans}}<br>{{'front.pamphlet.message_text4'|trans}}<br>{{'front.pamphlet.message_text5'|trans}}<br><br>{{'front.pamphlet.message_text6'|trans}}</p>
+			<div class="form__button">
+				<button class="button__pamphlet">{{'front.pamphlet.to_top'|trans}}</button>
+			</div>
+		</div>
+	</section>
+{% endblock %}

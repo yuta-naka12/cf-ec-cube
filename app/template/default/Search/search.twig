@@ -1,0 +1,106 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'registration_page' %}
+
+
+{% block javascript %}
+    <script src="//yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+{% endblock javascript %}
+
+{% block main %}
+ <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/user_data/assets/img/cf2022/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">Detailed Search</div>
+              <div class="breadcrumbs__page-title-text-jp">詳細検索</div>
+            </div>
+          </div>
+
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">TOP</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/user_data/assets/img/cf2022/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">プライバシーポリシー</span>
+
+            
+          </div>
+        </div>
+        
+        
+
+        <form method="get" action="" name="form">
+            <table class="table table-bordered">
+
+            <tbody><tr id="search_keyword">
+            <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">keyword:</font></font></th>
+            <td><input value="" size="25" type="text" name="keyword" maxlength="30"></td>
+            </tr>
+
+
+            <tr id="search_category">
+            <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">category:</font></font></th>
+            <td><select name="tree">
+            {% for category in categories %}
+            <option value="" selected="">
+            <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">{{ category.name }}</font>
+            </font>
+            </option>
+             {% endfor %}
+             </tr>
+
+            <tr id="search_goods">
+            <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Product code:</font></font></th>
+            <td><input value="" size="25" type="text" name="goods" maxlength="30"></td>
+            </tr>
+
+
+            <tr id="search_genre">
+            <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Genre:</font></font></th>
+            <td><ul class="genre_">
+            <li class="genre_depth_1"><label for="tree_23"><input name="genre" type="checkbox" id="tree_23" value="3month"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Limited time bargain item [Delivery from Sunday, December 25th to Saturday, January 28th]</font></font></label></li>
+            <li class="genre_depth_1"><label for="tree_24"><input name="genre" type="checkbox" id="tree_24" value="4month"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Limited time bargain item [Delivery from 1/31 (Tue) to 2/25 (Sat)]</font></font></label></li>
+            <li class="genre_depth_1"><label for="tree_43"><input name="genre" type="checkbox" id="tree_43" value="outlet"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">OUTLET</font></font></label></li>
+            <li class="genre_depth_1"><label for="tree_73"><input name="genre" type="checkbox" id="tree_73" value="tokusyuu"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Special feature of this term</font></font></label></li>
+            </ul>
+            <script type="text/javascript" src="/js/goods_searchdetailgenre.js"></script>
+            </td>
+            </tr>
+
+
+            <tr>
+            <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Sort order:</font></font></th>
+            <td>
+            <select name="sort">
+            <option value="" selected=""></option>
+            <option value="g">
+            <font style="vertical-align: inherit;">
+            <font style="vertical-align: inherit;">
+            Product code
+            </font>
+             </font>
+             </option>
+            </select>
+            </td>
+            </tr>
+
+
+            </tbody>
+            </table>
+            <div class="">
+            <input type="image" name="search" src="/html/user_data/assets/img/cf2022/img/sys/button/search.gif" alt="search for">
+            
+            </div>
+            </form>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends 'default_frame.twig' %}
+
+{% form_theme form 'Form/form_div_layout.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.login_password.subtitle'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.login_password.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_login_password'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <section class="login"> 
+        <div class="login__content"> 
+          <div class="login__wrap"> 
+            <h4 class="login__header">{{'front.mypage.login_password.contact_title'|trans}}</h4>
+            <div class="login__container">
+              <p class="login__paragraph"> {{'front.mypage.login_password.contact_message01'|trans}}<br>{{'front.mypage.login_password.contact_message02'|trans}}</p>
+              <div class="login__contact-wrap"> <img class="login__contact-img" src="/html/template/default/assets/img/footer/telephone-logo.svg" alt="telephone">
+                <p class="login__contact-phone">{{'front.mypage.login_password.contact_tel'|trans}}</p>
+                <p class="login__contact-time">{{'front.mypage.login_password.contact_opentime'|trans}}</p>
+              </div>
+              <p class="login__paragraph">{{'front.mypage.login_password.contact_note'|trans}}</p>
+            </div>
+          </div>
+          <div class="login__wrap">
+            <h4 class="login__header">{{'front.mypage.login_password.form_title'|trans}}</h4>
+            <form name="form1" id="form1" method="post" action="{{ url('forgot') }}">
+            <div class="login__container">
+                {{ form_widget(form._token) }}
+                <p class="login__paragraph">{{'front.mypage.login_password.form_message01'|trans}}<br>{{'front.mypage.login_password.form_message02'|trans}}</p>
+                <div class="login__form">
+                    <div class="login__item"> 
+                        <p class="login__item-label">{{'admin.common.member_id'|trans}} </p>
+                        {{ form_widget(form.login_email,{'attr': {'class':'entry-form__input login__item-input'}}) }}
+                    </div>
+                    <div class="login__item">
+                        <p class="login__item-label">{{'admin.common.contact_phone_number'|trans}}</p>
+                        {{ form_widget(form.login_phone_number,{'attr': {'class':'entry-form__input login__item-input'}}) }}
+                    </div>
+                    <button class="login__button">{{'front.mypage.login_password.form_btn'|trans}}</button>
+                </div>
+            </div>
+            </form>
+          </div>
+          <div class="login__wrap">
+            <h4 class="login__header">{{'front.mypage.login_password.unknown_title'|trans}}</h4>
+            <div class="login__container"> 
+              <p class="login__paragraph">{{'front.mypage.login_password.unknown_message01'|trans}}<a href="#">{{'front.mypage.login_password.unknown_link_to_contact'|trans}}</a>{{'front.mypage.login_password.unknown_message02'|trans}}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}
+
+

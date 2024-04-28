@@ -1,0 +1,41 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.title_en'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_mypage'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_inquiry_detail'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="otoiawaserireki">
+        <div class="wrapper">
+          <div class="otoiawaserireki-title">{{'front.mypage.inquiry_detail.title'|trans}}</div>
+          <div class="otoiawaserireki-subtitle">{{'front.mypage.inquiry.day_item1'|trans}}  {{'front.mypage.inquiry_detail.time'|trans}} {{'front.mypage.inquiry.content_item1'|trans}}  {{'front.mypage.inquiry_label02'|trans}} {{'front.mypage.inquiry.number_item1'|trans}}</div>
+          <div class="otoiawaserireki-table">
+            <div class="otoiawaserireki-table__row heading">
+              <div class="otoiawaserireki-table__txt">{{'front.mypage.name'|trans}}</div>
+            </div>
+            <div class="otoiawaserireki-table__row">
+              <div class="otoiawaserireki-table__txt">{{'front.mypage.inquiry_detail.content01'|trans}}</div>
+            </div>
+            <div class="otoiawaserireki-table__row">
+              <div class="otoiawaserireki-table__txt">{{'front.mypage.inquiry_detail.content02'|trans}}</div>
+            </div>
+          </div>
+          <div class="otoiawaserireki-subtitle s2">{{'front.mypage.inquiry_detail.message'|trans}}</div>
+          <textarea class="otoiawaserireki-textarea" name="" placeholder={{'front.mypage.inquiry_detail.textarea_ph'|trans}}></textarea>
+          <div class="otoiawaserireki-btn__container"><a class="otoiawaserireki-btn s2" href="">
+              <p>{{'front.mypage.back'|trans}}</p></a><a class="otoiawaserireki-btn" href="">
+              <p>{{'front.mypage.go_confirm'|trans}}</p></a></div>
+        </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,168 @@
+{% extends 'default_frame.twig' %}
+
+	{% block main %} 
+        <div class="wrapper">
+            <div class="breadcrumbs">
+                <div class="breadcrumbs__page-title">
+                    <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+                    <div class="breadcrumbs__page-title-text">
+                        <div class="breadcrumbs__page-title-text-en">For beginner</div>
+                        <div class="breadcrumbs__page-title-text-jp">初めての方へ</div>
+                    </div>
+                </div>
+                <div class="breadcrumbs__main">
+                    <a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="/">{{ 'front.product.position_top'|trans }}</a>
+                    <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div>
+                    <span class="breadcrumbs__main-pagename">{{ 'front.faq.title'|trans }}</span>
+                </div>
+            </div>
+            <div class="beginner">
+                <section class="beginner__intro">
+                    <div class="beginner__content-wrapper">
+                        <h2 class="benefits__heading">買い物へ行く手間をなくし<br>充実したライフスタイルに！</h2>
+                        <p class="beginner__paragraph">キャプテンフーヅは、魚介類を中心とした冷凍食品を販売する通販サイトです。<br>自社便、他社便、どちらかの配送方法を選んで、会員登録していただけます。<br>注文の際は、お電話・FAX・インターネットをご利用いただけます。</p>
+                    </div>
+                </section>
+                <section class="beginner__get-to-know">
+                    <div class="beginner__content-wrapper">
+                        <h2 class="beginner__section-heading">キャプテンフーヅを知る</h2>
+                        <div class="beginner__list">
+                            <div class="beginner__item">
+                                <div class="beginner__content-wrap">
+                                    <h3 class="beginner__title">商品づくりへのこだわり</h3>
+                                    <p class="beginner__text">とれたてのお魚を独自の冷凍技術で急速凍結！氷の結晶が細胞を破壊する間もなく凍結するため旨みを逃しません。</p>
+                                    <div class="beginner__button-wrap"> <a class="beginner__button" href="/cf2022/commitment.html">詳しく見る </a></div>
+                                </div>
+                                <div class="beginner__image"> <img src="/html/user_data/assets/img/cf2022/img/beginner/card-1.jpeg" alt="商品づくりへのこだわり"></div>
+                            </div>
+                            <div class="beginner__item">
+                                <div class="beginner__content-wrap">
+                                    <h3 class="beginner__title">7つのメリット</h3>
+                                    <p class="beginner__text">「多くの会員様が、長年に渡りご利用になる」ことの難しさに、必死に挑戦しているうちに、“７つのメリット”が作られました。</p>
+                                    <div class="beginner__button-wrap"> <a class="beginner__button" href="/cf2022/benefits.html">詳しく見る </a></div>
+                                </div>
+                                <div class="beginner__image"> <img src="/html/user_data/assets/img/cf2022/img/beginner/change-link3.jpeg" alt="7つのメリット"></div>
+                            </div>
+                            <div class="beginner__item">
+                                <div class="beginner__content-wrap">
+                                    <h3 class="beginner__title">魚の食べ方が変わる</h3>
+                                    <p class="beginner__text">キャプテンフーヅを使った生活は、いつもの食卓を便利でちょっと贅沢に変えてくれます。</p>
+                                    <div class="beginner__button-wrap"> <a class="beginner__button" href="/cf2022/change.html">詳しく見る </a></div>
+                                </div>
+                                <div class="beginner__image"> <img src="/html/user_data/assets/img/cf2022/img/beginner/card-3.jpeg" alt="魚の食べ方が変わる"></div>
+                            </div>
+                            <div class="beginner__item">
+                                <div class="beginner__content-wrap">
+                                    <h3 class="beginner__title">選ばれる理由</h3>
+                                    <p class="beginner__text">会員様に聞いた、キャプテンフーヅを利用する理由をご紹介します。</p>
+                                    <div class="beginner__button-wrap"> <a class="beginner__button" href="/cf2022/choose.html">詳しく見る </a></div>
+                                </div>
+                                <div class="beginner__image"> <img src="/html/user_data/assets/img/cf2022/img/beginner/card-2.jpeg" alt="魚の食べ方が変わる"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="beginner__method">
+                    <div class="beginner__content-wrapper">
+                        <h2 class="beginner__section-heading">宅配方法</h2>
+                        <p class="beginner__text beginner__text--method">宅配方法は、「自社便」と「他社便」の２通りございます。</p>
+                        <div class="beginner__table-wrap">
+                            <table class="beginner__table" cellspacing="10">
+                                <tr>
+                                    <td></td>
+                                    <th class="center">自社便</th>
+                                    <th class="center">他社便</th>
+                                </tr>
+                                <tr>
+                                    <td class="item-label">配達<br>エリア</td>
+                                    <td class="center red">神奈川県・東京都の一部</td>
+                                    <td class="center blue">全国配送可能</td>
+                                </tr>
+                                <tr>
+                                    <td class="item-label">送料</td>
+                                    <td class="center red">215円</td>
+                                    <td class="center blue">880円〜</td>
+                                </tr>
+                                <tr>
+                                    <td class="item-label">宅配<br>サイクル</td>
+                                    <td class="center">
+                                        <p class="red">２週間に一度</p>
+                                        <p>決められた曜日にお届けします。</p>
+                                        <p class="small">気軽にお休みできるので無理なく続けられます。</p>
+                                    </td>
+                                    <td class="center">
+                                        <p><span class="blue">3営業日以降</span>にお届けします。なお、お届け日・時間指定可能です。</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="item-label">お支払い<br>方法</td>
+                                    <td class="center">
+                                        <p class="red">代金引換または自動引落<br>（ゆうちょ銀行）</p>
+                                        <p class="small">ご不在時は保冷バッグにまたは預け箱に入れ<br>てお届けし、翌日回収にお伺いします。<br>（土曜日お届けの場合翌週火曜日）</p>
+                                    </td>
+                                    <td class="center">
+                                        <p><span class="blue">銀行振込または代金引換</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="item-label">ご注文<br>方法</td>
+                                    <td>
+                                        <p class="small">インターネット会員の方 <br><span class="red">注文日の夜12時</span>までにご注文下さい。</p><a class="beginner__link" href="https://captainfoods.co.jp/shop/ssl2/jisha_use.aspx#shimekiri"><img class="arrow" src="/cf2022/img\beginner\arrow.svg" alt="">注文締切日を確認する</a>
+                                        <p class="small">通常会員（電話・FAX会員）の方 <br>注文係が<span class="red">配達日４～６日前</span>に注文をお伺いします。</p>
+                                    </td>
+                                    <td>
+                                        <p class="small">お電話・FAX・インターネットで<span class="blue">お好きな時</span>にご注文いただけます。</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="item-label">ポイント</td>
+                                    <td colspan="2">
+                                        <p class="large">一定期間ポイントが付く商品があります。</p><a class="beginner__link" href="/cf2022/payment.html#points"> <img class="arrow" src="/cf2022/img\beginner\arrow.svg" alt="">ポイントについて詳しく見る </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="item-label">登録<br>フォーム</td>
+                                    <td class="center"><a class="beginner__button beginner__button--inline-flex" href="/jisha_use">自社便の詳細と登録フォームへ</a></td>
+                                    <td class="center"> <a class="beginner__button beginner__button--inline-flex" href="/agree">他社便の詳細と登録フォームへ</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <section class="beginner__recommend">
+                    <div class="beginner__content-wrapper">
+                        <h2 class="beginner__section-heading">こんな方におすすめ</h2>
+                        <ul class="beginner__recommend-list">
+                            <li class="beginner__recommend-item">大手宅配会社は品目が多くて便利だけど魚介類の鮮度・品ぞろえに満足していない。</li>
+                            <li class="beginner__recommend-item">高品質を売りにした宅配会社があるが、値段が高い…</li>
+                            <li class="beginner__recommend-item">手軽においしい魚が食べたい！</li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="beginner__strength">
+                    <div class="beginner__content-wrapper">
+                        <h2 class="beginner__section-heading sp">キャプテンフーヅの強み</h2>
+                        <div class="beginner__strength-item">
+                            <div class="beginner__text-content">
+                                <h2 class="beginner__section-heading beginner__section-heading--ta-start pc">キャプテンフーヅの強み</h2>
+                                <p class="beginner__paragraph beginner__paragraph--ta-justify">キャプテンフーヅは料亭向けの海老を一般小売することから始まり、1980年創業当初から魚介類を中心とした品ぞろえで皆様よりご愛顧いただいております。そのため、魚介類の品質は食材宅配業界においてトップクラスだと自負しております。 実際に日用品は大手宅配会社、お魚はキャプテンフーヅで。というお客様も多数いらっしゃいます。</p>
+                            </div>
+                            <div class="beginner__image beginner__image--strength"> <img src="/cf2022/img\beginner\beginner-1.png" alt=""></div>
+                        </div>
+                        <div class="beginner__strength-item">
+                            <div class="beginner__text-content">
+                                <p class="beginner__paragraph beginner__paragraph--ta-justify">冷凍庫から刺身パックを取り出してサッと流水解凍。包丁・まな板いらずで盛り合わせの出来上がり。 <br>お仕事や育児と忙しい毎日に追われる中で手軽にメインのおかずが完成する冷凍刺身は、冷凍＝まずいのイメージを覆すほどの鮮度の良さで毎日の食生活を充実したものにしてくれます。</p>
+                            </div>
+                            <div class="beginner__image beginner__image--strength"> <img src="/cf2022/img\beginner\beginner-2.png" alt=""></div>
+                        </div>
+                        <div class="beginner__strength-item">
+                            <div class="beginner__text-content">
+                                <p class="beginner__paragraph beginner__paragraph--ta-justify">他社の同一商品と比べてみていただければお分かりになるかと思いますが、商社からの直接仕入れ～自社便を使用してのお届けまで全て自社サービスで行っておりますので高品質・低価格でのご提供が可能になっております。</p>
+                            </div>
+                            <div class="beginner__image beginner__image--strength"> <img src="/cf2022/img\beginner\beginner-3.png" alt=""></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    {% endblock %}

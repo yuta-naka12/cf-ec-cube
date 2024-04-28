@@ -1,0 +1,43 @@
+
+
+{% extends 'default_frame.twig' %}
+
+{% form_theme form 'Form/form_div_layout.twig' %}
+
+
+
+{% block main %}
+
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="img\icons\page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.title_en'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_mypage'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_delivery'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="otodokesaki">
+        <div class="wrapper">
+          <div class="otodokesaki-title">
+            <h3>{{'front.mypage.delivery.title'|trans}}</h3>
+            {% if app.user.name01 != ” %}
+                <p>{{ app.user.name01 }} {{ app.user.name02 }}{{'common.name.suffix'|trans}}</p>
+            {% endif %}
+          </div>
+          <div class="otodokesaki-complete">
+            <div class="otodokesaki-title otodokesaki-title__complete">
+              <h3>{{'front.mypage.delivery.confirm.message'|trans}}</h3>
+            </div>
+            <div class="entry__button-wrap otodokesaki__btn-wrap"><a class="entry__button" href=""><span>{{'common.move_to_page_mypage'|trans}}</span></a></div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

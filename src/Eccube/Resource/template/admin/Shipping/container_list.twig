@@ -1,0 +1,177 @@
+<head>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css', 'admin') }}">
+</head>
+<body>
+{% for content in contents %}
+{% for data in content %}
+    <section class="page mt-5">
+        <div class="text-center">
+            <p class="title">コンテナ表</p>
+        </div>
+        <div class="sub-title-wrap mt-3">
+            <p>{{ deliveryDate }}</p>
+            <div class="footer">
+                <p class="car-number">1号車</p>
+            </div>
+
+            <div>
+                <p class="d-inline-block">コンテナNo. {{ loop.index }}　/4　{{ loop.index }}/4</p>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-6">
+                <table class="table table-bordered customers-table">
+                    {% for val in data.order %}
+                        {% if (loop.index) <= 5 %}
+                            <tr >
+                                <td class="text-center" style="width: 20px;">{{ val.customer_key }}</td>
+                                <td>{{ val.customer_name }}</td>
+                                <td></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-6">
+                <table class="table table-bordered customers-table">
+                    {% for val in data.order %}
+                        {% if (loop.index) >= 6 %}
+                            <tr >
+                                <td class="text-center" style="width: 20px;">
+                                    {{ val.customer_key }}
+                                </td>
+                                <td>{{ val.customer_name }}</td>
+                                <td></td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="content">
+            <table class="table table-bordered goods-table">
+                <tbody>
+                {% for val in data.data %}
+                    {% if (loop.index) % 3 == 1 %}
+                        <tr>
+                    {% endif %}
+                    <td>
+                        <div class="table-content">
+                            <label class="table-name-text">{{ val.name }} </label>
+                            <label>
+                                {% for key in val.customer_keys %}
+                                    {{ key }}
+                                {% endfor %}
+                            </label>
+                            <label class="total-number">{{ val.quantity }}</label>
+                        </div>
+                    </td>
+
+                    {% if (loop.index) % 3 == 0 %}
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="footer mt-3">
+                <label>2023/04/25 16:12 作成</label>
+                <p class="page-number">- {{ loop.index }} -</p>
+            </div>
+        </div>
+    </section>
+{% endfor %}
+{% endfor %}
+
+</body>
+<style>
+    @media print {
+        body {
+            margin: auto;
+            width: 794px;
+            height: 1123px;
+        }
+    }
+    .page {
+        width: 100%;
+        min-height: 1480px;
+        box-sizing: border-box;
+        padding: 10px 15px;
+    }
+    .page:last-child {
+        page-break-after: auto;
+    }
+    .title {
+        font-size: 18px;
+        font-weight: 0.4 !important;
+        display: inline-block;
+        border-bottom: 1px black solid;
+    }
+    .text-center {
+        text-align: center;
+    }
+    p {
+        margin: 0;
+        font-size: 12px;
+    }
+    label  {
+        margin-bottom: 0;
+    }
+    .sub-title-wrap {
+        display: flex;
+        justify-content: space-between;
+    }
+    .goods-table tbody {
+        height: 620px;
+    }
+    .goods-table th {
+        font-size: 10px;
+        padding: 3px 3px;
+        background: #a9a9a9;
+        width: 33%;
+    }
+    .goods-table td {
+        font-size: 12px;
+        font-weight: bold;
+        padding: 1px 3px;
+        width: 33%;
+        height: 10px;
+        max-height: 10px;
+    }
+    .table-content {
+        display: flex;
+        justify-content: space-between;
+        height: 10px;
+    }
+    .table-content label {
+        max-width: 154px;
+        height: 15px;
+        overflow: hidden;
+    }
+    .total-number {
+        font-size: 16px;
+    }
+    .footer {
+        position: relative;
+    }
+    .page-number {
+        position: absolute;
+        left: 50%;
+        top: 0;
+    }
+    .car-number {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: 120px;
+    }
+    .customers-table {
+        font-size: 10px;
+    }
+    .customers-table td {
+        padding: 3px;
+    }
+    .table-name-text {
+        width: 190px;
+        overflow: hidden;
+    }
+</style>

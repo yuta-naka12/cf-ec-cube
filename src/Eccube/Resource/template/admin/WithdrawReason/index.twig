@@ -1,0 +1,90 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['setting', 'master_data', 'withdraw_management'] %}
+
+{% block title %}{{ "退会理由管理" }}{% endblock %}
+{% block sub_title %}{{ 'admin.setting.system'|trans }}{% endblock %}
+
+
+{% form_theme form 'Form/bootstrap_4_layout.html.twig' %}
+
+{% block javascript %}
+    <script>
+        $('.action-down, .action-up').on('click', function(e) {
+            var self = $(this),
+                current = $(this).parents('tr');
+            $('body').append($('<div class="modal-backdrop show"></div>'));
+            $.ajax({
+                url: self.attr('href'),
+                method: self.data('method'),
+            }).done(function() {
+                if (self.hasClass('action-down')) {
+                    current.next().after(current);
+                } else {
+                    current.prev().before(current);
+                }
+            }).always(function() {
+                $('.modal-backdrop').remove();
+                $('.action-up, .action-down').removeClass('disabled');
+                $('.action-up').first().addClass('disabled');
+                $('.action-down').last().addClass('disabled');
+            });
+
+            return false;
+        });
+    </script>
+{% endblock %}
+
+{% block main %}
+    <div class="c-contentsArea__cols">
+        <div class="c-contentsArea__primaryCol">
+            <div class="c-primaryCol">
+                <div id="ex-member-new" class="d-block mb-3">
+                    <a class="btn btn-ec-regular" href="{{ url('admin_withdraw_reason_item_new') }}">{{ 'admin.common.registration__new'|trans }}</a>
+                </div>
+                <div class="card rounded border-0 mb-4">
+                    <div class="card-body p-0">
+                        <form name="form1" id="form1" method="post" action="">
+                            <table class="table table-sm">
+                                <thead>
+                                <tr>
+                                    <th class="border-top-0 pt-2 pb-2 text-center">
+                                        {{ "ID" }}
+                                    </th>
+                                    <th class="border-top-0 pt-2 pb-2 text-center">
+                                        {{ "Name" }}
+                                    </th>
+                                    <th class="border-top-0 pt-2 pb-2 text-center"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for ExtensionItem in WithdrawalReasons %}
+                                    <tr id="ex-member-{{ ExtensionItem.id }}">
+                                        <td class="align-middle text-center pl-3">
+                                            {{ ExtensionItem.id }}
+                                        </td>
+                                        <td class="align-middle text-center">
+                                            {{ ExtensionItem.name }}
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

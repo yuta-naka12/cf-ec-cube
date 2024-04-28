@@ -1,0 +1,106 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+<div class="wrapper application__container">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="img\icons\page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">Application form for online use</div>
+              <div class="breadcrumbs__page-title-text-jp">ネット利用お申し込みフォーム</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">TOP</a>
+            <div class="breadcrumbs__main-carret"><img src="img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">ネット利用お申し込みフォーム</span>
+          </div>
+        </div>
+      </div>
+      <section class="netform"> 
+        <p class="netform__text">いつもキャプテンフーヅをご利用頂き誠にありがとうございます。このたび、新システムを導入し、自社便会員様もインターネットでご注文いただけるようになりました。</p><a class="netform__button" href=""><span>キャプテンフーヅの宅配会員では無い方は「初めての方へ」</span></a>
+        <h3 class="entry__subtitle">ご利用開始までの３ステップ</h3>
+        <div class="netform__steps"> 
+          <div class="netform__step"> <img src="/html/user_data/assets/img/cf2022/img/icons/netform-step01.svg" alt="">
+            <p>下のフォームで必要事項を記入しお申し込みください。</p>
+          </div>
+          <div class="netform__step"> <img src="/html/user_data/assets/img/cf2022/img/icons/netform-step02.svg" alt="">
+            <p>当日または翌営業日に仮パスワードを記載したメールをお送りします。</p>
+          </div>
+          <div class="netform__step"> <img src="/html/user_data/assets/img/cf2022/img/icons/netform-step03.svg" alt="">
+            <p>会員IDと仮パスワードでログインしてください。（パスワードは必ず変更してください）</p>
+          </div>
+        </div>
+        <h3 class="entry__subtitle">よくある質問 </h3>
+        <div class="netform__faqs"> 
+          <div class="netform__faq">
+            <p class="netform__faq-question">web利用登録はするけど、今まで通りの曜日または時間帯に電話が欲しい。</p>
+            <p class="netform__faq-answer">ご要望欄に「注文日に電話希望」とご記入ください。</p>
+          </div>
+          <div class="netform__faq">
+            <p class="netform__faq-question">注文伺いの電話は来なくなる？</p>
+            <p class="netform__faq-answer">締切日までにご注文が確認できない場合、お伺いのお電話をさせていただきます。次のページからご確認ください。<br><a class="netform__faq-link" href="">確認のお電話日</a></p>
+          </div>
+          <div class="netform__faq">
+            <p class="netform__faq-question">注文締切日は？</p>
+            <p class="netform__faq-answer">次のページからご確認ください。<a class="netform__faq-link" href="">注文締切日</a></p>
+          </div>
+          <div class="netform__faq">
+            <p class="netform__faq-question">登録完了メールが来ない。</p>
+            <p class="netform__faq-answer">迷惑メールBOXに入ってしまっている。メールアドレスに誤りがある可能性がございます。</p>
+          </div>
+        </div>
+        <h3 class="entry__subtitle">今すぐweb登録利用をする</h3>
+      </section>
+      <section class="entry-form"> 
+        <div class="entry-form__item"><span class="entry-form__label">お名前</span>
+          <div class="entry-form__inputs"> 
+            <div class="entry-form__input-name"> <span>性</span>
+              <input type="text" placeholder="佐藤">
+            </div>
+            <div class="entry-form__input-name"> <span>名</span>
+              <input type="text" placeholder="太郎">
+            </div>
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label">フリガナ</span>
+          <div class="entry-form__inputs"> 
+            <div class="entry-form__input-name"> <span>セイ</span>
+              <input type="text" placeholder="サトウ">
+            </div>
+            <div class="entry-form__input-name"> <span>メイ</span>
+              <input type="text" placeholder="タロウ">
+            </div>
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional">会員番号</span>
+          <div class="entry-form__inputs">
+            <input class="entry-form__input" type="text">
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label">電話番号</span>
+          <div class="entry-form__inputs">
+            <input class="entry-form__input entry-form__input--med" type="text" placeholder="000-0000-0000">
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label">メール</span>
+          <div class="entry-form__inputs entry-form__inputs--column">
+            <input class="entry-form__input entry-form__input--med" type="email" placeholder="forexample-@.com"><span>ログイン時の会員IDとしても使用します。</span>
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional">パスワード</span>
+          <div class="entry-form__inputs"><span>お申し込みの当日～翌営業日に「メールにてご案内」いたします。</span></div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional">ご要望等ございましたら<br>ご記入ください。</span>
+          <div class="entry-form__inputs"> 
+            <textarea class="entry-form__textarea" placeholder="こちらに内容をご記入ください
+
+例：
+置き箱、郵便局自動引落とし等"></textarea>
+          </div>
+        </div><a class="entry__button entry__button--long entry__button--center" href=""><span>送信確認画面へ</span></a>
+        <div class="netform__contact">
+          <p class="netform__contact-text netform__contact-text--medium">ご不明点などありましたらお気軽にお問合せください</p>
+          <p class="netform__contact-text">平日<span class="red">9:00〜17:00</span>ネット係まで</p>
+          <div class="netform__contact-number"> <img src="img\icons\icon-phone.svg" alt=""><a href="tel:0120-978-669">0120-978-669</a></div>
+        </div>
+      </section>
+{% endblock %}

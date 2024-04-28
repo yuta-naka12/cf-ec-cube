@@ -1,0 +1,30 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.title_en'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_mypage'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_mypage_id'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="id-form">
+        <div class="id-form__title">
+          <h2 class="delivery__heading text">{{'front.mypage.change_id_title'|trans}}<br><span>{{'front.mypage.name'|trans}}</span></h2>
+        </div>
+        <section class="entry-form">
+          <div class="id-form__complete">
+            <p class="id-form__complete-message">{{'front.mypage.change_id_message'|trans}}</p>
+          </div>
+          <div class="id-form__btn-container id-form__btn-container--m65"><a class="id-form__btn" href=""><span>{{'common.move_to_page_mypage'|trans}} </span></a></div>
+        </section>
+      </div>
+{% endblock %}

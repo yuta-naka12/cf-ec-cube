@@ -1,0 +1,72 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends 'default_frame.twig' %}
+
+{% form_theme form 'Form/form_div_layout.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="img\icons\page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.forgot.password_reset_subtitle'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.forgot.password_reset_title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_password'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <section class="login"> 
+        <div class="login__content"> 
+          <div class="login__wrap">
+            <h4 class="login__header">{{'front.forgot.password_reset.title'|trans}}</h4>
+            <div class="login__container">
+              <p class="login__paragraph">{{'front.forgot.password_reset.message'|trans}}</p>
+                    <form class="login__form" id="form1" method="post" novalidate>
+                            {{ form_widget(form._token) }}
+                        <div class="login__item"> 
+                            <p class="login__item-label">{{'front.forgot.password_reset.label_id'|trans}}</p>
+                            {{ form_widget(form.login_email,{'attr':{'class':'entry-form__input login__item-input-558'}}) }}
+                        </div>
+                        {% if error %}
+                            <p class="ec-errorMessage">{{ error }}</p>
+                        {% endif %}
+                        <div class="login__item">
+                            <p class="login__item-label">{{'front.forgot.password_reset.label_password_first'|trans}}</p>
+                                {{ form_widget(form.password.first, {
+                                    'type': 'password',
+                                    'attr':{'class':'entry-form__input login__item-input-300'}
+                                }) }}
+                            <div class="login__item-text">
+                                <p>{{'front.forgot.password_reset.message01'|trans}} <br>{{'front.forgot.password_reset.message02'|trans}}</p>
+                            </div>
+                        </div>
+                        <div class="login__item">
+                            <p class="login__item-label">{{'front.forgot.password_reset.label_password_second'|trans}}</p>
+                                {{ form_widget(form.password.second, {
+                                    'type': 'password',
+                                    'attr': {'class':'entry-form__input login__item-input-300'}
+                                }) }}
+                            <div class="login__item-text">
+                                <p>{{'front.forgot.password_reset.message03'|trans}}</p>
+                            </div>
+                        </div>
+                        <div class="login__form-text">{{'front.forgot.password_reset.message04'|trans}}</div>
+                        <button class="login__button">{{'front.forgot.password_reset.btn_change'|trans}}</button>
+                    </form>
+            </div>
+          </div>
+        </div>
+      </section>
+{% endblock %}

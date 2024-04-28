@@ -1,0 +1,85 @@
+{% extends 'default_frame.twig' %}
+
+	{% block main %}
+		<div class="wrapper"> <div class="breadcrumbs">
+			<div class="breadcrumbs__page-title">
+				<div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+				<div class="breadcrumbs__page-title-text">
+					<div class="breadcrumbs__page-title-text-en">{{ 'front.cooking_method.subtitle'|trans }}</div>
+					<div class="breadcrumbs__page-title-text-jp">{{ 'front.cooking_method.title'|trans }}</div>
+				</div>
+			</div>
+			<div class="breadcrumbs__main">
+				<a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="/">{{ 'front.product.position_top'|trans }}</a>
+				<div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div>
+				<span class="breadcrumbs__main-pagename">{{ 'front.cooking_method.title'|trans }}</span>
+			</div>
+		</div>
+	
+	
+		<div class="section method"> <span class="method__title">おいしく食べるための解凍・調理方法</span>
+          <p class="method__text">解凍方法は冷凍食品を調理する上で最も重要な工程です。 正しい解凍方法で調理すると驚くほど差がでます。キャプテンフーヅ では、購入した商品をおいしく召し上がっていただくために、下記 の解凍方法をおすすめしています。</p>
+          <div class="method__container">
+            <div class="method__content">
+              <div class="method__image"><img src="/html/user_data/assets/img/cf2022/img/cooking-method/method-1.png" alt="対象商品"><br>
+                <p class="method__text">対象商品</p>
+                <div class="method__category"><span class="method__text">刺身類</span><span class="method__text">肉類</span><span class="method__text">水産加工品類 </span></div>
+              </div>
+              <div class="method__content-text"><span class="method__title method__title--small">低温解凍</span>
+                <p class="method__text method__text--big">特にブロック・柵状のお刺身におすすめの解凍方法です。 ドリップ（解凍時に出る旨味成分の汁） の流出も少なく、身質も鮮魚に近い食感を味わえます。</p>
+                <p class="method__text method__text--mid">・冷凍庫から冷蔵庫に移し、ゆっくりと解凍します。<br>　目安：秋冬4～5時間、春夏3～4時間</p>
+                <p class="method__text">※冷凍庫の設定、機種によって多少の誤差があります。又長時間冷蔵庫で解凍する事は避けてください。<br>※刺身バイキングの商品は上記より1時間ほど短い時間を目安に解凍してください。<br>※解凍のしすぎにご注意ください。      </p>
+              </div>
+            </div>
+            <div class="method__content">
+              <div class="method__image"><img src="/html/user_data/assets/img/cf2022/img/cooking-method/method-2.png" alt="対象商品"><br>
+                <p class="method__text">対象商品</p>
+                <div class="method__category"><span class="method__text">氷詰め商品</span><span class="method__text">刺身類</span></div>
+              </div>
+              <div class="method__content-text"><span class="method__title method__title--small">流水解凍</span>
+                <p class="method__text method__text--big"> 忙しい時、低温解凍の時間が取れない時におすすめの解凍方法です。</p>
+                <p class="method__text method__text--mid">・未開封でパッケージごと水受けの容器に入れ、水道水を細く流しかけながら水に浸し解凍します。 </p>
+                <p class="method__text">※氷詰めされている海老はパックから取り出し同様に解凍します。<br>※刺身ブロックの場合、10分程度流水につけ、中心が凍ったままスライスした後、冷蔵庫で全解凍します。</p>
+              </div>
+            </div>
+            <div class="method__content">
+              <div class="method__image"><img src="/html/user_data/assets/img/cf2022/img/cooking-method/method-3.png" alt="対象商品"><br>
+                <p class="method__text">対象商品</p>
+                <div class="method__category"><span class="method__text">干魚</span><span class="method__text">切身類</span><span class="method__text">揚げ物</span><span class="method__text">惣菜類</span></div>
+              </div>
+              <div class="method__content-text"><span class="method__title method__title--small">凍ったまま</span>
+                <p class="method__text method__text--big"> 焼き魚や煮魚にする際におすすめの調理方法。素材の旨味をドリップの流出により失う事もなく、解凍による鮮度落ちもありません。</p>
+                <p class="method__text method__text--mid">・袋から取り出し解凍せずにそのまま加熱調理します。素材物は軽く水洗いをしてください。 </p>
+                <p class="method__text">※焼魚の場合、脂分の多い魚、または漬魚はホイルを敷いて焼いてください。</p>
+              </div>
+            </div>
+            <div class="method__content">
+              <div class="method__image"><img src="/html/user_data/assets/img/cf2022/img/cooking-method/method-4.png" alt="対象商品"><br>
+                <p class="method__text">対象商品</p>
+                <div class="method__category"><span class="method__text">まぐろ刺身類</span></div>
+              </div>
+              <div class="method__content-text"><span class="method__title method__title--small">塩水解凍</span>
+                <p class="method__text method__text--big">ドリップの流出や変色を軽減できる為、変色しやすいマグロにおすすめの解凍方法！</p>
+                <p class="method__text method__text--mid">①ボウルにぬるま湯を入れ塩ひとつまみを加えます。<br>②マグロを凍ったままボウルに約1分浸けると身の表面が反り上がります。<br>③キッチンペーパーに包み冷蔵庫でゆっくり解凍します。　</p>
+              </div>
+            </div>
+            <div class="method__content">
+              <div class="method__image"><img src="/html/user_data/assets/img/cf2022/img/cooking-method/method-5.png" alt="対象商品"><br>
+                <p class="method__text">対象商品</p>
+                <div class="method__category"><span class="method__text">調理済み加工品</span><span class="method__text">スイーツ</span></div>
+              </div>
+              <div class="method__content-text"><span class="method__title method__title--small">自然解凍</span>
+                <p class="method__text method__text--big">主に調理済みの加工食品などにする解凍方法です。</p>
+                <p class="method__text method__text--mid">・日の当らない涼しい場所で自然に解凍します。</p>
+              </div>
+            </div><a class="button__secondary" href="/bacteriological-test">
+              <div class="button__secondary-link">細菌検査の実施</div></a>
+          </div>
+        </div>
+      </div>
+	
+	</div>
+
+
+
+{% endblock %}

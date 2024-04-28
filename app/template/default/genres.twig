@@ -1,0 +1,45 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">Genre</div>
+              <div class="breadcrumbs__page-title-text-jp">ジャンル一覧</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">TOP</a>
+            <div class="breadcrumbs__main-carret"><img src="html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">ジャンル一覧</span>
+          </div>
+        </div>
+      </div>
+      <section class="t-search">
+        <div class="t-search__wrapper">
+          <div class="t-search__component">
+            <input class="t-search__input" type="text" id="s" name="s" placeholder={{'front.category.search_ph'|trans}}>
+            <button class="t-search__button"> <img src="html/template/default/assets/img/t-search/magnifying-glass-icon.svg" alt="" loading="lazy"><span>商品検索</span></button>
+          </div>
+          <div class="t-search__text">
+            <div class="t-search__text-description"><span>{{'front.category.search_description1'|trans}}</span><span>{{'front.category.search_description2'|trans}}<br>{{'front.category.search_description3'|trans}}</span></div>
+            <div class="t-search__text-button"><span>{{'front.category.search_detail'|trans}}</span><img src="html/template/default/assets/img/t-search/right-carret-1.svg" alt="" loading="lazy"></div>
+          </div>
+        </div>
+      </section>
+      <section class="category">
+      
+        <div class="category__list">
+         {% for genre in genres %}
+          <div class="category__item">
+            <div class="category__image">
+              <div class="category__image-ratio"></div><img src="html/template/default/assets/img/category/category-image1.jpg" alt="">
+            </div><span class="category__text">{{genre.name}}</span>
+          </div>
+           {% endfor %}
+          </div＞
+
+        
+      </section>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'default_frame.twig' %}
+
+
+
+{% block main %}
+ <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/user_data/assets/img/cf2022/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">Quick order</div>
+              <div class="breadcrumbs__page-title-text-jp">クイックオーダー</div>
+            </div>
+          </div>
+
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">TOP</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/user_data/assets/img/cf2022/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">プライバシーポリシー</span>
+          </div>
+        </div>
+
+
+            <div class="quickorder_ col1_">
+            <div id="quickorderframe">
+            <h1 class="common_headline1_">クイックオーダー</h1>
+            <div style="border:2px solid #8d8d8d; font-size:16px; padding:10px; margin:5px 0;">
+            <h4 style="font-weight:bold;">2022年12月25日～2023年4月22日のパンフレットをご利用のお客様へ</h4>
+            商品コード4桁の先頭に　36　を付けてご入力ください。　例：363001<br>
+            </div>
+
+
+            <form action="/shop/cart/cart.aspx" method="POST" id="quickorder_form" onsubmit="return confirm('以上の商品をまとめて買い物かごに入れます。');">
+            <div id="suggestArea"></div>
+            <table class="table table-bordered">
+            <tbody><tr>
+
+            <th class="goods_">商品コード</th>
+            <th class="name_">商品名</th>
+            <th class="price_">販売価格</th>
+            <th class="qty_">数量</th>
+            <th class="amt_">小計</th>
+            <th class="msg_">メッセージ</th>
+            <th class="del_"></th>
+            </tr>
+            {% for i in 0..100 %}
+                  
+            <tr>
+            <td class="line0_ goods_"><input type="text" name="goods-{{ i }}" value="" size="20" maxlength="6" autocomplete="off"></td>
+            <td class="line0_ name_"></td>
+            <td class="line0_ price_"></td>
+            <td class="line0_ qty_"><input type="text" name="qty-{{ i }}" value="" size="3" maxlength="3"></td>
+            <td class="line0_ amt_"></td>
+            <td class="line0_ msg_"></td>
+            <td class="line0_ del_"><img class="delButton" src="/html/user_data/assets/img/cf2022/img/sys/button/delete_s.gif" alt="削除"></td>
+            </tr>
+            {% endfor %}
+            </tbody></table>
+            <div class="submit_">
+            <input type="image" src="/html/user_data/assets/img/cf2022/img/icons/cart.gif" alt="買い物かごへ入れる">
+            </div>
+            </form>
+            </div>
+            </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,142 @@
+{% set Categories = repository('Eccube\\Entity\\Category').getList() %}
+{% set Genres = repository('Customize\\Entity\\Product\\ProductGenre').findAll() %}
+{% set Topics = repository('Customize\\Entity\\Product\\ProductTopic').findAll() %}
+
+{% macro tree(Category) %}
+    {% from _self import tree %}
+    <a href="{{ url('product_list') }}?category_id={{ Category.id }}">
+        {{ Category.name }}
+    </a>
+    {% if Category.children|length > 0 %}
+        <ul>
+            {% for ChildCategory in Category.children %}
+                <li>
+                    {{ tree(ChildCategory) }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+{% from _self import tree %}
+
+<div class="sidemenu"><a class="sidemenu__logo-link" href="/stg/shop/">
+        <div class="sidemenu__logo"><img src="/html/template/default/assets/img/common/logo.png" alt="Captain Foods" loading="lazy"></div></a>
+    <div class="sidemenu__menu-list">
+        <div class="sidemenu__menu-item sublist_toggle_js" sublist="1"><img class="sidemenu__menu-image" src="/html/template/default/assets/img/common/icon-registration.svg" alt="" loading="lazy">
+            <div class="sidemenu__menu-text">
+                <!-- <div class="sidemenu__menu-guest">ゲスト様</div>--><span>{{'front.sidemenu_mypage_outline'|trans}}</span>
+            </div>
+        </div>
+        <div class="sidemenu__menu-sublist sublist_menu_js" sublist="1">
+            <div class="sidemenu__menu-sublist-item"><a class="sidemenu__link" href="/shop/customer/history.aspx">{{'front.sidemenu_mypage_outline'|trans}}</a></div>
+            <div class="sidemenu__menu-sublist-item"><a class="sidemenu__link" href="/shop/customer/ShippingSchedule.aspx">{{'front.sidemenu_mypage_item01'|trans}}</a></div>
+            <div class="sidemenu__menu-sublist-item"><a class="sidemenu__link" href="/shop/customer/customer.aspx">{{'front.sidemenu_mypage_item02'|trans}}</a></div>
+            <div class="sidemenu__menu-sublist-item"><a class="sidemenu__link" href="/shop/customer/mailchange.aspx"></a>{{'front.sidemenu_mypage_item03'|trans}}</div>
+            <div class="sidemenu__menu-sublist-item"><a class="sidemenu__link" href="/shop/customer/idchange.aspx">{{'front.sidemenu_mypage_item04'|trans}}</a></div>
+            <div class="sidemenu__menu-sublist-item"><a class="sidemenu__link" href="/shop/customer/passchange.aspx">{{'front.sidemenu_mypage_item05'|trans}}</a></div>
+            <div class="sidemenu__menu-sublist-item"><a class="sidemenu__link" href="/shop/contact/contactlist.aspx">{{'front.sidemenu_mypage_item06'|trans}}</a></div>
+            <div class="sidemenu__menu-sublist-item"><a class="sidemenu__link" href="/shop/customer/logout.aspx">{{'front.sidemenu_mypage_item07'|trans}}</a></div>
+        </div>
+        <a class="sidemenu__menu-item" href="/shop/cart/cart.aspx"><img class="sidemenu__menu-image" src="/html/template/default/assets/img/common/icon-cart-gray.svg" alt="" loading="lazy"><span>{{'front.sidemenu_cart'|trans}}</span></a>
+    </div>
+    <div class="sidemenu__cart" style="margin-bottom: 0;">
+        <div class="sidemenu__button-container" style="margin-top: 0;">
+            <a class="sidemenu__button" href="/shop/cart/cart.aspx">{{'front.sidememu_cart_check'|trans}}</a>
+        </div>
+    </div>
+
+     <div class="sidemenu__menu-list">
+            <a class="sidemenu__menu-item" href="/genres"><span>トピックを見る</span></a>
+            <div class="sidemenu__menu-sublist sublist_menu_js active" sublist="2">
+            {% for Topic in Topics %}
+            <a class="sidemenu__category-item"
+                        sublist="3"
+                        href="{{ url('product_list') }}?genre_id={{ Topic.id }}">
+
+                            <span>{{ Topic.title }}</span>
+                        </a>
+            {% endfor %}
+
+      </div>
+    </div>
+
+    <div class="sidemenu__menu-list">
+            <a class="sidemenu__menu-item" href="/genres"><span>ジャンルを見る</span></a>
+            <div class="sidemenu__menu-sublist sublist_menu_js active" sublist="2">
+            {% for Genre in Genres %}
+            <a class="sidemenu__category-item"
+                        sublist="3"
+                        href="{{ url('product_list') }}?genre_id={{ Genre.id }}">
+
+                            <span>{{ Genre.name }}</span>
+                        </a>
+            {% endfor %}
+
+      </div>
+    </div>
+
+    <div class="sidemenu__category-list">
+       <a class="sidemenu__menu-item" href="/category"><span>カテゴリーを見る</span></a>
+        <a class="sidemenu__menu-item" href="/special"><span>{{'front.sidememu_category_special'|trans}}</span></a>
+        <div class="sidemenu__menu-sublist sublist_menu_js active" sublist="2">
+            {% for Category in Categories %}
+                <a class="sidemenu__category-item"
+                   sublist="3"
+                   href="{{ url('product_list') }}?category_id={{ Category.id }}">
+                    <img class="sidemenu__category-image"
+                         src="/html/template/default/assets/img/common/icon-menu7.png"
+                         alt=""
+                         loading="lazy">
+                    <span>{{ Category.name }}</span>
+                </a>
+                {% if Category.children|length > 0 %}
+                    <div class="sidemenu__menu-sublist sublist_menu_js active" sublist="1">
+                        <ul>
+                            {% for ChildCategory in Category.children %}
+                                <div class="sidemenu__menu-sublist-item">
+                                    <a class="sidemenu__link" href="{{ url('product_list') }}?category_id={{ ChildCategory.id }}">
+                                        {{ ChildCategory.name }}
+                                    </a>
+                                    {% if Category.children|length > 0 %}
+                                        <div class="sidemenu__menu-sublist sublist_menu_js active">
+                                            {% for GrandchildCategory in ChildCategory.children %}
+                                                <div class="sidemenu__menu-sublist-item">
+                                                    <a class="sidemenu__link" href="{{ url('product_list') }}?category_id={{ GrandchildCategory.id }}">
+                                                        {{ GrandchildCategory.name }}
+                                                    </a>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+      </div>
+        <div class="sidemenu__menu-list">
+            <a class="sidemenu__menu-item" href="/cooking-method">
+                <span>{{'front.sidememu_recipe1'|trans}}<br>{{'front.sidememu_recipe2'|trans}}</span>
+            </a>
+            <a class="sidemenu__menu-item" href="/bacteriological-test">
+                <span>{{'front.sidememu_sanitary'|trans}}</span>
+            </a>
+            <a class="sidemenu__menu-item" href="/guide">
+                <span>{{'front.sidememu_gides'|trans}}</span>
+            </a>
+            <a class="sidemenu__menu-item" href="/voice-list">
+                <span>{{'front.sidememu_reviews'|trans}}</span>
+            </a>
+            <a class="sidemenu__menu-item" href="/faq">
+                <span>{{'front.sidememu_faq'|trans}}</span>
+            </a>
+            <a class="sidemenu__menu-item sidemenu__menu-item--border-bottom" href="/apply/pamphlet">
+                <span>{{'front.sidememu_apply'|trans}}</span>
+            </a>
+            <a class="sidemenu__menu-item" href="/net-form">
+                <span>{{'front.sidememu_signup'|trans}}</span>
+            </a>
+        </div>
+    </div>

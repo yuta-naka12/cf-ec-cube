@@ -1,0 +1,51 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.news.sub_title'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.news.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_news'|trans}}</span>
+          </div>
+        </div>        
+        <div class="news-details">
+          <div class="news-details__info"><span class="news-details__info-date">{{'front.news.date01'|trans}}</span><span class="news-details__info-category">{{'front.news.category_label'|trans}}</span></div>
+          <h3 class="news-details__title">{{'front.news.detail01_title'|trans}}</h3>
+          <div class="news-details__thumbnail">
+            <div class="news-details__thumbnail-ratio"></div><img src="" alt="">
+          </div>
+          <div class="news-details__text">
+            <p>{{'front.news.detail01_pre'|trans}}</p>
+          </div>
+          <div class="news-details__article">
+            <h4>{{'front.news.detail01_outline01'|trans}}</h4>
+            <p>{{'front.news.detail01_text01'|trans}}</p>
+          </div>
+          <div class="news-details__article">
+            <h5>{{'front.news.detail01_outline02'|trans}}</h5>
+            <p>{{'front.news.detail01_text02'|trans}}</p>
+            <p>{{'front.news.detail01_text03'|trans}}</p>
+          </div>
+          <div class="news-details__row">
+            <div class="news-details__thumbnail2">
+              <div class="news-details__thumbnail2-ratio"></div><img src="" alt="">
+            </div>
+            <p>{{'front.news.detail01_text04'|trans}}</p>
+          </div>
+          <div class="news-details__row">
+            <p>{{'front.news.detail01_text05'|trans}}</p>
+            <div class="news-details__thumbnail2 news-details__thumbnail2--reverse">
+              <div class="news-details__thumbnail2-ratio"></div><img src="" alt="">
+            </div>
+          </div>
+          <div class="news-details__prevnext"><a class="news-details__prevnext-prev" href="#"><img src="/html/template/default/assets/img/icons/icon-arrow.svg" alt=""><span class="news-details__prevnext-prev-text">{{'front.news.go_to_prev'|trans}}</span></a><a class="news-details__prevnext-all" href="#"><img src="/html/template/default/assets/img/icons/icon-bento.svg" alt=""><span class="news-details__prevnext-all-text">{{'front.news.go_to_list'|trans}}</span></a><a class="news-details__prevnext-next" href="#"> <span class="news-details__prevnext-next-text">{{'front.news.go_to_next'|trans}}</span><img src="/html/template/default/assets/img/icons/icon-arrow.svg" alt=""></a></div>
+        </div>
+      </div>
+{% endblock %}

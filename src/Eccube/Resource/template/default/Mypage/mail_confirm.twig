@@ -1,0 +1,44 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.title_en'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_mypage'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_mail'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <section class="mail">
+        <div class="wrapper">
+          <h2 class="delivery__heading mail__heading text">{{'front.mypage.mail.title'|trans}}<br>
+            {% if app.user.name01 != ” %}
+                <span>{{ app.user.name01 }} {{ app.user.name02 }}{{'common.name.suffix'|trans}}</span>
+            {% endif %}
+          <span class="mail__subheading">{{'front.mypage.mail.confirm_message'|trans}}</span></h2>
+        </div>
+        <div class="entry-form">
+          <div class="kaiinhenkou__block">
+            <div class="entry-form__item"><span class="entry-form__label mail__label">{{'front.mypage.info_id_label'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap"> <span>ABCD1234</span></div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label mail__label">{{'front.mypage.info_password_label'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap"> <span>●●●●●●●●</span></div>
+            </div>
+            <div class="entry-form__item entry-form__item--align-center"><span class="entry-form__label mail__label mail__label--2-lines confirm">{{'front.mypage.info_newmail_label01'|trans}}<br class="pc">{{'front.mypage.info_newmail_label02'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap"> <span>mail@example.com</span></div>
+            </div>
+          </div>
+          <div class="kaiinhenkou__button-group"> <a class="button__secondary button__secondary--okiniiri button__secondary--no-margin" href="#"> 
+              <div class="button__secondary-link button__secondary-link--okiniiri button__secondary-link--return">{{'common.back'|trans}}</div></a><a class="button__secondary button__secondary--okiniiri button__secondary--no-margin" href="#"> 
+              <div class="button__secondary-link button__secondary-link--okiniiri">{{'common.registration'|trans}}</div></a></div>
+        </div>
+      </section>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+     <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">Payment</div>
+              <div class="breadcrumbs__page-title-text-jp">お支払い方法・ポイントについて</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">TOP</a>
+            <div class="breadcrumbs__main-carret"><img src="/stg/cf2022/img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">お支払い方法・ポイントについて</span>
+          </div>
+        </div>
+      </div>
+      <div class="delivery">
+        <div class="delivery__nav"><a class="delivery__nav-item" href="#method">お支払いの方法</a><a class="delivery__nav-item" href="#points">ポイントについて</a></div>
+        <div class="delivery__content">
+          <div class="delivery__anchor" id="method"></div>
+          <div class="delivery__section">
+            <h2 class="delivery__heading">お支払いの方法</h2>
+            <h3 class="delivery__subheading">自社便宅配システムの場合</h3>
+            <div class="delivery__text">
+              <ul>
+                <li class="delivery__text-listitem"><span>代金引換</span><br>
+                  <p class="delivery__text-additional"><span class="red">手数料無料</span><br>キャプテンフーヅのドライバーに代金をお渡しください。</p>
+                </li>
+                <li class="delivery__text-listitem"><span>郵便局引落し(ゆうちょ銀行)</span><br>
+                  <p class="delivery__text-additional"><span class="red">手数料無料</span><br>配達日の5日後に（土日祝含まず）ご登録の口座より引落しさせていただきます。<br>※休業日を挟む場合は、引落日がずれる場合がございます。ご了承ください。<br>郵送にて申し込み用紙をお送りします。<br>手続き完了までは代金引換をご利用ください。(一ヶ月程お時間いただきます)</p>
+                </li>
+              </ul>
+            </div>
+            <h3 class="delivery__subheading">宅急便（他社便）届けの場合</h3>
+            <div class="delivery__text">
+              <p>・銀行振り込み（前払い）<br>　振込み確認後に商品を発送させて頂きます。 振込手数料はお客様負担でお願いいたします。<br>　【入金先】ゆうちょ銀行　店名〇二九　当座　0032603　キャプテンフーヅ(カ</p>
+              <p>・代金引換<br>　配達ドライバーに代金をお支払いください。代引手数料：300円(＋税)</p>
+            </div>
+          </div>
+          <div class="delivery__anchor" id="points"></div>
+          <div class="delivery__section mb-double">
+            <h2 class="delivery__heading">ポイントについて</h2>
+            <h3 class="delivery__subheading">ポイントの付き方　－ショッピングサイト上での確認方法－</h3>
+            <div class="delivery__text">
+              <p>各商品の詳細ページに記載されるポイントの右側に表示される数字が獲得ポイントとなります。</p>
+              <p>【商品詳細ページ例】</p>
+              <div class="delivery__img delivery__img--point1"><img class="contain" src="/html/user_data/assets/img/cf2022/img/payment/point01.jpeg"></div>
+            </div>
+            <h3 class="delivery__subheading">ポイントの付き方　－カタログでの確認方法－</h3>
+            <div class="delivery__text">
+              <p>マークによりポイントの付き方が異なります。下記の表をご参照ください。また、カタログにマークの記載がない商品はポイント付与対象外となります。</p>
+              <div class="payment__list">
+                <div class="payment__list-item">
+                  <p>カタログ内に左記のマークが付いている商品は購入商品代金（税込）に対して1％のポイントが付きます。</p>
+                </div>
+                <div class="payment__list-item payment__list-item--3p">
+                  <p>カタログ内に左記のマークが付いている商品は、カタログに記載される対象期間に購入される商品代金（税込）に対して3％<br>
+                    のポイントが付きます。
+                  </p>
+                </div>
+                <div class="payment__list-item payment__list-item--5p">
+                  <p>カタログ内に左記のマークが付いている商品は、カタログに記載される対象期間に購入される商品代金（税込）に対して5％<br>
+                    のポイントが付きます。
+                  </p>
+                </div>
+              </div>
+            </div>
+            <h3 class="delivery__subheading">貯めたポイントは…</h3>
+            <div class="delivery__text">
+              <p>1ポイント1円としてキャプテンフーヅでのご注文時にご利用いただけます。<br>
+                有効期限はございません。<br>
+                ※送料にはご利用いただけません。
+              </p>
+            </div>
+            <h3 class="delivery__subheading">注意事項</h3>
+            <div class="delivery__text">
+              <ul>
+                <li>ポイントは出荷完了後に付与されます。</li>
+                <li>キャンペーンポイントは、通常ポイントとは別の処理で加算されるため、遅れる場合がございます。</li>
+              </ul>
+            </div>
+            <h3 class="delivery__subheading">ショッピングサイト上でのポイント確認・使用方法</h3>
+            <div class="delivery__text">
+              <p>ご注文方法の指定のページ下部　お支払情報　現在のポイント残高をご確認ください。<br>
+                ポイントは1ポイント1円としてご利用いただけます。お手持ちのポイントを使用する場合は、ポイントを使うにチェックを入れ使用するポイント数をご入力ください。<br>
+                ポイントを使用しない場合はポイントをためるにチェックが入った状態のまま購入手続きを進めてください。
+              </p>
+              <p>※ポイントに有効期限はありません。<br>
+                ※ご注文時ポイントを使用した商品をご注文締め切り日以降にキャンセルした場合は、使用ポイントの返還はできません。予めご了承ください。
+              </p>
+            </div>
+            <div class="delivery__text">
+              <p>【STEP2 ご注文方法の指定(ご購入手続き画面)ページ例】</p>
+              <div class="delivery__img delivery__img--point2"><img class="contain" src="/html/user_data/assets/img/cf2022/img/payment/point02.jpeg"></div>
+            </div>
+            <h3 class="delivery__subheading">納品伝票でのポイント確認・使用方法</h3>
+            <div class="delivery__text mb-none">
+              <p>【ご利用明細】</p>
+              <div class="delivery__img delivery__img--point1"><img class="contain" src="/html/user_data/assets/img/cf2022/img/payment/point03.jpeg"></div>
+            </div>
+            <div class="delivery__text">
+              <p><span class="primary">①</span>ポイント値引き＝使用したポイント数<br>
+                <span class="primary">②</span>合計＝今回の獲得ポイント数<br>
+                <span class="primary">③</span>累計＝累計ポイント数
+                
+              </p>
+            </div>
+          </div>
+
+           <div class="delivery__section">
+            <div class="delivery__flow">
+              <div class="delivery__flow-item">
+                <div class="delivery__flow-icon"><img src="/html/user_data/assets/img/cf2022/img/delivery/ic-basket.svg" alt=""></div>
+                <div class="delivery__flow-links"><a class="delivery__flow-link" href="/ordering#registration">登録の流れ</a><a class="delivery__flow-link" href="/ordering#order">注文の流れ</a><a class="delivery__flow-link" href="/ordering#change">注文の変更</a><a class="delivery__flow-link" href="/ordering#mail">注文メールが届かないとき</a></div>
+              </div>
+              <div class="delivery__flow-item">
+                <div class="delivery__flow-icon"><img src="/html/user_data/assets/img/cf2022/img/delivery/ic-box.svg" alt=""></div>
+                <div class="delivery__flow-links"><a class="delivery__flow-link" href="/delivery#company">自社便</a><a class="delivery__flow-link" href="/delivery#other-company">他社便</a><a class="delivery__flow-link" href="/delivery#return-policy">商品の返品・キャンセルについて</a></div>
+              </div>
+              <div class="delivery__flow-item">
+                <div class="delivery__flow-icon"><img src="/html/user_data/assets/img/cf2022/img/delivery/ic-coins.svg" alt=""></div>
+                <div class="delivery__flow-links"><a class="delivery__flow-link" href="/payment#method">お支払いの方法</a><a class="delivery__flow-link" href="/payment#points">ポイントについて</a></div>
+              </div>
+            </div>
+            <div class="delivery__link-top"><a href="/stg/cf2022/guide.html">ご利用ガイドTOPへ</a></div>
+          </div>
+
+        </div>
+      </div>
+
+{% endblock %}

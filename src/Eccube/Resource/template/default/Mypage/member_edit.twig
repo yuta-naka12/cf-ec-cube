@@ -1,0 +1,126 @@
+{% extends 'default_frame.twig' %}
+
+{% form_theme form 'Form/form_div_layout.twig' %}
+
+{% block main %}
+
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.title_en'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_mypage'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_mypage_id'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <section class="kaiinhenkou">
+        <div class="wrapper">
+          <h2 class="delivery__heading text">{{'front.mypage.change_id_title'|trans}}<br><span>{{'front.mypage.name'|trans}}</span></h2>
+        </div>
+        <div class="entry-form">
+          <div class="kaiinhenkou__block">
+            <p class="kaiinhenkou__notice kaiinhenkou__notice--instruction">{{'front.mypage.member_message'|trans}}</p>
+            <div class="entry-form__item"><span class="entry-form__label kaiinhenkou__label">{{'admin.common.name'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap">
+                <div class="entry-form__input-name ec-input"> <span>{{'admin.common.last_name'|trans}}</span>
+                  {{ form_widget(form.name.name01, { 'attr': { 'placeholder': 'front.form.ph_lastname' }}) }}
+                </div>
+                <div class="entry-form__input-name ec-input"> <span>{{'admin.common.first_name'|trans}}</span>
+                  {{ form_widget(form.name.name02, { 'attr': { 'placeholder': 'front.form.ph_firstname' }}) }}
+                </div><span class="kaiinhenkou__notice">{{'front.mypage.note01'|trans}}</span>
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label kaiinhenkou__label">{{'admin.common.kana_label'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap">
+                <div class="entry-form__input-name ec-input"> <span>{{'admin.common.last_name_kana'|trans}}</span>
+                  {{ form_widget(form.kana.kana01, { 'attr': { 'placeholder': 'front.form.ph_lastname_kana' }}) }}
+                </div>
+                <div class="entry-form__input-name ec-input"> <span>{{'admin.common.first_name_kana'|trans}}</span>
+                  {{ form_widget(form.kana.kana02, { 'attr': { 'placeholder': 'front.form.ph_firstname_kana' }}) }}
+                </div><span class="kaiinhenkou__notice">{{'front.mypage.note02'|trans}}</span>
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional kaiinhenkou__label--large">{{'admin.common.mail_address_all'|trans}}</span>
+              <div class="entry-form__inputs"><span> {{ form_widget(form.email.first) }}&nbsp;&nbsp;&nbsp;<br class="sp"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt="">&nbsp;&nbsp;&nbsp;<a class="primary" href="">{{'front.mypage.go_change'|trans}}</a></span></div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional kaiinhenkou__label--large">{{'admin.common.password'|trans}}</span>
+              <div class="entry-form__inputs"><span> {{ form_widget(form.password.fitst,{ type: 'password'}) }} &nbsp;&nbsp;&nbsp;<br class="sp"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt="">&nbsp;&nbsp;&nbsp;<a class="primary" href="">{{'front.mypage.go_change'|trans}}</a></span></div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label kaiinhenkou__label">{{'admin.common.phone_number'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap ec-telInput">
+                {{ form_widget(form.phone_number) }}
+                <span class="kaiinhenkou__notice">{{'front.mypage.note03'|trans}}</span>
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label kaiinhenkou__label kaiinhenkou__label--optional-labeled">{{'admin.common.phone_number_opt'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap ">
+                <input class="entry-form__input kaiinhenkou__input" type="text"><span class="kaiinhenkou__notice">{{'front.mypage.note04'|trans}}</span>
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label kaiinhenkou__label">{{'admin.common.zipcode'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap ec-input">
+                {{form_widget(form.phone_number_opt, { 'type' : 'hidden' }, { 'attr': { 'placeholder': 'common.address_sample_02' }})}}
+                <a class="entry-form__button" href="">{{'front.mypage.search_adress'|trans}}</a><span class="kaiinhenkou__notice">{{'front.mypage.note05'|trans}}</span>
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label kaiinhenkou__label">{{'admin.common.address'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--column">
+                <div class="entry-form__inputs">
+                  <div class="entry-form__select ec-select" name="post">
+                    {{ form_widget(form.job) }}
+                  </div><span class="kaiinhenkou__notice kaiinhenkou__notice--inline">{{'front.mypage.note06'|trans}}</span>
+                </div>
+                <div class="entry-form__inputs ec-input">
+                  {{ form_widget(form.address.pref) }}
+                  <span class="kaiinhenkou__notice kaiinhenkou__notice--inline">{{'front.mypage.note07'|trans}}</span>
+                </div>
+                <div class="entry-form__inputs e-input">
+                  {{ form_widget(form.address.addr01, { 'attr': { 'placeholder': 'common.address_sample_01' }}) }}
+                </div>
+                <div class="entry-form__inputs entry-form__inputs--wrap ec-input">
+                  {{ form_widget(form.address.addr02,  { 'attr': { 'placeholder': 'common.address_sample_02' }}) }}
+                  <span class="kaiinhenkou__notice kaiinhenkou__notice--mt-10">{{'front.mypage.note08'|trans}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label kaiinhenkou__label kaiinhenkou__label--optional-labeled">{{'admin.common.address_opt'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap ec-input">
+                {{ form_widget(form.address.addr03,  { 'attr': { 'placeholder': 'common.address_building_room' }}) }}
+                <span class="kaiinhenkou__notice kaiinhenkou__notice--mt-10">{{'front.mypage.note09'|trans}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="kaiinhenkou__block">
+            <p class="kaiinhenkou__notice kaiinhenkou__notice--md kaiinhenkou__notice--instruction-lower">{{"front.mypage.message_opt"|trans}}</p>
+            <div class="entry-form__item"><span class="entry-form__label kaiinhenkou__label--large entry-form__label--optional">{{'admin.common.gender'|trans}}</span>
+              <div class="entry-form__inputs entry-form__inputs--wrap ec-select">
+                {{ form_widget(form.sex) }}
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label kaiinhenkou__label--large entry-form__label--optional">{{'admin.common.birth_day'|trans}}</span>
+              <div class="entry-form__inputs">
+                <div class="kaiinhenkou__input-date ec-select">
+                  {{ form_widget(form.birth.year) }}<span>{{'admin.common.birth_day_year'|trans}}</span>
+                  {{ form_widget(form.birth.month) }}<span>{{'admin.common.birth_day_month'|trans}}</span>
+                  {{ form_widget(form.birth.day) }}<span>{{'admin.common.birth_day_day'|trans}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="entry-form__item entry-form__item--align-end"><span class="entry-form__label kaiinhenkou__label--large entry-form__label--optional">{{'front.mypage.contact_label01'|trans}}<br class="pc">{{'front.mypage.contact_label02'|trans}}</span>
+              <div class="entry-form__inputs ec-select">
+                {{form_widget(form.contact)}}
+              </div>
+            </div>
+          </div>
+          <div class="kaiinhenkou__button-group"> <a class="button__secondary button__secondary--okiniiri button__secondary--no-margin" href="#">
+              <div class="button__secondary-link button__secondary-link--okiniiri button__secondary-link--return">{{'front.mypage.back'|trans}}</div></a><a class="button__secondary button__secondary--okiniiri button__secondary--no-margin" href="#">
+              <div class="button__secondary-link button__secondary-link--okiniiri">{{'front.mypage.go_confirm'|trans}}</div></a></div>
+        </div>
+      </section>
+{% endblock %}

@@ -1,0 +1,128 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['customer', 'call_list'] %}
+
+{% block title %}ご注文の内容の確認{% endblock %}
+{% block sub_title %}{% endblock %}
+
+{% block main %}
+    <div class="c-contentsArea__cols">
+        <div class="c-contentsArea__primaryCol">
+            <div class="c-primaryCol">
+                <div class="card rounded border-0 mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8"><span class="card-title">ご注文の商品</span></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>商品コード</th>
+                                        <th>商品名</th>
+                                        <th>数量</th>
+                                        <th>合計</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for OrderItem in OrderForm %}
+                                        {% if OrderItem.code and OrderItem.amount %}
+                                            <tr>
+                                                <td class="p-2">{{ OrderItem.code }}</td>
+                                                <td class="p-2">{{ OrderItem.name }}</td>
+                                                <td class="p-2">{{ OrderItem.amount }}</td>
+                                                <td class="p-2">{{ OrderItem.price|price }}</td>
+                                            </tr>
+                                        {% endif %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table table-sm table-bordered">
+                                    <thead>
+                                    <tr><th>　</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th class="p-2 text-center" style="width: 160px">商品金額合計</th>
+                                            <td class="p-2 text-right">{{ 'order-total-price-input' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-2 text-center" style="width: 160px">ポイント使用</th>
+                                            <td class="p-2 text-right">{{ 'use-point' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-2 text-center" style="width: 160px">消費税(内税)</th>
+                                            <td class="p-2 text-right">{{ 'order-tax-input'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="p-2 text-center" style="width: 160px">注文金額合計</th>
+                                            <td class="p-2 text-right">{{ 'order-total-price-input'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded border-0 mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8"><span class="card-title">配送情報</span></div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="contents">
+                            <p class="font-weight-bold">支払い方法</p>
+                            <p></p>
+                        </div>
+                        <div class="contents">
+                            <p class="font-weight-bold">ご注文主</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded border-0 mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8"><span class="card-title">お届け先</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card rounded border-0 mb-4">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-8"><span class="card-title">その他</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-5">
+                    <a class="btn btn-info mr-4 px-5">修正する</a>
+                    <form method="post" action="{{ url('admin_call_list_order_complete', {'id': CallList.id }) }}">
+
+                        <input type="hidden" name="request" value="{{ data }}">
+                        <button type="submit" class="btn btn-danger px-5">注文する</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

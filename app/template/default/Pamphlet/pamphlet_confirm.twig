@@ -1,0 +1,121 @@
+{% extends 'default_frame.twig' %}
+
+{% block javascript %}
+	<script type="text/javascript" src="https://ajaxzip3.github.io/ajaxzip3.js" charset="utf-8"></script>
+{% endblock javascript %}
+
+{% block main %}
+	<div class="wrapper">
+		<div class="breadcrumbs">
+			<div class="breadcrumbs__page-title">
+				<div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+				<div class="breadcrumbs__page-title-text">
+					<div class="breadcrumbs__page-title-text-en">{{ 'front.pamphlet.subtitle'|trans }}</div>
+					<div class="breadcrumbs__page-title-text-jp">{{ 'front.pamphlet.title'|trans }}</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<section class="pamphlet">
+		<div class="pamphlet__container">
+			<div class="pamphlet__progress">
+				<div class="pamphlet__progress-item">{{'front.pamphlet.step_item1'|trans}}</div>
+				<div class="pamphlet__progress-item active">{{'front.pamphlet.step_item2'|trans}}</div>
+				<div class="pamphlet__progress-item">{{'front.pamphlet.step_item3'|trans}}</div>
+			</div>
+			<form class="form" action="{{ url("apply_pamphlet_complete") }}" method="post">
+				{% for key, item in applicant %}
+					{% if key is not same as 'address' %}
+						<input class="form__input number" type="text" name="pamphlet[{{key}}]" value="{{ item }}" hidden>
+					{% else %}
+						{% for addr_key, addr in item %}
+							<input class="form__input number" type="text" name="pamphlet[{{key}}][{{addr_key}}]" value="{{ addr }}" hidden>
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+				<div class="form__list">
+					<div class="form__item">
+						<div class="form__label">
+							<label class="form__label-text">{{'front.pamphlet.name'|trans}}</label>
+							<span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+						</div>
+						<div class="form__input-wrap">
+							<div class="form__input-label">
+								<span>{{ applicant.name01 }}</span>
+							</div>
+							<div class="form__input-label">
+								<span>{{ applicant.name02 }}</span>
+							</div>
+						</div>
+					</div>
+					<div class="form__item">
+						<div class="form__label">
+							<label class="form__label-text">{{'front.pamphlet.name_kana'|trans}}</label>
+							<span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+						</div>
+						<div class="form__input-wrap">
+							<div class="form__input-label">
+								<span>{{applicant.kana01}}</span>
+							</div>
+							<div class="form__input-label">
+								<span>{{applicant.kana02}}</span>
+							</div>
+						</div>
+					</div>
+					<div class="form__item">
+						<div class="form__label">
+							<label class="form__label-text">{{'front.pamphlet.zip'|trans}}</label>
+							<span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+						</div>
+						<div class="form__input-wrap">
+							<span>{{applicant.postal_code}}</span>
+						</div>
+					</div>
+					<div class="form__item">
+						<div class="form__label form__label--height">
+							<label class="form__label-text">{{'front.pamphlet.address'|trans}}</label>
+							<span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+						</div>
+						<div class="form__input-wrap form__input-wrap--column">
+							<span class="margin">{{prefecture}}</span>
+							<span class="margin">{{applicant.address.addr01}}</span>
+							<span>{{applicant.address.addr02}}</span>
+						</div>
+					</div>
+					<div class="form__item">
+						<div class="form__label form__label">
+							<label class="form__label-text">{{'front.pamphlet.phone_num'|trans}}</label>
+							<span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+						</div>
+						<div class="form__input-wrap">
+							<span>{{applicant.phone_number}}</span>
+						</div>
+					</div>
+					<div class="form__item">
+						<div class="form__label form__label">
+							<label class="form__label-text">{{'front.pamphlet.email'|trans}}</label>
+							<span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+						</div>
+						<div class="form__input-wrap">
+							<span>{{applicant.email}}</span>
+						</div>
+					</div>
+					<div class="form__item">
+						<div class="form__label form__label--height textarea">
+							<label class="form__label-text">{{'front.pamphlet.other'|trans}}</label>
+							<span class="form__label-req any">{{'front.pamphlet.req'|trans}}</span>
+						</div>
+						<div class="form__input-wrap">
+							<p>{{applicant.memo}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="form__button form__button--confirm">
+					<button type="button" class="button__pamphlet-back" onclick="history.back()">{{'front.pamphlet.to_form'|trans}}</button>
+					<button class="button__pamphlet" type="submit">{{'front.pamphlet.submit'|trans}}</button>
+				</div>
+			</form>
+		</div>
+	</section>
+{% endblock %}

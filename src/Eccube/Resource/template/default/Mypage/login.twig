@@ -1,0 +1,68 @@
+{% extends 'default_frame.twig' %}
+
+{% set body_class = '' %}
+
+{% block main %}
+    <div class="wrapper">
+      <div class="breadcrumbs">
+        <div class="breadcrumbs__page-title">
+          <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+          <div class="breadcrumbs__page-title-text">
+            <div class="breadcrumbs__page-title-text-en">{{'front.mypage.login_subtitle'|trans}}</div>
+            <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.login_title'|trans}}</div>
+          </div>
+        </div>
+        <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+          <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_login'|trans}}</span>
+        </div>
+      </div>
+    </div>
+    <form name="login_mypage" id="login_mypage" method="post" action="{{ url('mypage_login') }}">
+      {% if app.session.flashBag.has('eccube.login.target.path') %}
+          {% for targetPath in app.session.flashBag.peek('eccube.login.target.path') %}
+              <input type="hidden" name="_target_path" value="{{ targetPath }}" />
+          {% endfor %}
+      {% endif %}
+      <section class="login"> 
+        <div class="login__content"> 
+          <div class="login__wrap">
+            <h4 class="login__header">{{'front.mypage.login_member'|trans}}</h4>
+            <div class="login__container">
+              <div class="login__form">
+                <div class="login__item"> 
+                  <p class="login__item-label">{{'front.mypage.login_id'|trans}} </p>
+                    {{ form_widget(form.login_email, {'attr': {'style' : 'ime-mode: disabled;','class':'entry-form__input login__item-input', 'autofocus': true}}) }}
+                </div>
+                <div class="login__item">
+                  <p class="login__item-label">{{'front.mypage.login_password'|trans}}</p>
+                    {{ form_widget(form.login_pass,  {'attr': {'class':'entry-form__input login__item-input'}}) }}
+                </div>
+                {% if error %}
+                  <p class="ec-errorMessage">{{ error.messageKey|trans(error.messageData, 'validators')|nl2br }}</p>
+                {% endif %}
+                <button class="login__button" type="submit">{{'common.login'|trans}}</button><a href="{{ url('forgot') }}" class="login__forgot-password">{{'common.forgot_password'|trans}}</a>
+              </div>
+            </div>
+          </div>
+          <div class="login__wrap"> 
+            <h4 class="login__header">{{'front.mypage.login_member_title'|trans}}</h4>
+            <div class="login__container"> 
+              <button onclick="location.href='{{ url('entry') }}'" class="button__pamphlet login__button-p">{{'front.mypage.login_to_memberform'|trans}}</button>
+            </div>
+          </div>
+          <div class="login__wrap">
+            <h4 class="login__header">{{'front.mypage.login_newcommer_title'|trans}}</h4>
+            <div class="login__container"> 
+              <p class="login__note">
+                {{'front.mypage.login_newcommer_message01'|trans}}<br>
+                {{'front.mypage.login_newcommer_message02'|trans}}
+              </p>
+              <button onclick="location.href='https://captainfoods.co.jp/stg/shop/customer/agree.aspx'" class="button__pamphlet login__button-p">{{'front.mypage.login_to_signup'|trans}}</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    </form>
+{% endblock %}
+

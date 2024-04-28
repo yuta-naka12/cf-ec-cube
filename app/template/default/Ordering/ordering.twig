@@ -1,0 +1,365 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+   
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/stg/cf2022/img\icons\page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">Ordering</div>
+              <div class="breadcrumbs__page-title-text-jp">ご注文方法</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">TOP</a>
+            <div class="breadcrumbs__main-carret"><img src="/stg/cf2022/img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">ご注文方法</span>
+          </div>
+        </div>
+      </div>
+      <div class="delivery">
+        <div class="delivery__nav"><a class="delivery__nav-item" href="#registration">登録の流れ</a><a class="delivery__nav-item" href="#order">注文の流れ</a><a class="delivery__nav-item" href="#change">注文の変更</a><a class="delivery__nav-item" href="#mail">メールが届かないとき</a></div>
+        <div class="delivery__content">
+          <div class="delivery__anchor" id="registration"></div>
+          <div class="delivery__section">
+            <h2 class="delivery__heading">登録の流れ</h2>
+            <div class="delivery__tab js-tabbing">
+              <div class="delivery__tab-menu">
+                <div class="delivery__tab-menu-item js-tab-toggle active" tabid="1" link-tab="link-tab-1">自社便会員登録の流れ</div>
+                <div class="delivery__tab-menu-item js-tab-toggle" tabid="2" link-tab="link-tab-2">他社便会員登録の流れ</div>
+              </div>
+              <div class="delivery__tab-content">
+                <div class="delivery__tab-content-item js-tab-menu active" tabid="1">
+                  <div class="order__steps">
+                    <!--h3.delivery__heading.delivery__heading--border ネット会員登録-->
+                    <div class="order__step-item">
+                      <div class="order__step-title">自社便会員登録</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-2-1.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">キャプテンフーヅをご利用いただくにあたり、お客様のお名前、ご住所、お電話番号をご登録させていただきます。<br>面倒な手続きや入会金・年会費は一切必要ありません。お客様のご都合に合わせてご利用いただけます。<br>入力フォームに必要項目を入力してください。ご登録完了後、ご注文日に専任の注文担当者よりお電話を差し上げ、ご注文をお伺いさせていただきます。尚、インターネットでのお買い物をご希望の場合は、自社便会員登録後にネット会員登録へお進みください。</p>
+                          <div class="order__button mt-xs"><a class="button__secondary button__secondary--order" href="https://captainfoods.co.jp/shop/ssl2/jisha_use.aspx">
+                              <div class="button__secondary-link button__secondary-link--order">自社便登録フォームへ</div></a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">ネット会員登録</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order02.jpeg" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">インターネットでご注文頂きたい場合は、会員登録後にWEB会員に登録をしていただく必要がございます。<br>フォームから必要事項を入力し、お申込みいただいた後、仮ID、パスワードを記載したメールをお送りします。<br>会員IDと仮パスワードでログインしてください。<br>※仮パスワードは、必ず変更してください。</p>
+                          <div class="order__button mt-xs"><a class="button__secondary button__secondary--order" href="https://captainfoods.co.jp/shop/ssl2/webentry.aspx">
+                              <div class="button__secondary-link button__secondary-link--order">ネット会員登録へ</div></a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">会員登録完了</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order07.jpeg" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">ご登録ありがとうございます。<br>キャプテンフーヅをご利用いただけます。</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="delivery__tab-content-item js-tab-menu" tabid="2">
+                  <div class="order__steps">
+                    <!--h3.delivery__heading.delivery__heading--border ネット会員登録-->
+                    <div class="order__step-item">
+                      <div class="order__step-title">他社便会員登録</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-2-1.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">キャプテンフーヅをご利用いただくにあたり、お客様のお名前、ご住所、お電話番号をご登録させていただきます。<br>面倒な手続きや入会金・年会費は一切必要ありません。お客様のご都合に合わせてご利用いただけます。<br>入力フォームに必要項目を入力してください。<br>会員IDとパスワードは、当店を今後も快適に利用する際に必要になります。<br>必ず忘れないものをご登録ください。</p>
+                          <div class="order__button mt-xs"><a class="button__secondary button__secondary--order" href="https://captainfoods.co.jp/shop/customer/agree.aspx">
+                              <div class="button__secondary-link button__secondary-link--order">他社便登録フォームへ</div></a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">会員登録完了</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-2-2.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">ご登録ありがとうございます。<br>キャプテンフーヅをご利用いただけます。</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="delivery__anchor" id="order"></div>
+          <div class="delivery__section">
+            <h2 class="delivery__heading">注文の流れ</h2>
+            <div class="delivery__tab delivery__tab--linked js-tabbing active" link-tab="link-tab-1">
+              <div class="delivery__tab-menu">
+                <div class="delivery__tab-menu-item js-tab-toggle active" tabid="order-1">電話注文</div>
+                <div class="delivery__tab-menu-item js-tab-toggle" tabid="order-2">ネット注文</div>
+                <div class="delivery__tab-menu-item js-tab-toggle" tabid="order-3">FAX注文</div>
+                <div class="delivery__tab-menu-item js-tab-toggle" tabid="order-4">LINE注文</div>
+              </div>
+              <div class="delivery__tab-content">
+                <div class="delivery__tab-content-item js-tab-menu active" tabid="order-1">
+                  <div class="order__steps">
+                    <!--h3.delivery__heading.delivery__heading--border ネット会員登録-->
+                    <div class="order__step-item">
+                      <div class="order__step-title">お電話</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-1-1.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">注文日に専任の注文担当者がお電話を差し上げご注文をお伺いします。</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">お電話で注文</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-1-2.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">パンフレットまたは当サイト商品一覧の商品番号をお伝えください。</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="delivery__tab-content-item js-tab-menu" tabid="order-2">
+                  <div class="order__steps">
+                    <div class="order__step-item">
+                      <div class="order__step-title">商品を選択</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-3-1.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">会員の方はマイページよりログインして頂き、購入したい商品を選択して「カートに入れる」をクリックします。カートに商品が追加されます。<br>商品詳細検索を行うこともできます。<br>※他社便をご利用の場合はゲスト（会員登録なし）にて購入も可能です。</p>
+                          <div class="order__button mt-xs"><a class="button__secondary button__secondary--order" href="https://captainfoods.co.jp/shop/goods/search.aspx">
+                              <div class="button__secondary-link button__secondary-link--order">詳細検索</div></a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">カートの中身を確認する</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-3-2.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">カートにて、商品と数量、送料をご確認ください。<br>カート内では、数量の変更や、商品の削除をすることができます。ご注文に間違いがない場合は、「購入手続きへ」をクリックし、購入手続きに進んでください。</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">購入手続き</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-3-3.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">配送方法や配送日、お支払情報を選択ください。<br>自社便のご利用と他社便のご利用では、ご利用いただけるお支払方法や配送日に違いがあるので、ご注意ください。<br>最後に「ご注文内容の確認」ページで、ご注文商品と送料含む合計金額が表示されます。<br>ご注文内容の最終確認をお願い致します。</p>
+                          <div class="order__button mt-xs"><a class="button__secondary button__secondary--order" href="/stg/cf2022/delivery.html">
+                              <div class="button__secondary-link button__secondary-link--order">お届けについて</div></a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">注文完了</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-3-4.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">ご注文完了です。お客様の注文番号が表示されますので、必ずお控えください。                    </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="delivery__tab-content-item js-tab-menu" tabid="order-3">
+                  <div class="order__steps">
+                    <div class="order__step-item">
+                      <div class="order__step-title">まずはFAX会員のお申込みをお願いいたします。</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-4-1.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">FAXでの注文をご希望の場合は、専任の注文担当者または事務所へお申し出ください。ご注文日に専任の担当者よりＦＡＸ注文書をお送りさせて頂きます。</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">商品を選択する</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-4-2.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">注文書に会員様のお名前と電話番号、商品番号とその個数の記入頂き、注文書に記載のFAX番号へ返信をお願い致します。</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="delivery__tab-content-item js-tab-menu" tabid="order-4">
+                  <div class="order__steps">
+                    <div class="order__step-item">
+                      <div class="order__step-title">まずはLINEの交換をお願いいたします</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-5-1.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">専任の注文担当者へLINE注文をご希望の旨をお伝えください。<br>LINE注文をご利用頂く携帯電話の番号をご登録させて頂きます。次に注文担当者の番号をLINE注文をご利用頂く携帯電話へご登録をお願い致します。<br>友達追加完了後、LINEでの注文がご利用頂けます。</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">商品を選択する</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-5-2.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">専任の注文担当者が注文日ご注文を伺うメッセージを送信させていただきます。<br>パンフレットまたは当サイト商品一覧の商品番号をメッセージにご入力ください。<br>尚、LINEは注文専用となります。会員情報の変更などはお電話にてご連絡をお願い致します。<br>※個人情報の入力はしないようお願い致します。</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="delivery__tab delivery__tab--linked js-tabbing" link-tab="link-tab-2">
+              <div class="delivery__tab-menu">
+                <!--.delivery__tab-menu-item.js-tab-toggle.active(tabid="order-2-1") 電話注文-->
+                <div class="delivery__tab-menu-item js-tab-toggle active" tabid="order-2-2">ネット注文</div>
+              </div>
+              <div class="delivery__tab-content">
+                <!--.delivery__tab-content-item.js-tab-menu.active(tabid="order-2-1")
+                .order__steps
+                  //h3.delivery__heading.delivery__heading--border ネット会員登録
+                  .order__step-item
+                    .order__step-title お電話
+                    .order__step-content
+                      .order__step-img.order__step-img--tabbed
+                        img.cover(src="img/order/order-tab-1-1.png", alt="")
+                      .order__step-details
+                        p.order__step-details-text 注文日に専任の注文担当者がお電話を差し上げご注文をお伺いします。
+                  .order__step-item
+                    .order__step-title お電話で注文
+                    .order__step-content
+                      .order__step-img.order__step-img--tabbed
+                        img.cover(src="img/order/order-tab-1-2.png", alt="")
+                      .order__step-details
+                        p.order__step-details-text パンフレットまたは当サイト商品一覧の商品番号をお伝えください。
+                
+                -->
+                <div class="delivery__tab-content-item js-tab-menu active" tabid="order-2-2">
+                  <div class="order__steps">
+                    <div class="order__step-item">
+                      <div class="order__step-title">商品を選択</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-3-1.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">会員の方はマイページよりログインして頂き、購入したい商品を選択して「カートに入れる」をクリックします。カートに商品が追加されます。<br>商品詳細検索を行うこともできます。<br>※他社便をご利用の場合はゲスト（会員登録なし）にて購入も可能です。</p>
+                          <div class="order__button mt-xs"><a class="button__secondary button__secondary--order" href="">
+                              <div class="button__secondary-link button__secondary-link--order">詳細検索</div></a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">カートの中身を確認する</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-3-2.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">カートにて、商品と数量、送料をご確認ください。<br>カート内では、数量の変更や、商品の削除をすることができます。ご注文に間違いがない場合は、「購入手続きへ」をクリックし、購入手続きに進んでください。</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">購入手続き</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-3-3.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">配送方法や配送日、お支払情報を選択ください。<br>自社便のご利用と他社便のご利用では、ご利用いただけるお支払方法や配送日に違いがあるので、ご注意ください。<br>最後に「ご注文内容の確認」ページで、ご注文商品と送料含む合計金額が表示されます。<br>ご注文内容の最終確認をお願い致します。</p>
+                          <div class="order__button mt-xs"><a class="button__secondary button__secondary--order" href="">
+                              <div class="button__secondary-link button__secondary-link--order">お届けについて</div></a></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="order__step-item">
+                      <div class="order__step-title">注文完了</div>
+                      <div class="order__step-content">
+                        <div class="order__step-img order__step-img--tabbed"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/order-tab-3-4.png" alt=""></div>
+                        <div class="order__step-details">
+                          <p class="order__step-details-text">ご注文完了です。お客様の注文番号が表示されますので、必ずお控えください。                    </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="delivery__anchor" id="change"></div>
+          <div class="delivery__section">
+            <h2 class="delivery__heading">注文の変更</h2>
+            <div class="delivery__tab delivery__tab--linked js-tabbing active" link-tab="link-tab-1">
+              <h3 class="delivery__subheading">注文変更の場合</h3>
+              <div class="delivery__text-row">
+                <div class="delivery__text delivery__text--half">
+                  <p>お電話またはお問い合わせフォームから承ります。<br>
+                    自社便をご利用の方は、マイページ⇒購入履歴一覧⇒オーダーIDを選択し、注文内容の変更手続きをすることもできます。<br>
+                    ※発送済みの品物については変更できませんのでご了承ください。
+                  </p>
+                </div>
+                <div class="order__img"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/change.jpeg"></div>
+              </div>
+            </div>
+            <div class="delivery__tab delivery__tab--linked js-tabbing" link-tab="link-tab-2">
+              <h3 class="delivery__subheading">注文変更の場合</h3>
+              <div class="delivery__text-row">
+                <div class="delivery__text delivery__text--half">
+                  <p>ご注文内容の変更はお電話にてお問合わせください。<br>045-833-7221<br><br>※発送済みの品物については変更できませんのでご了承ください。</p>
+                </div>
+                <div class="order__img"><img class="cover" src="/html/user_data/assets/img/cf2022/img/order/change.jpeg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="delivery__anchor" id="mail"></div>
+          <div class="delivery__section">
+            <h2 class="delivery__heading">注文完了メールが届かないとき</h2>
+            <div class="delivery__text no-pad">
+              <p>ご注文完了時、会員登録時など正しく受付が出来ますと、「自動返信メール」が届く仕組みになっております。<br>
+                しばらく経っても届かない場合は、以下をご参照ください。
+              </p>
+            </div>
+            <h3 class="delivery__subheading">迷惑メールと間違われ受信されない</h3>
+            <div class="delivery__text">
+              <p>メールが迷惑メールに振り分けられていることが考えられます。メールの設定はお手持ちのスマートフォン・パソコンなどによって異なりますが、「＠以降のアドレスが◯◯以外のメールは迷惑メールとして振り分ける」という設定になっていると、キャプテンフーヅからのメールもこれに該当してしまいます。迷惑メールのフォルダに入ってしまっていないか確認してください。</p>
+            </div>
+            <h3 class="delivery__subheading">メールアドレスに間違いがある</h3>
+            <div class="delivery__text">
+              <p>注文の際メールアドレスに誤りがあったということが考えられます。メールアドレスは間違いの無いよう正確にご入力ください。<br>
+                メールアドレスの間違えは当店にて修正が可能です。お電話にてお問い合わせいただき、アドレス間違いが判明しましたらその際に修正をさせていただきます。
+              </p>
+            </div>
+            <h3 class="delivery__subheading">メールアドレスについてのお願い</h3>
+            <div class="delivery__text">
+              <p>
+                自動送信メールが届かない場合は早急にご連絡ください。
+                
+              </p>
+            </div>
+          </div>
+          
+          <div class="delivery__section">
+            <div class="delivery__flow">
+              <div class="delivery__flow-item">
+                <div class="delivery__flow-icon"><img src="/html/user_data/assets/img/cf2022/img/delivery/ic-basket.svg" alt=""></div>
+                <div class="delivery__flow-links"><a class="delivery__flow-link" href="/ordering#registration">登録の流れ</a><a class="delivery__flow-link" href="/ordering#order">注文の流れ</a><a class="delivery__flow-link" href="/ordering#change">注文の変更</a><a class="delivery__flow-link" href="/ordering#mail">注文メールが届かないとき</a></div>
+              </div>
+              <div class="delivery__flow-item">
+                <div class="delivery__flow-icon"><img src="/html/user_data/assets/img/cf2022/img/delivery/ic-box.svg" alt=""></div>
+                <div class="delivery__flow-links"><a class="delivery__flow-link" href="/delivery#company">自社便</a><a class="delivery__flow-link" href="/delivery#other-company">他社便</a><a class="delivery__flow-link" href="/delivery#return-policy">商品の返品・キャンセルについて</a></div>
+              </div>
+              <div class="delivery__flow-item">
+                <div class="delivery__flow-icon"><img src="/html/user_data/assets/img/cf2022/img/delivery/ic-coins.svg" alt=""></div>
+                <div class="delivery__flow-links"><a class="delivery__flow-link" href="/payment#method">お支払いの方法</a><a class="delivery__flow-link" href="/payment#points">ポイントについて</a></div>
+              </div>
+            </div>
+            <div class="delivery__link-top"><a href="/stg/cf2022/guide.html">ご利用ガイドTOPへ</a></div>
+          </div>
+
+        </div>
+      </div>
+
+{% endblock %}
+
+

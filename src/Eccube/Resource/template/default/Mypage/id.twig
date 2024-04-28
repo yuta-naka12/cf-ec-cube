@@ -1,0 +1,51 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.title_en'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_mypage'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_mypage_id'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="id-form">
+        <div class="id-form__title">
+          <h2 class="delivery__heading text">{{'front.mypage.change_id_title'|trans}}<br><span>{{'front.mypage.name'|trans}}</span></h2>
+        </div>
+        <section class="entry-form">
+          <div class="id-form__container">
+            <div class="entry-form__item"><span class="entry-form__label id-form__label">{{'front.mypage.info_id_label'|trans}}</span>
+              <div class="entry-form__inputs id-form__inputs">
+                <input class="entry-form__inzput id-form__input" type="text" placeholder={{'front.mypage.info_id'|trans}}>
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label id-form__label">{{'front.mypage.info_password_label'|trans}}</span>
+              <div class="entry-form__inputs id-form__inputs">
+                <input class="entry-form__input id-form__input" type="password" placeholder={{'front.mypage.info_password'|trans}}>
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label id-form__label">{{'front.mypage.info_id_new_label'|trans}}</span>
+              <div class="entry-form__inputs id-form__inputs">
+                <input class="entry-form__input id-form__input" type="text" placeholder={{'front.mypage.info_id_new'|trans}}>
+                <p class="id-form__paragraph"> {{'front.mypage.info_id_note'|trans}}</p>
+              </div>
+            </div>
+            <div class="entry-form__item"><span class="entry-form__label id-form__label id-form__label--top">{{'front.mypage.info_id_new_label'|trans}}<br>{{'front.mypage.reenter'|trans}}</span>
+              <div class="entry-form__inputs id-form__inputs">
+                <input class="entry-form__input id-form__input" type="text" placeholder={{'front.mypage.info_id_new'|trans}}>
+                <p class="id-form__paragraph"> {{'front.mypage.info_note'|trans}}</p>
+              </div>
+            </div>
+            <div class="id-form__btn-container"><a class="id-form__btn id-form__btn--text-end" href=""><span>{{'front.mypage.back'|trans}} </span></a><a class="id-form__btn" href=""><span>{{'front.mypage.go_confirm'|trans}} </span></a></div>
+          </div>
+        </section>
+      </div>
+{% endblock %}

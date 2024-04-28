@@ -1,0 +1,239 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['product', 'category'] %}
+
+{% block title %}{{ 'admin.product.category_management'|trans }}{% endblock %}
+{% block sub_title %}{{ 'admin.setting.system'|trans }}{% endblock %}
+
+{% form_theme form '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block javascript %}
+    <script src="{{ asset('assets/js/vendor/fileupload/vendor/jquery.ui.widget.js', 'admin') }}"></script>
+    <script src="{{ asset('assets/js/vendor/fileupload/jquery.iframe-transport.js', 'admin') }}"></script>
+    <script src="{{ asset('assets/js/vendor/fileupload/jquery.fileupload.js', 'admin') }}"></script>
+    <script src="{{ asset('assets/js/vendor/fileupload/jquery.fileupload-process.js', 'admin') }}"></script>
+    <script src="{{ asset('assets/js/vendor/fileupload/jquery.fileupload-validate.js', 'admin') }}"></script>
+    <script>var bootstrapTooltip = $.fn.tooltip.noConflict();</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $.fn.tooltip = bootstrapTooltip;
+        $(document).on('drop dragover', function(e) {
+            e.preventDefault();
+        });
+
+        $(function() {
+            $("#thumb").sortable({
+                cursor: 'move',
+                opacity: 0.7,
+                placeholder: 'ui-state-highlight',
+                update: function(event, ui) {
+                    updateSortNo();
+                }
+            });
+            var proto_img = '<div class="c-form__fileUploadThumbnail" style="background-image:url(\'__path__\');">' + '</div>';
+            var proto_add = '{{ form_widget(form.add_image) }}';
+    
+            var hideThumbnail = function() {
+                if ($("#thumb div").length > 0) {
+                    $("#category_no_image").css("display", "none");
+                } else {
+                    $("#category_no_image").css("display", "");
+                    $('#message').empty();
+                }
+            };
+            $('#admin_category_image_path').fileupload({
+                url: "{{ url('admin_category_image_add') }}",
+                type: "post",
+                sequentialUploads: true,
+                dataType: 'json',
+                dropZone: $('#upload-zone'),
+                done: function(e, data) {                    
+                    $('.progress').hide();
+                    $.each(data.result.files, function(index, file) {
+                        console.log(file);
+                        var path = '{{ asset('', 'temp_image') }}' + file;
+                        var $img = $(proto_img.replace(/__path__/g, path));
+                        var $new_img = $(proto_add);
+                        $new_img.val(file);
+                        $child = $img.append($new_img);
+
+                        let exist_child = $('#thumb').children('div');
+                        if(exist_child){
+                            $('#thumb').html($child);
+                        } else {
+                            $('#thumb').append($child);
+                        }
+                        
+                    });
+                    hideThumbnail();
+                },
+                fail: function(e, data) {
+                    console.log(e,data);
+                    alert("{{ 'admin.common.upload_error'|trans }}");
+                },
+                always: function(e, data) {
+                    $('.progress').hide();
+                    $('.progress .progress-bar').width('0%');
+                },
+                start: function(e, data) {
+                    $('.progress').show();
+                },
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: 10000000,
+                maxNumberOfFiles: 10,
+                progressall: function(e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('.progress .progress-bar').css(
+                        'width',
+                        progress + '%'
+                    );
+                },
+                processalways: function(e, data) {
+                    if (data.files.error) {
+                        alert("{{ 'admin.common.upload_error'|trans }}");
+                    }
+                }
+            });
+
+        });
+
+    </script>
+{% endblock javascript %}
+
+{% block main %}
+    <form name="member_form" role="form" id="member_form" method="post" action="{{ ( TargetCategory and TargetCategory.id) ? url('admin_product_category_edit', {'id': TargetCategory.id}) : url('admin_product_category_edit') }}" enctype="multipart/form-data" novalidate>
+        {{ form_widget(form._token) }}
+        <div class="c-contentsArea__cols">
+            <div class="c-contentsArea__primaryCol">
+                <div class="c-primaryCol">
+                    <div class="card rounded border-0 mb-4">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-8"><span class="card-title">{{ 'admin.setting.system.rank_registration'|trans }}</span></div>
+                                <div class="col-4 text-right">
+                                    <a data-toggle="collapse" href="#memberInfo" aria-expanded="false" aria-controls="memberInfo">
+                                        <i class="fa fa-angle-up fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="collapse show ec-cardCollapse" id="memberInfo">
+                            <div class="card-body">
+                           
+                                  <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.category.name'|trans }}</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                    
+                                        <div class="row">
+                                            <div class="col">
+                                                 {{ form_widget(form.name, { 'attr': {'name': 'admin_category[name]'} }) }}
+                                            </div>
+                                            {{ form_errors(form.name) }}
+                                        </div>
+                                 
+                                    </div>
+                                </div> 
+
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <span>{{ 'admin.product.category.Parent category'|trans }}</span>
+                                        <span class="badge badge-primary ml-1">{{ 'admin.common.required'|trans }}</span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                         <div class="col" >
+                                          {{ form_widget(form.parent, { 'attr': {'parent': 'admin_category[parent]'} }) }}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+    
+                                <div class="row"> 
+                                    <div class="col-3">
+                                        <div class="d-inline-block" data-tooltip="true" data-placement="top" title="{{ 'tooltip.product.image'|trans }}">
+                                            <span>{{ 'admin.product.image'|trans }}</span>
+                                            <i class="fa fa-question-circle fa-lg ml-1"></i>
+                                            <br>{{ 'admin.product.image_size'|trans }}
+                                        </div>
+                                    </div>
+                                    <div class="col mb-2">
+                                    {# loading bar #}
+                                        <div class="progress" style="display: none;">
+                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                        <div id="thumb" class="c-form__fileUploadThumbnails clearfix">
+                                        {% if TargetCategory.image_path != null %}
+                                            <div class="c-form__fileUploadThumbnail" style="background-image:url('/html/upload/save_image/{{TargetCategory.image_path}}');">
+                                                <input type="hidden" id="admin_category_add_image" name="admin_category[add_image]" value="{{TargetCategory.image_path}}">
+                                            </div>
+                                        {% endif %}
+                                        </div>
+                                        {% if TargetCategory.image_path != null %}
+                                            <input type="hidden" id="admin_category_delete_image" name="admin_category[delete_image]" value="{{TargetCategory.image_path}}">
+                                        {% endif %}
+                                        <p id="message"></p>
+                                        <div id="upload-zone" class="media py-5 border-ec-dashed mb-2 rounded">
+                                            <div class="media-body">
+                                                <i class="fa fa-cloud-upload fa-3x text-ec-lightGray mx-3 align-middle" aria-hidden="true"></i>
+                                                {{ 'admin.common.drag_and_drop_image_description'|trans }}
+                                                {{ form_widget(form.image_path, { attr : { accept : 'image/*', style : 'display:none;' } }) }}
+                                                {{ form_errors(form.image_path) }}
+                                                <a class="btn btn-ec-regular mr-2" onclick="$('#admin_category_image_path').click()">
+                                                    {{ 'admin.common.file_select'|trans }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="c-conversionArea">
+            <div class="c-conversionArea__container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-6">
+                        <div class="c-conversionArea__leftBlockItem">
+                            <a class="c-baseLink"
+                               href="{{ url('admin_product_category') }}">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                <span>{{ 'admin.product.category_management'|trans }}</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="ex-conversion-action" class="row align-items-center justify-content-end">
+                            <div class="col-auto">
+                                <button class="btn btn-ec-conversion px-5"
+                                        type="submit">{{ 'admin.common.registration'|trans }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,60 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends 'default_frame.twig' %}
+
+{% form_theme form 'Form/form_div_layout.twig' %}
+
+{% block main %}
+      <div class="wrapper application__container">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/common/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{ 'front.shopping.form_title__sub'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{ 'front.shopping.form_title'|trans }}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="img\icons\icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{ 'front.shopping.form_title'|trans }}</span>
+          </div>
+        </div>
+      </div>
+      <section class="entry-form"> 
+        <div class="entry-form__item"><span class="entry-form__label">{{'admin.common.name'|trans}}</span>
+          <div class="entry-form__inputs"> 
+            <div class="entry-form__input-name"> <span>{{'admin.common.last_name'|trans}}: </span><span>佐藤</span></div>
+            <div class="entry-form__input-name"> <span>{{'admin.common.first_name'|trans}}: </span><span>太郎</span></div>
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label">{{'admin.common.kana_label'|trans}}</span>
+          <div class="entry-form__inputs"> 
+            <div class="entry-form__input-name"> <span>{{'admin.common.last_name_kana'|trans}}: </span><span>サトウ</span></div>
+            <div class="entry-form__input-name"> <span>{{'admin.common.first_name_kana'|trans}}: </span><span>タロウ</span></div>
+          </div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional">{{'admin.common.user_id'|trans}}</span>
+          <div class="entry-form__inputs"><span>0000000</span></div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label">{{'admin.common.phone_number'|trans}}</span>
+          <div class="entry-form__inputs"><span>000-0000-0000</span></div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label">{{'admin.common.mail_address'|trans}}</span>
+          <div class="entry-form__inputs entry-form__inputs--column"><span>forexample-@.com</span></div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional">{{'admin.common.password'|trans}}</span>
+          <div class="entry-form__inputs"><span>お申し込みの当日～翌営業日に「メールにてご案内」いたします。</span></div>
+        </div>
+        <div class="entry-form__item"><span class="entry-form__label entry-form__label--optional">{{'admin.common.demand_1'|trans}}<br>{{'admin.common.demand_2'|trans}}</span>
+          <div class="entry-form__inputs"> <span>こちらに内容をご記入ください\n\n例：\n置き箱、郵便局自動引落とし等</span></div>
+        </div><a class="entry__button entry__button--long entry__button--center" href=""><span>{{'common.send_1'|trans}}</span></a>
+      </section>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'product_page' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.product.suboutline_side'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.product.outline_side'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'front.product.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'front.product.position_category'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'front.product.position_side'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <section class="t-search">
+        <div class="t-search__wrapper">
+          <div class="t-search__component">
+            <input class="t-search__input" type="text" id="s" name="s" placeholder={{'front.product.search_ph'|trans}}>
+            <button class="t-search__button"> <img src="/html/template/default/assets/img/t-search/magnifying-glass-icon.svg" alt="" loading="lazy"><span>{{'front.product.search'|trans}}</span></button>
+          </div>
+          <div class="t-search__text">
+            <div class="t-search__text-description"><span>{{'front.product.search_description1'|trans}}</span><span>{{'front.product.search_description2'|trans}}<br>{{'front.product.search_description3'|trans}}</span></div>
+            <div class="t-search__text-button"><span>{{'front.product.search_detail'|trans}}</span><img src="/html/template/default/assets/img/t-search/right-carret-1.svg" alt="" loading="lazy"></div>
+          </div>
+        </div>
+      </section>
+      <div class="category-type">
+        <div class="category-type__content"><a class="category-type__item" href="">
+            <div class="category-type__img">
+              <div class="category-type__img-wrap"><img src="/html/template/default/assets/img/side/side-01.jpg" alt=""></div>
+            </div>
+            <p class="category-type__txt">{{'front.product.item01_side'|trans}}</p></a><a class="category-type__item" href="">
+            <div class="category-type__img">
+              <div class="category-type__img-wrap"><img src="/html/template/default/assets/img/side/side-02.jpg" alt=""></div>
+            </div>
+            <p class="category-type__txt">{{'front.product.item02_side'|trans}}</p></a><a class="category-type__item" href="">
+            <div class="category-type__img">
+              <div class="category-type__img-wrap"><img src="/html/template/default/assets/img/side/side-03.jpg" alt=""></div>
+            </div>
+            <p class="category-type__txt">{{'front.product.item03_side'|trans}}</p></a><a class="category-type__item" href="">
+            <div class="category-type__img">
+              <div class="category-type__img-wrap"><img src="/html/template/default/assets/img/side/side-04.jpg" alt=""></div>
+            </div>
+            <p class="category-type__txt">{{'front.product.item04_side'|trans}}</p></a></div>
+      </div>
+
+{% endblock %}

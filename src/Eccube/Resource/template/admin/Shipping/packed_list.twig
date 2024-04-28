@@ -1,0 +1,208 @@
+<head>
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css', 'admin') }}">
+</head>
+<body>
+{% for content in contents %}
+    {% for data in content.orders %}
+        <section class="page">
+            <div class="text-center">
+                <p class="title">詰込管理票</p>
+            </div>
+            <div class="sub-title-wrap">
+                <div>
+                    <p>出荷予定日: {{ deliveryDate }}</p>
+                    <p>ブロック:   宅急便+午前</p>
+                </div>
+            </div>
+            <div class="content">
+                <table class="table table-bordered">
+                    <tr>
+                        <th style="width: 190px; min-width: 190px;;">ﾄﾗｯｸNo.</th>
+                        <th>{{ random(1, 15) }}</th>
+                        <th>{{ random(1, 15) }}</th>
+                        <th>{{ random(1, 15) }}</th>
+                        <th>{{ random(1, 15) }}</th>
+                        <th>{{ random(1, 15) }}</th>
+                        <th>合計</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td class="text-left" style="width: 190px; min-width: 190px;;">コンテナ数</td>
+                        <td>{{ random(1, 15) }}</td>
+                        <td>{{ random(1, 15) }}</td>
+                        <td>{{ random(1, 15) }}</td>
+                        <td>{{ random(1, 15) }}</td>
+                        <td>{{ random(1, 15) }}</td>
+                        <td>{{ random(1, 15) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="text-left" style="width: 190px; min-width: 190px;;">ドライ</td>
+                        <td>{{ random(10, 30) }} </td>
+                        <td>{{ random(10, 30) }}</td>
+                        <td>{{ random(10, 30) }}</td>
+                        <td>{{ random(10, 30) }}</td>
+                        <td>{{ random(10, 30) }}</td>
+                        <td>{{ random(100, 300) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% for item in data.OrderItems %}
+                        <tr>
+                            <td class="text-left" style="width: 190px; min-width: 190px;;">
+                                {{ item.product_name }}
+                            </td>
+                            <td>{{ random(0, 15) }}</td>
+                            <td>{{ random(0, 15) }}</td>
+                            <td>{{ random(0, 15) }}</td>
+                            <td>{{ random(0, 15) }}</td>
+                            <td>{{ random(0, 15) }}</td>
+                            <td>{{ random(0, 15) }}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    {% set itemCount = data.orderItems|length %}
+                    {% for item in 1 .. 13 - itemCount  %}
+                        <tr>
+                            <td class="text-left" style="height: 25px; min-height: 25px;"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+
+                </table>
+                <div class="footer mt-3">
+                    <label>{{ createDate }} 作成</label>
+                    <p class="page-number">- {{ loop.index }} -</p>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+{% endfor %}
+</body>
+<style>
+    @page {
+        margin: 0;
+        size:landscape;
+    }
+    .page{
+        box-sizing: border-box;
+        padding: 10px 15px;
+    }
+    .page{
+        page-break-after: always;
+    }
+    .page:last-child{
+        page-break-after: auto;
+    }
+    .title {
+        font-size: 18px;
+        font-weight: 0.4 !important;
+        display: inline-block;
+        border-bottom: 1px black solid;
+    }
+    .text-center {
+        text-align: center;
+    }
+    p {
+        margin: 0;
+        font-size: 12px;
+    }
+    label  {
+        margin-bottom: 0;
+    }
+    .sub-title-wrap {
+        display: flex;
+        justify-content: space-between;
+    }
+    .table th {
+        font-size: 16px !important;
+        padding: 3px 0;
+        background: #a9a9a9;
+        text-align: center;
+        overflow: hidden;
+    }
+    .table td {
+        width: 64px;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 1px 3px;
+        text-align: right;
+    }
+    .table-content label {
+        overflow: hidden;
+    }
+    .footer {
+        position: relative;
+    }
+    .page-number {
+        position: absolute;
+        left: 50%;
+        top: 0;
+    }
+</style>

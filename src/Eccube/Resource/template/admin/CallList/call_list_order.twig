@@ -1,0 +1,484 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['customer', 'call_list'] %}
+
+{% block title %}{{ 'admin.call_list.call_list_management'|trans }}{% endblock %}
+{% block sub_title %}{% endblock %}
+
+{% form_theme form '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block javascript %}
+<script>
+        $('.action-down, .action-up').on('click', function(e) {
+        var self = $(this),
+        current = $(this).parents('tr');
+        $('body').append($('<div class="modal-backdrop show"></div>'));
+        $.ajax({
+        url: self.attr('href'),
+        method: self.data('method'),
+    }).done(function() {
+        if (self.hasClass('action-down')) {
+        current.next().after(current);
+    } else {
+        current.prev().before(current);
+    }
+    }).always(function() {
+        $('.modal-backdrop').remove();
+        $('.action-up, .action-down').removeClass('disabled');
+        $('.action-up').first().addClass('disabled');
+        $('.action-down').last().addClass('disabled');
+    });
+        return false;
+    });
+
+
+    // 編集時の商品情報をセット
+    function setRegisteredProducts() {
+    var pointConversionRate = {{ BaseInfo.point_conversion_rate }};
+    }
+    // 商品検索
+            $('#searchProductModalButton').on('click', function() {
+                var list = $('#searchProductModalList');
+                list.children().remove();
+
+                $.ajax({
+                    url: '{{ url('admin_order_search_product') }}',
+                    type: 'POST',
+                    dataType: 'html',
+                    data: {
+                        'id': $('#admin_search_product_id').val(),
+                        'category_id': $('#admin_search_product_category_id').val()
+                    }
+                }).done(function(data) {
+                    $('#searchProductModalList').html(data);
+                }).fail(function(data) {
+                    alert('search product failed.');
+                });
+            });
+        // 小計計算
+        addProductCodes = {}
+
+    // Discount Function 
+    let quantity;
+    let discount_rate ;
+    let products ;
+    $('input[name="form[bulk_name]"]').on('change', function() {
+        // Find all the checked checkboxes
+    $('input[name="form[bulk_name]"]:checked').each(function() {
+        // Get the value of the "identification" attribute
+        var quantity_val = $(this).attr('quantity');
+        var discount_rate_val = $(this).attr('discount_rate');
+        var products_val = $(this).attr('products');
+        quantity = quantity_val;
+        discount_rate = discount_rate_val
+        products = products_val
+    });
+        calculateTotalPayment()
+    // checkedIds will contain an array of checked identification values
+    });
+
+    function calculateTotalPayment() {
+        let totalCost = 0;
+
+        Object.keys(addProductCodes).forEach(key => {
+            let quantity_input= document.getElementById(`order-form-${key}-product-amount-input`).value
+            let id_input= document.getElementById(`order-form-${key}-class-input`).value
+
+            try{
+                if (products.includes(id_input) && quantity_input > parseInt(quantity)) {
+                    operation = (100 - parseInt(discount_rate))/100
+                    let discountPrice = addProductCodes[key] * operation
+                    totalCost += discountPrice
+           
+                } else {
+                    totalCost += addProductCodes[key]
+
+                }
+            } catch (err){
+                totalCost += addProductCodes[key]
+            }
+        });
+        let numberFormatTotalCost = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(totalCost);
+        $(`#order-subtotal-price-text`).text(numberFormatTotalCost);
+        $(`#order-subtotal-input`).val(totalCost);
+        // 内税計算
+        const taxRate = 10;
+        let tax = Math.floor(totalCost / taxRate);
+        let numberFormatTax = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(tax);
+        $(`#order-tax-text`).text(numberFormatTax);
+        $(`#order-tax-input`).val(tax);
+        // 支払い合計を計算
+        // TODO ポイントを使用した時に更新する
+        let numberFormatPaymentTotal = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' }).format(totalCost);
+        $(`#order-total-price-text`).text(numberFormatPaymentTotal);
+        $(`#order-total-price`).val(totalCost);
+    }
+    $(function() {
+
+    for (let i = 0; i < 30; i++) {
+        // Search Product by product code
+        $(`#order-form-code-${i}`).blur(function() {
+        var list = $();
+        list.children().remove();
+        $.ajax({
+        url: '{{ url('admin_order_search_product_data') }}',
+                        type: 'POST',
+                        dataType: 'html',
+                        data: {
+                            'code': $(`#order-form-code-${i}`).val(),
+                        }
+                    }).done(function(results) {
+                        // Parse Search result
+                        var data = JSON.parse(results)
+                        if (data.length) {
+                            let product = data[0]
+                            // Insert product value
+                            // Name
+                            $(`#order-form-${i}-product-name`).text(product.name);
+                            $(`#order-form-${i}-product-name-input`).val(product.name)
+
+                            // Cost
+                            if (product.ProductClasses.length) {
+                                let cost = Math.floor(Number(product.ProductClasses[0].price01))
+                                $(`#order-form-${i}-product-cost`).text(cost + '円');
+                                $(`#order-form-${i}-product-cost-input`).val(cost)
+                                // Stock
+                                $(`#order-form-${i}-product-stock-input`).val(product.ProductClasses[0].stock)
+                                $(`#order-form-${i}-class-input`).val(product.ProductClasses[0].id)
+                            }
+                        }
+                    });
+                });
+        // Amount 入力した時にPriceを自動アップデート
+        $(`#order-form-${i}-product-amount-input`).blur(function() {
+                let amount = $(`#order-form-${i}-product-amount-input`).val();
+                // 商品コード取得
+                let productCode = $(`#order-form-code-${i}`).val();
+                if (amount && productCode) {
+                    let cost = $(`#order-form-${i}-product-cost-input`).val();
+                    let price = amount && cost ? Math.floor(Number(amount) * Number(cost)) : '';
+
+                    $(`#order-form-${i}-product-price`).text(price + '円');
+                    $(`#order-form-${i}-product-price-input`).val(price);
+
+                    $(`#order-form-${i}-product-stock`).text('有');
+
+                    // TODO 合計金額の設定
+                    addProductCodes[i] = price;
+                    // 小計を再計算
+                    calculateTotalPayment();
+
+                }
+            });
+        // Remove button function
+        $(`#order-remove-${i}-btn`).on('click', function() {
+            const confirmDialog = confirm('注文商品を削除します');
+            if(confirmDialog === true) {
+              // Init Input value
+              $(`#order-form-code-${i}`).val('');
+              $(`#order-form-${i}-product-name`).text('');
+              $(`#order-form-${i}-product-name-input`).val('');
+              $(`#order-form-${i}-product-cost`).text('');
+              $(`#order-form-${i}-product-cost-input`).val('');
+              $(`#order-form-${i}-product-amount-input`).val('');
+              $(`#order-form-${i}-product-price`).text('');
+              $(`#order-form-${i}-product-price-input`).val('');
+              $(`#order-form-${i}-product-stock`).text('');
+              $(`#order-form-${i}-product-stock-input`).val('');
+              $(`#order-form-${i}-class-input`).val('');
+              // 追加商品配列から削除
+              delete addProductCodes[i]
+              // 小計を再計算
+              calculateTotalPayment();
+            }
+          });
+        }
+
+    // 編集時はOrderItemsをセットする
+    {#var orderItems = {{ OrderItems|raw }};#}
+    {#if (orderItems.length) {#}
+    {#    orderItems.forEach(function (orderItem, index) {#}
+    {#        $(`#order-form-code-${index}`).val(orderItem.product_code);#}
+    {#          $(`#order-form-${index}-product-name`).text(orderItem.product_name);#}
+    {#          $(`#order-form-${index}-product-name-input`).val(orderItem.product_name);#}
+    {#          $(`#order-form-${index}-product-cost`).text(orderItem.ProductClass.price01);#}
+    {#          $(`#order-form-${index}-product-cost-input`).val('');#}
+    {#          $(`#order-form-${index}-product-amount-input`).val(orderItem.quantity);#}
+    {#          $(`#order-form-${index}-product-price`).text(orderItem.price);#}
+    {#          $(`#order-form-${index}-product-price-input`).val(orderItem.price);#}
+    {#          $(`#order-form-${index}-product-stock`).text('');#}
+    {#          $(`#order-form-${index}-product-stock-input`).val('');#}
+    {#          $(`#order-form-${index}-class-input`).val('');#}
+
+    {#    })#}
+    {#}#}
+    });
+</script>
+{% endblock %}
+
+{% block main %}
+    <div class="c-contentsArea__cols">
+        <div class="c-contentsArea__primaryCol">
+            <div class="c-primaryCol">
+                <form method="post" action="{{ url('admin_call_list_order_confirm', {'id': CallList.id }) }}">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td style="width: 110px;">氏名</td>
+                                            <td>{{ CallList.Customer.name01 }} {{ CallList.Customer.name02 }}</td>
+                                            <td style="width: 180px;">
+                                                <form>
+                                                    <select name="delivery_date" class="form-control">
+
+                                                    </select>
+                                                </form>
+                                            </td>
+                                            <td style="width: 110px;">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <a class="btn btn-success" data-toggle="modal" data-target="#showHistory">注文履歴</a>
+                                                        <div class="modal fade" id="showHistory" tabindex="-1" role="dialog" aria-labelledby="addProduct" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">注文履歴</h5>
+                                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <table class="table table-striped table-sm">
+                                                                            <thead class="table-active">
+                                                                            <tr><th class="align-middle pt-2 pb-2 pl-3">注文日</th>
+                                                                                <th class="align-middle pt-2 pb-2">注文番号</th>
+                                                                                <th class="align-middle pt-2 pb-2">購入金額</th>
+                                                                                <th class="align-middle pt-2 pb-2 pr-3">対応状況</th>
+                                                                            </tr></thead>
+                                                                            <tbody>
+                                                                            {% for Order in Orders %}
+                                                                                <tr>
+                                                                                    <td class="align-middle pl-3">
+                                                                                        {{ Order.order_date|date_min }}
+                                                                                    </td>
+                                                                                    <td class="align-middle">
+                                                                                        <a href="{{ url('admin_order_edit', { 'id' : Order.id }) }}" target="_blank">
+                                                                                            {{ Order.id }}
+                                                                                        </a>
+                                                                                    </td>
+                                                                                    <td class="align-middle">{{ Order.total|price }}</td>
+                                                                                    <td class="align-middle pr-3">
+                                                                                        <span class="badge badge-ec-blue" style="background-color: #fff; color: {{ Order.OrderStatusColor }}; border-color: {{ Order.OrderStatusColor }}">{{ Order.OrderStatus }}</span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            {% endfor %}
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>注文コメント</td>
+                                            <td colspan="3">
+                                                <textarea name="order-comment" class="form-control" rows="3">{{ CallList.Customer.call_list_note }}</textarea>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <a class="btn btn-ec-regular mr-2 add" data-toggle="modal" data-target="#addProduct">{{ 'admin.order.add_product_item'|trans }}</a>
+                                    <div class="modal fade" id="addProduct" tabindex="-1" role="dialog" aria-labelledby="addProduct" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">{{ 'admin.order.add_product_item'|trans }}</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ form_widget(searchProductModalForm.id, { attr : {'class': 'mb-3', 'placeholder': 'admin.product.multi_search_label' }}) }}
+                                                    {{ form_widget(searchProductModalForm.category_id) }}
+                                                    <button type="button" id="searchProductModalButton" class="btn btn-ec-conversion px-5 mb-4 mt-2">{{ 'admin.common.search'|trans }}</button>
+                                                    <div id="searchProductModalList"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>商品コード</td>
+                                            <td>商品名</td>
+                                            <td>販売価格</td>
+                                            <td>数量</td>
+                                            <td>小計</td>
+                                            <td>在庫</td>
+                                            <td></td>
+                                        </tr>
+                                        {% for val in 0..30 %}
+                                            <tr>
+                                                <td style="width: 180px;">
+                                                    <input class="form-control"
+                                                           id="order-form-code-{{ val }}"
+                                                           name="order-form[{{ val }}][code]"
+                                                           type="number"
+                                                    >
+                                                    <input class="form-control"
+                                                           id="order-form-{{ val }}-class-input"
+                                                           name="order-form[{{ val }}][class]"
+                                                           type="hidden"
+                                                    >
+                                                </td>
+                                                <td>
+                                                    <p id="order-form-{{ val }}-product-name"></p>
+                                                    <input type="hidden"
+                                                           name="order-form[{{ val }}][name]"
+                                                           id="order-form-{{ val }}-product-name-input">
+                                                </td>
+                                                <td style="width: 100px;">
+                                                    <p id="order-form-{{ val }}-product-cost"></p>
+                                                    <input type="hidden"
+                                                           name="order-form[{{ val }}][cost]"
+                                                           id="order-form-{{ val }}-product-cost-input"
+                                                    >
+                                                </td>
+                                                <td style="width: 100px;">
+                                                    <input class="form-control"
+                                                           name="order-form[{{ val }}][amount]"
+                                                           id="order-form-{{ val }}-product-amount-input"
+                                                           type="number"
+                                                    >
+                                                </td>
+                                                <td style="width: 100px;">
+                                                    <p id="order-form-{{ val }}-product-price"></p>
+                                                    <input type="hidden"
+                                                           name="order-form[{{ val }}][price]"
+                                                           id="order-form-{{ val }}-product-price-input"
+                                                    >
+                                                </td>
+                                                <td style="width: 100px;">
+                                                    <p id="order-form-{{ val }}-product-stock"></p>
+                                                    <input type="hidden"
+                                                           name="order-form[{{ val }}][stock]"
+                                                           id="order-form-{{ val }}-product-stock-input"
+                                                    >
+                                                </td>
+                                                <td style="width: 100px;">
+                                                    <button class="btn btn-sm btn-danger" id="order-remove-{{ val }}-btn">
+                                                        削除する
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="d-inline-block">
+                                        <span>{{ "Bulk buying group ID" }}</span>
+                                    </div>
+                                </div>
+                                <div class="col mb-2">
+                                    <div>
+                                        {{ form_widget(bulkEntityForm.bulk_name) }}
+                                        {{ form_errors(bulkEntityForm.bulk_name) }}
+                                    </div>
+                                </div>
+                            </div> 
+ 
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td style="width: 180px">商品金額合計</td>
+                                            <td>
+                                                <p id="order-subtotal-price-text"></p >
+                                                <input type="hidden" id="order-subtotal-input">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>消費税(内税)</td>
+                                            <td>
+                                                <p class="align-middle font-weight-normal" id="order-tax-text"></p>
+                                                <input type="hidden" id="order-tax-input" name="order-tax-input">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>送料</td>
+                                            <td>¥ 160</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ポイント使用(値引き)</td>
+                                            <td>
+                                                <input type="number" name="use-point" class="form-control" style="width: 180px;">
+                                                <label>
+                                                    保有ポイント:
+                                                    <span class="font-weight-bold">
+                                                    {{ CallList.Customer.point|number_format }}
+                                                </span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>合計</td>
+                                            <td>
+                                                <p class="align-middle font-weight-normal" id="order-total-price-text"></p>
+                                                <input type="hidden" id="order-total-price" name="order-total-price-input">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label class="form__input-label">配送コメント(全角42文字以内)</label>
+                                    <textarea name="delivery-comment" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label class="form__input-label"><span style="color: red">今回限りの伝言</span>(全角42文字以内)</label>
+                                    <textarea name="rumour" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="card rounded border-0 py-4">
+                    <div class="card-body p-0 text-center">
+                        <button type="submit" class="btn btn-primary px-5" >次へ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

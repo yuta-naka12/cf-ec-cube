@@ -1,0 +1,131 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{%- extends 'bootstrap_4_horizontal_layout.html.twig' -%}
+
+{%- block toggle_switch_widget -%}
+    <div class="c-toggleSwitch">
+        <div class="c-toggleSwitch__btn">
+            <input type="checkbox"
+                   id="{{ form.vars.id }}"
+                   name="{{ form.vars.full_name }}"
+                   value="{{ form.vars.value }}"{{ form.vars.data ? ' checked' }}>
+            <label for="{{ form.vars.id }}"></label>
+        </div>
+        <div class="c-toggleSwitch__label">
+            <span class="{{ form.vars.id }}-on text-dark {{ form.vars.data ? '' : 'd-none' }}">{{ form.vars.label_on|trans }}</span>
+            <span class="{{ form.vars.id }}-off text-dark {{ form.vars.data ? 'd-none' : '' }}">{{ form.vars.label_off|trans }}</span>
+        </div>
+        <script>
+            $('#{{ form.vars.id }}').on('change', function (e) {
+                if ($(this).prop('checked')) {
+                    $('.{{ form.vars.id }}-on').removeClass('d-none');
+                    $('.{{ form.vars.id }}-off').addClass('d-none');
+                } else {
+                    $('.{{ form.vars.id }}-on').addClass('d-none');
+                    $('.{{ form.vars.id }}-off').removeClass('d-none');
+                }
+            });
+        </script>
+    </div>
+{%- endblock -%}
+
+{% block choice_widget %}
+    {% if type is defined and type == 'hidden' %}
+        {{ block('form_widget_simple') }}
+    {% else %}
+    <div class="{% if form.vars.valid == false %}is-invalid{% endif %}">
+        {{ parent() }}
+    </div>
+    {% endif %}
+{% endblock %}
+
+{%- block file_widget -%}
+    {%- set attr = attr|merge({class: (attr.class|default('') ~ ' form-control-file')|trim}) -%}
+    <input type="file" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+{%- endblock -%}
+
+{% block filter_choice_widget %}
+    <div class="{% if form.vars.valid == false %}is-invalid{% endif %}">
+    <select id="{{ form.vars.id }}"
+           name="{{ form.vars.attr['name'] is defined ? form.vars.full_name ~ form.vars.attr['name'] : form.vars.full_name }}"
+            class="form-control {{ form.vars.attr.class|default('')}}"
+            {% if form.vars.multiple is not empty and form.vars.multiple == true %}
+                multiple="multiple"
+            {% endif %}
+            style="{{ form.vars.attr['style'] is defined ? form.vars.attr['style'] : '' }}"
+            {% if form.vars.attr['disabled'] is defined and form.vars.attr['disabled'] == true  %}
+                disabled="disabled"
+            {% endif %}>
+        <option value=""selected>選択してください</option>
+        {% for choice in form.vars.choices %}
+            {% set selected = '' %}
+            {% if form.vars.data and form.vars.data == choice.value %}
+                {% set selected = 'selected' %}
+            {% endif %}
+            <option {{ selected }} value="{{ choice.value }}">{{ choice.value }} : {{ choice.label }}</option>
+        {% endfor %}
+    </select>
+    </div>
+    <script src="//yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+    <script>
+        $(document).ready(function() {
+            $('#{{ form.vars.id }}').select2({
+                matcher: function(params, data, option) {
+                    // If there are no search terms, return all of the data
+                    if ($.trim(params.term) === '') {
+                        return data;
+                    }
+
+                    // Do not display the item if there is no 'text' property
+                    if (typeof data.text === 'undefined') {
+                        return null;
+                    }
+
+                    // `params.term` should be the term that is used for searching
+                    // `data.text` is the text that is displayed for the data object
+                    if (data.id.indexOf(params.term) > -1 || data.text.indexOf(params.term) > -1) {
+                        return $.extend({}, data, true);
+                    }
+
+                    // Return `null` if the term should not be displayed
+                    return null;
+                }
+            });
+
+            const postalCode = document.querySelector('.p-postal-code');
+            postalCode.addEventListener('keyup', function(event) {
+                // Get the postal code
+                const postalCode = event.target.value;
+                // Call the YubinBango.js method
+                new YubinBango.Core(postalCode, function(address) {
+                    // Get the prefecture
+                    let pref_id = address.k;
+                    // Loop over the options in the prefecture select box
+                    $('#admin_customer_address_pref').children('option').each(function() {
+                        // If the value of the prefecture matches
+                        if ($(this).val() == pref_id) {
+                            // Select the prefecture
+                            $(this).prop('selected', true);
+                            // Make sure the selected prefecture is reflected
+                            $('#admin_customer_address_pref').val(pref_id).trigger('change');
+                        }
+                    });
+                    // Get the city
+                    let city = address.l;
+                    // Get the street address
+                    let street_address = address.m;
+                    // Set the address
+                    $('#admin_customer_address_addr01').val(city + street_address);
+                })
+            });
+        });
+    </script>
+{% endblock %}

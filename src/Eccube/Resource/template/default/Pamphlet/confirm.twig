@@ -1,0 +1,89 @@
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'pamphlet_form' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.pamphlet.subtitle'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.pamphlet.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'front.product.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'front.pamphlet.title'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <section class="pamphlet">
+        <div class="pamphlet__container"> 
+          <div class="pamphlet__progress"> 
+            <div class="pamphlet__progress-item">{{'front.pamphlet.step_item1'|trans}}</div>
+            <div class="pamphlet__progress-item active">{{'front.pamphlet.step_item2'|trans}}</div>
+            <div class="pamphlet__progress-item">{{'front.pamphlet.step_item3'|trans}}</div>
+          </div>
+          <form class="form">
+            <div class="form__list">
+              <div class="form__item">
+                <div class="form__label"> 
+                  <label class="form__label-text">{{'front.pamphlet.name'|trans}}</label><span class="form__label-req">{{"front.pamphlet.req"|trans}}</span>
+                </div>
+                <div class="form__input-wrap">
+                  <div class="form__input-label"><span>{{'front.pamphlet.name_last_ph'|trans}}</span></div>
+                  <div class="form__input-label"> <span>{{'front.pamphlet.name_first_ph'|trans}}</span></div>
+                </div>
+              </div>
+              <div class="form__item">
+                <div class="form__label"> 
+                  <label class="form__label-text">{{'front.pamphlet.name_kana'|trans}}</label><span class="form__label-req">{{"front.pamphlet.req"|trans}}</span>
+                </div>
+                <div class="form__input-wrap">
+                  <div class="form__input-label"><span>{{'front.pamphlet.name_last_kana_ph'|trans}}</span></div>
+                  <div class="form__input-label"><span>{{'front.pamphlet.name_first_kana_ph'|trans}}</span></div>
+                </div>
+              </div>
+              <div class="form__item"> 
+                <div class="form__label"> 
+                  <label class="form__label-text">{{'front.pamphlet.zip'|trans}}</label><span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+                </div>
+                <div class="form__input-wrap"><span>{{'front.pamphlet.zip_ph'|trans}}</span></div>
+              </div>
+              <div class="form__item">
+                <div class="form__label form__label--height">
+                  <label class="form__label-text">{{'front.pamphlet.address'|trans}}</label><span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+                </div>
+                <div class="form__input-wrap form__input-wrap--column"><span class="margin">{{'front.pamphlet.address_prf_item02'|trans}}</span><span class="margin">{{'front.pamphlet.adress_city_ph'|trans}}</span><span>{{'front.pamphlet.adress_num_ph'|trans}}</span></div>
+              </div>
+              <div class="form__item">
+                <div class="form__label form__label">
+                  <label class="form__label-text">{{'front.pamphlet.phone_num'|trans}}</label><span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+                </div>
+                <div class="form__input-wrap"><span>{{'front.pamphlet.phone_num_ph'|trans}}</span></div>
+              </div>
+              <div class="form__item">
+                <div class="form__label form__label">
+                  <label class="form__label-text">{{'front.pamphlet.email'|trans}}</label><span class="form__label-req">{{'front.pamphlet.req'|trans}}</span>
+                </div>
+                <div class="form__input-wrap"><span>{{'front.pamphlet.email_ph'|trans}}</span></div>
+              </div>
+              <div class="form__item">
+                <div class="form__label form__label--height textarea">
+                  <label class="form__label-text">{{'front.pamphlet.other'|trans}}</label><span class="form__label-req any">{{'front.pamphlet.opt'|trans}}</span>
+                </div>
+                <div class="form__input-wrap">
+                  <p>{{'front.pamphlet.other_ex1'|trans}}<br>{{'front.pamphlet.other_ex2'|trans}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="form__button form__button--confirm">
+              <button class="button__pamphlet-back">{{'front.pamphlet.to_form'|trans}}</button>
+              <button class="button__pamphlet">{{'front.pamphlet.submit'|trans}}</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+
+{% endblock %}

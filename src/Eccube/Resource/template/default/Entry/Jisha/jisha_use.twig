@@ -1,0 +1,315 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends 'default_frame.twig' %}
+
+{% set body_class = 'registration_page' %}
+
+{% form_theme form 'Form/form_div_layout.twig' %}
+
+{% block javascript %}
+<script src="//yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+{% endblock javascript %}
+
+{% block main %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs__page-title">
+        <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+        <div class="breadcrumbs__page-title-text">
+            <div class="breadcrumbs__page-title-text-en">Entry Form
+            </div>
+            <div class="breadcrumbs__page-title-text-jp">自社便入力フォーム</div>
+        </div>
+    </div>
+    <div class="breadcrumbs__main">
+        <a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="/">{{ 'front.product.position_top'|trans }}</a>
+        <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div>
+        <span class="breadcrumbs__main-pagename">{{ 'front.faq.title'|trans }}</span>
+    </div>
+</div>
+<section class="entry">
+    <h2 class="entry__title">注意事項</h2>
+    <h3 class="entry__subtitle">お届けサイクル</h3>
+    <div class="entry-jisya__delivery">
+        <table>
+            <tr>
+                <th>注文日</th>
+                <th>月</th>
+                <th>火</th>
+                <th> 水</th>
+                <th>金</th>
+                <th>土</th>
+            </tr>
+            <tr>
+                <td>お届け日</td>
+                <td>金</td>
+                <td>土</td>
+                <td>火</td>
+                <td>木</td>
+                <td>木</td>
+            </tr>
+        </table>
+        <div class="entry-jisya__delivery-flex">
+            <div class="entry-jisya__delivery-note"> <span>※ </span><span>2週間に一度のお届けになります。<br>お届けエリア外の場合は<span class="jisya__redtext">他社便（宅急便）</span>をご利用ください。</span></div><a class="entry__button" href=""><span>住んでいる地域のお届け曜日を検索</span></a>
+        </div>
+    </div>
+    <h2 class="entry__title-count"> <span class="number">1</span>お届け可能エリア</h2>
+    <div class="entry__table-wrapper">
+        <table class="entry__table">
+            <tr>
+                <td class="w-338">1地区<br>045-831-6235</td>
+                <td>横浜市、川崎市</td>
+            </tr>
+            <tr>
+                <td class="w-338">2地区<br>045-831-9858</td>
+                <td>町田市、大和市、相模原市（一部を除く）、座間市、綾瀬市、<br>海老名市、藤沢市、鎌倉市、横須賀市、葉山町、逗子市、茅ヶ崎市</td>
+            </tr>
+            <tr>
+                <td class="w-338">3地区<br>045-833-8700</td>
+                <td>狛江市、調布市、世田谷区、三鷹市、目黒区、杉並区、稲城市</td>
+            </tr>
+        </table>
+    </div><a class="entry__button" href=""><span>住んでいる地域のお届け曜日を検索</span></a>
+    <p class="entry__text entry__text--red">
+        ※お住まいの地区ダイヤルが繋がらない場合、お住まいの地区以外のダイヤルでも対応可能です。<br>※お届けエリア外の場合は他社便（宅急便）をご利用ください。</p>
+    <h2 class="entry__title-count"> <span class="number">2</span>お支払いの方法</h2>
+    <div class="entry__table-wrapper">
+        <table class="entry__table">
+            <tr>
+                <td>代金引換</td>
+                <td class="red">手数料無料</td>
+                <td>キャプテンフーヅのドライバーに代金をお渡しください。</td>
+            </tr>
+            <tr>
+                <td>郵便局引き落とし</td>
+                <td class="red">手数料無料</td>
+                <td>配達日の5日後に（土日祝含まず）ご登録の口座より引落しさせていただきます。<br>※休業日を挟む場合は、引落日がずれる場合がございます。ご了承ください。<br>郵送にて申し込み用紙をお送りします。<br>手続き完了までは代金引換をご利用ください。(一ヶ月程お時間いただきます)</td>
+            </tr>
+        </table>
+    </div>
+    <p class="entry__text">送料は一律215円になります。（その他一切の費用はいただきません）</p>
+    <div class="entry__button-wrap"> <a class="entry__button entry__button--no-arrow" href=""><span>ポイントについて</span></a><a class="entry__button" href=""><span>住んでいる地域のお届け曜日を検索</span></a></div>
+    <div class="jisya__faq">
+        <div class="jisya__faq-item">
+            <h4 class="jisya__faq-title">留守の場合は？</h4>
+            <div class="jisya__faq-content">
+                <div class="jisya__faq-image"><img src="img\jisya\jisya-faq-1.jpg" alt="留守の場合は？"></div>
+                <p class="jisya__faq-desc">配達時ご不在の場合は、保冷バックに商品とドライアイスを入れお玄関先や集合ポスト下、宅配BOXなどに置かせていただき、ポストにお知らせメモを入れさせていただきます。<br>置き場所にご指定がある場合は予めお申し出くださいますようお願いいたします。<br>尚、ご購入頂きました保冷箱をご利用の際は保冷箱に商品を入れさせていただきます。</p>
+            </div>
+        </div>
+        <div class="jisya__faq-item">
+            <h4 class="jisya__faq-title">電話はかかってくる？</h4>
+            <p class="jisya__faq-content">
+            <div class="jisya__faq-desc">注文日までにご注文がない場合、確認のお電話日にお電話をさせていただきます。<br>会員様にご負担なくご利用いただけるシステムとなっておりますのでお休みの場合は、お気軽にお申し付けください。</div>
+            </p>
+        </div>
+        <div class="entry__button-wrap"> <a class="entry__button" href=""><span>よくある質問</span></a></div>
+    </div>
+</section>
+<section class="entry-form">
+    <h3 class="entry__subtitle">今すぐ自社便利用登録をする</h3>
+    <p class="entry__text jisya__entry-text">自社便宅配可能エリアをご確認の上お申込みください。<br>※事前にパンフレット請求をされている方は、ご登録に当たり担当者からシステム説明のご連絡をさせていただきます。<br>初回お電話にてご注文完了以降、ネットでのお買い物をご希望の場合は、<br>弊社ホームページ<span class="jisya__redtext">『既に会員の方のネット会員登録』</span>からお申し込みください。</p>
+    <div class="entry-form__progress entry-form__progress--first"><span class="active">入力</span><span>入力確認</span><span>送信</span></div>
+    <div class="ec-off1Grid">
+        <div class="ec-off1Grid__cell">
+            <form method="post" action="{{ url('entry') }}" novalidate class="h-adr">
+                <span class="p-country-name" style="display:none;">Japan</span>
+                {{ form_widget(form._token) }}
+                <div class="ec-borderedDefs">
+                    <dl>
+                        <dt>
+                            {{ form_label(form.name, 'common.name', { 'label_attr': { 'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-halfInput{{ has_errors(form.name.name01, form.name.name02) ? ' error'}}">
+                                {{ form_widget(form.name.name01, { 'attr': { 'placeholder': 'common.last_name' }}) }}
+                                {{ form_widget(form.name.name02, { 'attr': { 'placeholder': 'common.first_name' }}) }}
+                                {{ form_errors(form.name.name01) }}
+                                {{ form_errors(form.name.name02) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.kana, 'common.kana', { 'label_attr': { 'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-halfInput{{ has_errors(form.kana.kana01, form.kana.kana02) ? ' error'}}">
+                                {{ form_widget(form.kana.kana01, { 'attr': { 'placeholder': 'common.last_name_kana' }}) }}
+                                {{ form_widget(form.kana.kana02, { 'attr': { 'placeholder': 'common.first_name_kana' }}) }}
+                                {{ form_errors(form.kana.kana01) }}
+                                {{ form_errors(form.kana.kana02) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.company_name, 'common.company_name', { 'label_attr': { 'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-halfInput{{ has_errors(form.company_name) ? ' error' }}">
+                                {{ form_widget(form.company_name) }}
+                                {{ form_errors(form.company_name) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.address, 'common.address', { 'label_attr': { 'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-zipInput{{ has_errors(form.postal_code) ? ' error' }}"><span>{{ 'common.postal_symbol'|trans }}</span>
+                                {{ form_widget(form.postal_code) }}
+                                <div class="ec-zipInputHelp">
+                                    <div class="ec-zipInputHelp__icon">
+                                        <div class="ec-icon"><img
+                                                src="{{ asset('assets/icon/question-white.svg') }}" alt="">
+                                        </div>
+                                    </div><a href="https://www.post.japanpost.jp/zipcode/" target="_blank"><span>{{ 'common.search_postal_code'|trans }}</span></a>
+                                </div>
+                                {{ form_errors(form.postal_code) }}
+                            </div>
+
+                            <div class="ec-select{{ has_errors(form.address.pref) ? ' error' }}">
+                                {{ form_widget(form.address.pref) }}
+                                {{ form_errors(form.address.pref) }}
+                            </div>
+                            <div class="ec-input{{ has_errors(form.address.addr01) ? ' error' }}">
+                                {{ form_widget(form.address.addr01, { 'attr': { 'placeholder': 'common.address_sample_01' }}) }}
+                                {{ form_errors(form.address.addr01) }}
+                            </div>
+                            <div class="ec-input{{ has_errors(form.address.addr02) ? ' error' }}">
+                                {{ form_widget(form.address.addr02,  { 'attr': { 'placeholder': 'common.address_sample_02' }}) }}
+                                {{ form_errors(form.address.addr02) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.phone_number, 'common.phone_number', { 'label_attr': { 'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-telInput{{ has_errors(form.phone_number) ? ' error' }}">
+                                {{ form_widget(form.phone_number) }}
+                                {{ form_errors(form.phone_number) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.email, 'common.mail_address', { 'label_attr': { 'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-input{{ has_errors(form.email.first) ? ' error' }}">
+                                {{ form_widget(form.email.first, { 'attr': { 'placeholder': 'common.mail_address_sample' }}) }}
+                                {{ form_errors(form.email.first) }}
+                            </div>
+                            <div class="ec-input{{ has_errors(form.email.second) ? ' error' }}">
+                                {{ form_widget(form.email.second, { 'attr': { 'placeholder': 'common.repeated_confirm' }}) }}
+                                {{ form_errors(form.email.second) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.password, 'common.password', { 'label_attr': {'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-input{{ has_errors(form.password.first) ? ' error' }}">
+                                {{ form_widget(form.password.first, {
+                                    'attr': { 'placeholder': 'common.password_sample'|trans({ '%min%': eccube_config.eccube_password_min_len, '%max%': eccube_config.eccube_password_max_len }) },
+                                    'type': 'password'
+                                }) }}
+                                {{ form_errors(form.password.first) }}
+                            </div>
+                            <div class="ec-input{{ has_errors(form.password.second) ? ' error' }}">
+                                {{ form_widget(form.password.second, {
+                                    'attr': { 'placeholder': 'common.repeated_confirm'|trans },
+                                    'type': 'password'
+                                }) }}
+                                {{ form_errors(form.password.second) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.birth, 'common.birth_day', { 'label_attr': {'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-birth{{ has_errors(form.birth) ? ' error' }}">
+                                {{ form_widget(form.birth.year) }}<span>/</span>
+                                {{ form_widget(form.birth.month) }}<span>/</span>
+                                {{ form_widget(form.birth.day) }}
+                                {{ form_errors(form.birth) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.sex, 'common.gender', { 'label_attr': { 'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-radio{{ has_errors(form.sex) ? ' error' }}">
+                                {{ form_widget(form.sex) }}
+                                {{ form_errors(form.sex) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt>
+                            {{ form_label(form.job, 'common.job', { 'label_attr': {'class': 'ec-label' }}) }}
+                        </dt>
+                        <dd>
+                            <div class="ec-select{{ has_errors(form.job) ? ' error' }}">
+                                {{ form_widget(form.job) }}
+                                {{ form_errors(form.job) }}
+                            </div>
+                        </dd>
+                    </dl>
+                    {# エンティティ拡張の自動出力 #}
+                    {% for f in form|filter(f => f.vars.eccube_form_options.auto_render) %}
+                        {% if f.vars.eccube_form_options.form_theme %}
+                            {% form_theme f f.vars.eccube_form_options.form_theme %}
+                            {{ form_row(f) }}
+                        {% else %}
+                            <dl>
+                                <dt>
+                                    {{ form_label(f) }}
+                                </dt>
+                                <dd>
+                                    <div class="{{ f.vars.eccube_form_options.style_class }}{{ has_errors(f) ? ' error' }}">
+                                        {{ form_widget(f) }}
+                                        {{ form_errors(f) }}
+                                    </div>
+                                </dd>
+                            </dl>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="ec-registerRole__actions">
+                    <div class="ec-off4Grid">
+                        <div class="ec-off4Grid__cell">
+                            <div class="ec-checkbox{{ has_errors(form.user_policy_check) ? ' error' }}">
+                                <label>
+                                    {{ form_widget(form.user_policy_check) }}
+                                    {{ 'front.entry.agree_with_terms'|trans({ '%url%': url('help_agreement') })|raw }}
+                                </label>
+                                {{ form_errors(form.user_policy_check) }}
+                            </div>
+                            <button class="ec-blockBtn--action" type="submit" name="mode" value="confirm">{{ 'front.entry.agree'|trans }}</button>
+                            <a class="ec-blockBtn--cancel" href="{{ url('homepage') }}">{{ 'front.entry.disagree'|trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+    {% endblock %}

@@ -1,0 +1,239 @@
+{#
+This file is part of EC-CUBE
+
+Copyright(c) EC-CUBE CO.,LTD. All Rights Reserved.
+
+http://www.ec-cube.co.jp/
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+#}
+{% extends '@admin/default_frame.twig' %}
+
+{% set menus = ['customer', 'call_list'] %}
+
+{% block title %}{{ 'admin.call_list.call_list_management'|trans }}{% endblock %}
+{% block sub_title %}{% endblock %}
+
+{% form_theme form '@admin/Form/bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block javascript %}
+<script>
+    $('.action-down, .action-up').on('click', function(e) {
+    var self = $(this),
+    current = $(this).parents('tr');
+    $('body').append($('<div class="modal-backdrop show"></div>'));
+    $.ajax({
+    url: self.attr('href'),
+    method: self.data('method'),
+}).done(function() {
+    if (self.hasClass('action-down')) {
+    current.next().after(current);
+} else {
+    current.prev().before(current);
+}
+}).always(function() {
+    $('.modal-backdrop').remove();
+    $('.action-up, .action-down').removeClass('disabled');
+    $('.action-up').first().addClass('disabled');
+    $('.action-down').last().addClass('disabled');
+});
+
+    return false;
+});
+</script>
+{% endblock %}
+
+{% block main %}
+    <div class="c-contentsArea__cols">
+        <div class="c-contentsArea__primaryCol">
+            <div class="c-primaryCol">
+                <div class="mb-3">
+                    {# <form method="post" action="{{ url('admin_call_list') }}"> #}
+                    <form name="search_form" id="search_form" method="post" action="">
+                        {{ form_widget(form._token) }}
+
+                        <div class="row">
+                            <div class="col-md-6 ">
+                                <div class="form-group ">
+                                    <label>配達予定日</label>
+                                    {{ form_widget(form.delivery_date) }}
+                                    {{ form_errors(form.delivery_date) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>状態</label>
+                                   {{ form_widget(form.situation) }}
+                                    {{ form_errors(form.situation) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>会員名カナ</label>
+                                    {{ form_widget(form.name_kana) }}
+                                    {{ form_errors(form.name_kana) }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>電話番号</label>
+                                    {{ form_widget(form.tel_number) }}
+                                    {{ form_errors(form.tel_number) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-primary">検索する</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="card rounded border-0 mb-4">
+                    <div class="card-body p-0">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                            <tr class="call-list-table__header">
+                                <th class="border-top-0 pt-2 pb-2 text-center align-items-center" rowspan="2">
+                                    {{ 'admin.call_list.id'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ 'admin.call_list.time_zone'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ 'admin.call_list.target_time'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ 'admin.call_list.customer_name'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ 'admin.call_list.customer_tel'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ 'admin.call_list.order_class'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ 'admin.call_list.purchase_number'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center">
+                                    {{ 'admin.call_list.continue_absence_number'|trans }}
+                                </th>
+                                <th class="border-top-0 pt-2 pb-2 text-center" rowspan="2"></th>
+                            </tr>
+                            <tr>
+                                <th class="border-top-0 pt-2 pb-2 text-center" colspan="7">
+                                    {{ 'admin.call_list.comment'|trans }}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for CallList in CallLists %}
+                                {% if CallList.status_id == 3 %}
+                                    <tr id="ex-member-{{ CallList.id }}" class="non-attendance">
+                                {% elseif CallList.status_id == 2 %}
+                                    <tr id="ex-member-{{ CallList.id }}" class="processed">
+                                {% elseif CallList.status_id == 5 %}
+                                    <tr id="ex-member-{{ CallList.id }}" class="office-ordered">
+                                {% else %}
+                                    <tr id="ex-member-{{ CallList.id }}">
+                                {% endif %}
+                                    <td class="align-middle text-center pl-3" rowspan="2">
+                                        {{ CallList.id }}
+                                    </td>
+                                    <td class="align-middle text-center">
+
+                                    </td>
+                                    <td class="align-middle" style="width: 200px;">
+                                        {# TODO Update delivery time zone #}
+                                        <form method="post" action="{{ url('admin_call_list_time_designation', {'id': CallList.id }) }}">
+                                            <input class="form-control d-inline-block" type="text" name="time_zone" value="{{ CallList.Customer.delivery_preferred_time}}" style="width: 140px;">
+                                            <button class="btn btn-primary btn-sm">更新</button>
+                                        </form>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{ CallList.Customer.name01 }} {{ CallList.Customer.name02 }}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{ CallList.Customer.phone_number }}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{ CallList.Customer.order_type_id }}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{ CallList.Customer.buy_times }}
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        {{ CallList.Customer.no_consecutive_order_count }}
+                                    </td>
+                                    {% if(CallList.status_id == 2) or (CallList.status_id == 3) %}
+                                        <td rowspan="2" style="width: 95px;">
+                                            <div class="text-center mt-3">
+                                                <form method="post" action="{{ url('admin_call_list_cancel', {'id': CallList.id }) }}">
+                                                    <button type="submit" class="btn btn-sm btn-secondary">キャンセル</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    {% else %}
+                                        <td rowspan="2" style="width: 95px;">
+                                            <div class="text-center">
+                                                <a class="btn btn-danger" href="{{ url('admin_call_list_order', {'id': CallList.id }) }}">注文登録</a>
+                                            </div>
+                                            <div class="text-center mt-3">
+                                                <form method="post" action="{{ url('admin_call_list_non_attendance', {'id': CallList.id }) }}">
+                                                    {{ form_widget(form._token) }}
+                                                    <button type="submit" class="btn btn-primary">休み</button>
+                                                </form>
+                                            </div>
+                                            <div class="text-center mt-3">
+                                                <a class="btn btn-primary">更新</a>
+                                            </div>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                                {% if CallList.status_id == 3 %}
+                                    <tr id="ex-member-{{ CallList.id }}" class="non-attendance">
+                                {% elseif CallList.status_id == 2 %}
+                                    <tr id="ex-member-{{ CallList.id }}" class="processed">
+                                {% elseif CallList.status_id == 5 %}
+                                    <tr id="ex-member-{{ CallList.id }}" class="office-ordered">
+                                {% else %}
+                                    <tr id="ex-member-{{ CallList.id }}">
+                                {% endif %}
+                                    <td class="align-middle text-center" colspan="7">
+                                        <form method="post" action="{{ url('admin_call_list_note', {'id': CallList.id }) }}">
+                                            <div class="row pb-3">
+                                                <div class="col-11 pr-0">
+                                                    <textarea name="note" class="form-control" rows="3">{{ CallList.Customer.call_list_note }}</textarea>
+                                                </div>
+                                                <div class="col-1 px-0 mt-4">
+                                                    <button type="submit" class="btn btn-sm btn-primary">更新</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .non-attendance {
+            background: #FFFFEF;
+        }
+        .processed {
+            background: #eaeaea;
+        }
+        .office-ordered {
+            background: #eefff4;
+        }
+    </style>
+{% endblock %}

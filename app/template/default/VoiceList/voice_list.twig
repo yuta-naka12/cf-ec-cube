@@ -1,0 +1,42 @@
+{% extends 'default_frame.twig' %}
+
+
+	{% block main %}
+			<div class="wrapper"> <div class="breadcrumbs">
+			<div class="breadcrumbs__page-title">
+				<div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+				<div class="breadcrumbs__page-title-text">
+					<div class="breadcrumbs__page-title-text-en">{{ 'front.voice_list.subtitle'|trans }}</div>
+					<div class="breadcrumbs__page-title-text-jp">{{ 'front.voice_list.title'|trans }}</div>
+				</div>
+			</div>
+			<div class="breadcrumbs__main">
+				<a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="/">{{ 'front.product.position_top'|trans }}</a>
+				<div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div>
+				<span class="breadcrumbs__main-pagename">{{ 'front.voice_list.title'|trans }}</span>
+			</div>
+		</div>
+
+        <div class="voice-list">
+          <!--.voice-list__textp お客様の声についての説明が入ります。お客様の声についての説明が入ります。お客様の声についての説明が入ります。お客様の声についての説明が入ります。お客様の声についての説明が入ります。お客様の声についての説明が入ります。お客様の声についての説明が入ります。お客様の声についての説明が入ります。
+          -->
+		  <ul class="voice-list__list js-load-post js-post-voice" post="voice" paged="paged" paged_limit="5">
+          {% for VoiceList in VoiceLists %}
+		  <li class="voice-list__item"><div class="voice-list__image"><img src="{{VoiceList.image_path}}" alt=""></div><div class="voice-list__content">
+		  <h2 class="voice-list__title">{{VoiceList.title}} {{VoiceList.customer_initials}}</h2>
+		  <div class="voice-list__description truncateMe">{{VoiceList.content}}</div>
+		  <div class="voice-list__read-more"><a class="voice-list__read-more-text" href="/voice/{{ VoiceList.id }}/detail">続きを読む</a>
+		  </div>
+		  </div>
+		  </li>
+		  {% endfor %}
+          </ul> 
+          <div class="t-news__button t-news__button--more js-more-post"><span>さらに読み込む</span><img src="/html/template/default/assets/img/icons/t-news/news-button-carret.svg" alt="" loading="lazy"></div>
+        </div>
+     
+	</div>
+
+
+{% endblock %}
+
+

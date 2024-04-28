@@ -1,0 +1,65 @@
+{% extends 'default_frame.twig' %}
+
+{% block main %}
+      <div class="wrapper">
+        <div class="breadcrumbs">
+          <div class="breadcrumbs__page-title">
+            <div class="breadcrumbs__page-title-image"><img src="/html/template/default/assets/img/icons/page-title-logo.png" alt=""></div>
+            <div class="breadcrumbs__page-title-text">
+              <div class="breadcrumbs__page-title-text-en">{{'front.mypage.title_en'|trans}}</div>
+              <div class="breadcrumbs__page-title-text-jp">{{'front.mypage.title'|trans}}</div>
+            </div>
+          </div>
+          <div class="breadcrumbs__main"><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="https://captainfoods.co.jp/stg/shop/">{{'common.position_top'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><a class="breadcrumbs__main-pagename breadcrumbs__main-pagename--inactive" href="#">{{'common.position_mypage'|trans}}</a>
+            <div class="breadcrumbs__main-carret"><img src="/html/template/default/assets/img/icons/icon-arrow-right-red.svg" alt=""></div><span class="breadcrumbs__main-pagename">{{'common.position_history'|trans}}</span>
+          </div>
+        </div>
+      </div>
+      <section class="reki">
+        <div class="wrapper">
+          <h2 class="delivery__heading text">{{'front.mypage.history.title'|trans}}</h2>
+          <div class="reki__notice-block"> 
+            <div class="reki__notice-title-bar">
+              <h3>{{'front.mypage.history.descr_title:'|trans}} <br class="sp-sm">{{'front.mypage.history.descr_note'|trans}}</h3>
+            </div>
+            <div class="reki__notice-content">
+              <p class="reki__notice-text">{{'front.mypage.history.descr_step01'|trans}}<span class="primary">「{{'front.mypage.history.descr_step02'|trans}}</span>{{'front.mypage.history.descr_step03'|trans}}</p><span class="reki__notice-text reki__notice-text--small primary">{{'front.mypage.history.descr_warn'|trans}}</span>
+            </div>
+          </div>
+          <div class="category-subgroup">
+            <div class="reki__table-wrapper">
+              <table class="reki__table"> 
+                <thead> 
+                  <tr class="reki__heading-row">
+                    <th>{{'front.mypage.history.date_label'|trans}}</th>
+                    <th>{{'front.mypage.history.id_label'|trans}}</th>
+                    <th>{{'front.mypage.history.content_label'|trans}}</th>
+                    <th>{{'front.mypage.history.sum_label'|trans}}</th>
+                    <th>{{'front.mypage.history.paymemt_label'|trans}}</th>
+                  </tr>
+                </thead>
+                <tbody> 
+                  <tr>
+                    <td>{{ Order.create_date|date_sec }}</td>
+                    <td>{{ Order.order_no }}</td>
+                    <td>{{ orderItem.productName }} × {{ orderItem.quantity }} </td>
+                    <td>{{ Order.payment_total|price }}</td>
+                    <td>{{ Order.PaymentMethod }}</td>
+                  </tr>
+                  <tr> 
+                    <td>{{'front.mypage.history.date_item02'|trans}}</td>
+                    <td>{{'front.mypage.history.id_item02'|trans}}</td>
+                    <td>{{'front.mypage.history.content_item02'|trans}}</td>
+                    <td>{{'front.mypage.history.sum_item02'|trans}}</td>
+                    <td>{{'front.mypage.history.paymemt_item02'|trans}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div><a class="button__secondary button__secondary--okiniiri" href="#"> 
+              <div class="button__secondary-link button__secondary-link--okiniiri">{{'common.back'|trans}}</div></a>
+          </div>
+        </div>
+      </section>
+
+{% endblock %}
